@@ -274,33 +274,32 @@ This looks good. Cloud Foundry app listens on port 8081.
 
 ## Step 7: Push the Cloud Foundry App to your Cloud Foundry Container
 
-In this step Node.js target application will be pushed to PCF. We will use the --no-start option as we are not ready to start accepting traffic on our application just yet.
+In this step Node.js target application will be pushed to PCF. We will use the apigee-push command instead of regular piush command as apigee-push option automatically injects the microgateway within the cf container for the co-resident plan to work.
+
+Note - Please enter 'y' for the "microgateway-coresident" question, other questions are optional (can be left blank) if you are not pushing a java application.
 
 ```bash
-cf push --no-start
+shuklaankur-macbookpro:coresident-sample shuklaankur$ cf apigee-push
+Do you plan on using this application with the "microgateway-coresident" plan? [y/n] y
+If you are pushing a java application, enter the path to the archive. Otherwise press [Enter]:
+Specific name of application to push [optional]:
+Using manifest file /Users/shuklaankur/pcf/cloud-foundry-apigee/samples/coresident-sample/manifest.yml
 
-Pushing from manifest to org apigee / space sandeepmuru+pivotal+labuser4@google.com as sandeepmuru+pivotal+labuser4@google.com...
-Using manifest file /.../cloud-foundry-apigee/samples/coresident-sample/manifest.yml
-
-Deprecation warning: Route component attributes 'domain', 'domains', 'host', 'hosts' and 'no-hostname' are deprecated. Found: host.
-Please see http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#deprecated for the currently supported syntax and other app manifest deprecations. This feature will be removed in the future.
-
-Using manifest file /.../cloud-foundry-apigee/samples/coresident-sample/manifest.yml
-
-Creating app as1-target-nodejs-app in org apigee / space sandeepmuru+pivotal+labuser4@google.com as sandeepmuru+pivotal+labuser4@google.com...
+Creating app as-sample-co-njs in org apigee-edge-for-pcf-service-broker-org / space apigee-edge-for-pcf-service-broker-space as admin...
 OK
 
-Using route as1-target-nodejs-app.apps.apigee-demo.net
-Binding as1-target-nodejs-app.apps.apigee-demo.net to as1-target-nodejs-app...
+Using route as-sample-co-njs.apps.hol.apigee-pcf-apijam.com
+Binding as-sample-co-njs.apps.hol.apigee-pcf-apijam.com to as-sample-co-njs...
 OK
 
-Uploading as1-target-nodejs-app...
-Uploading app files from: /.../cloud-foundry-apigee/samples/coresident-sample
-Uploading 8.8K, 12 files
-Done uploading               
+Uploading as-sample-co-njs...
+Uploading app files from: /Users/shuklaankur/pcf/cloud-foundry-apigee/samples/coresident-sample
+Uploading 8.7K, 12 files
+Done uploading
 OK
+
+shuklaankur-macbookpro:coresident-sample shuklaankur$
 ```
-
 ## Step 7: Bind the Cloud Foundry App to the Service Instance and Restart the Target App
 
 In this step, you bind a Cloud Foundry app to the Apigee service instance you created. The apigee-bind-mgc command creates the proxy for you and binds the app to the service. This command also gives you an option to restage your target application after binding is complete.
@@ -365,7 +364,7 @@ You’ll be prompted for the following:
 
 Example:
 ```bash
-shuklaankur-macbookpro:lab3 shuklaankur$ cf apigee-bind-mgc --app as1-target-nodejs-app --service AS-Apigee-MGW-COR-Plan --apigee_org amer-api-partner19 --apigee_env test --edgemicro_key 2d99ace69294c8f791404a7dd735a83b4ce08545f9f2da2cb736a7b9019989c5 --edgemicro_secret b4eb6dea5cb19ca6c784d3345c1630d3698ab2ef8041cf7843d191f3a5d5de66 --target_app_route as1-target-nodejs-app.apps.apigee-demo.net --target_app_port 8081 --action 'bind' --user sandeepmuru+pivotal+labuser4@google.com --pass Apigee123
+shuklaankur-macbookpro:lab3 shuklaankur$ cf apigee-bind-mgc --app as1-target-nodejs-app --service AS-Apigee-MGW-COR-Plan --apigee_org amer-api-partner19 --apigee_env test --edgemicro_key 2d99ace69294c8f791404a7dd735a83b4ce08545f9f2da2cb736a7b9019989c5 --edgemicro_secret b4eb6dea5cb19ca6c784d3345c1630d3698ab2ef8041cf7843d191f3a5d5de66 --target_app_route as1-target-nodejs-app.apps.apigee-demo.net --target_app_port 8081 --action 'proxy bind' --user sandeepmuru+pivotal+labuser4@google.com --pass Apigee123
 Binding service AS-Apigee-MGW-COR-Plan to app as1-target-nodejs-app in org apigee / space sandeepmuru+pivotal+labuser4@google.com as sandeepmuru+pivotal+labuser4@google.com...
 OK
 TIP: Use 'cf restage as1-target-nodejs-app' to ensure your env variable changes take effect
@@ -468,7 +467,7 @@ start command:     npm start
 
 Once you’ve bound your app’s path to the Apigee service (creating an Apigee proxy in the process), you can try it out with the sample app.
 
-From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
+From command line run the curl command you ran earlier to make a request to your Cloud Foundry app (see below for example):
 
 ```bash
 shuklaankur-macbookpro:coresident-sample shuklaankur$ cf apps
@@ -485,6 +484,6 @@ $ curl as1-target-nodejs-app.apps.apigee-demo.net -H 'x-api-key:5e4ljPtk8N4FgTKM
 {"hello":"hello Diego"}
 ```
 
-Note - If above command fails to execute in terminal, try ewith Postman client or a similar tool.
+Note - If above command fails to execute in terminal, try with Postman client or a similar tool.
 
-The new proxy is now ready for you or someone on your team to add policies to define security, traffic management, and more. For more information refer to Edge Migrogateway Documentation on Apigee Docs.
+The new proxy is now ready for you or someone on your team to add policies, define security, traffic management, and more. For more information refer to Edge Migrogateway Documentation on Apigee Docs.
