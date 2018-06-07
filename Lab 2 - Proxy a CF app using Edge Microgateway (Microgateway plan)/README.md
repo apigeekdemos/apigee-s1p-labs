@@ -46,7 +46,7 @@ PCF_DOMAIN: PCF Domain for your apps.
 
 # Steps
 
-**1. Push the sample application as a CF app to PCF**
+**1. Push the sample target application as a CF app to PCF**
 
    a. Clone the Apigee Edge GitHub repo:
     
@@ -58,14 +58,14 @@ PCF_DOMAIN: PCF Domain for your apps.
 
    c. In the *org-and-microgateway-sample* directory, edit *manifest.yml* and change the following parameters:
    
-   * **name**: {your_initials}-sampleapi-mg
-   * **host**: {your_initials}-sampleapi-mg
+   * **name**: {your_initials-target}-sampleapi-mg
+   * **host**: {your_initials-target}-sampleapi-mg
 ```
   applications: 
-  - name: {your_initials}-sampleapi-mg
+  - name: {your_initials-target}-sampleapi-mg
     memory: 128M 
     instances: 1 
-    host: {your_initials}-sampleapi-mg
+    host: {your_initials-target}-sampleapi-mg
     path: . 
     buildpack: nodejs_buildpack
 ```
@@ -127,12 +127,12 @@ Getting apps in org apigee / space sandeepmuru+pivotal+labuser3@google.com as sa
 OK
 
 name                        requested state   instances   memory   disk   urls
-hm-sampleapi-mg             started           1/1         600M     1G   hm-sampleapi-mg.apps.apigee-demo.net
+hm-target-sampleapi-mg             started           1/1         600M     1G   hm-target-sampleapi-mg.apps.apigee-demo.net
 ```
 
    h. Use curl to send a test request to the url of the running app. Verify the response from the app. 
     
-    $ curl hm-sampleapi-mg.apps.apigee-demo.net
+    $ curl hm-target-sampleapi-mg.apps.apigee-demo.net
 ```
 {"hello":"hello from cf app"}
 ```
@@ -241,7 +241,7 @@ applications:
 
    The apigee-bind-mg command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-mg --app {your_sample_app_name} --service {your_mg_service_instance} --apigee_org amer-api-partner19 --apigee_env test --micro {your_edgemicro_app_name}.apps.apigee-demo.net --domain apps.apigee-demo.net --user sandeepmuru+pivotal+labuser3@google.com --pass Apigee123
+    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service {your_mg_service_instance} --apigee_org amer-api-partner19 --apigee_env test --micro {your_edgemicro_app_name}.apps.apigee-demo.net --domain apps.apigee-demo.net --user {username} --pass {password}
 
    The above command will promt for these entries. Enter the values as listed below:
 
@@ -264,7 +264,7 @@ applications:
    
    In order to fix the error from the previous step, you need an API key.
 	
-   a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your_initials}_helloapi.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key. 
+   a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-initials}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key. 
 	
    b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.
 

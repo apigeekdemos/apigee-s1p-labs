@@ -198,7 +198,7 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
    The apigee-bind-mg command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-org --app {your_sample_app_name} --service {your_service_instance} --apigee_org amer-api-partner19 --apigee_env test --domain apps.apigee-demo.net --user sandeepmuru+pivotal+labuser3@google.com --pass Apigee123
+    $ cf apigee-bind-org --app {your_sample_app_name} --service {your_service_instance} --apigee_org amer-api-partner19 --apigee_env test --domain apps.apigee-demo.net --user {username} --pass {password}
 
    The above command will promt for these entries. Enter the values as listed below:
 
@@ -210,7 +210,9 @@ dashboard:       https://enterprise.apigee.com/platform/#/
    Once you’ve bound your app’s path to the Apigee service (creating an Apigee proxy in the process), you can try it out with the sample app.
 
    This time Trace the API proxy from the Apigee Edge management console.
-   * Login using the Apigee Org credentials given to you.
+   * Login using the Apigee Org credentials given to you. Ensure that you are viewing the org 'amer-api-partner19' (see screenshot)
+
+   ![Org Plan](resources/SelectOrg.png)
    * In the management console, under APIs > API proxies, locate the name of the proxy you just created with bind-route-service. It will have a name of cf-{your-initials}-sampleapi.apps.apigee-demo.net
    * Click the new proxy’s name to view its Overview page.
    * Click the Trace tab, then click the Start Trace Session button.

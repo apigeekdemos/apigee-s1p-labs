@@ -364,7 +364,7 @@ You’ll be prompted for the following:
 
 Example:
 ```bash
-shuklaankur-macbookpro:lab3 shuklaankur$ cf apigee-bind-mgc --app as1-target-nodejs-app --service AS-Apigee-MGW-COR-Plan --apigee_org amer-api-partner19 --apigee_env test --edgemicro_key 2d99ace69294c8f791404a7dd735a83b4ce08545f9f2da2cb736a7b9019989c5 --edgemicro_secret b4eb6dea5cb19ca6c784d3345c1630d3698ab2ef8041cf7843d191f3a5d5de66 --target_app_route as1-target-nodejs-app.apps.apigee-demo.net --target_app_port 8081 --action 'proxy bind' --user sandeepmuru+pivotal+labuser4@google.com --pass Apigee123
+shuklaankur-macbookpro:lab3 shuklaankur$ cf apigee-bind-mgc --app as1-target-nodejs-app --service AS-Apigee-MGW-COR-Plan --apigee_org amer-api-partner19 --apigee_env test --edgemicro_key {EdgeMicroKey} --edgemicro_secret {EdgeMicroSecret} --target_app_route as1-target-nodejs-app.apps.apigee-demo.net --target_app_port 8081 --action 'proxy bind' --user {Apigee-username} --pass {Apigee-password}
 Binding service AS-Apigee-MGW-COR-Plan to app as1-target-nodejs-app in org apigee / space sandeepmuru+pivotal+labuser4@google.com as sandeepmuru+pivotal+labuser4@google.com...
 OK
 TIP: Use 'cf restage as1-target-nodejs-app' to ensure your env variable changes take effect
@@ -401,7 +401,7 @@ buildpack: node.js 1.6.3 (with decorator microgateway-coresident)
 
 ```
 
-### Step 8: Deploy Manually the API Proxy to the environment
+### Step 8: Verify the API Proxy has been Deployed to the environment
 
 Verify that proxy with proxy name edgemicro_{APP_NAME.PCF_DOMAIN} create in Edge has been deployed successfuly on the corresponding environment through [https://apigee.com/edge](https://apigee.com/edge). Remember to use Apigee username and password provided by instructor.
 
@@ -484,6 +484,6 @@ $ curl as1-target-nodejs-app.apps.apigee-demo.net -H 'x-api-key:5e4ljPtk8N4FgTKM
 {"hello":"hello Diego"}
 ```
 
-Note - If above command fails to execute in terminal, try with Postman client or a similar tool.
+Note - If above command fails to execute or hangs in terminal, add -H 'Cache-Control: no-cache' to the curl call and it will not hang. You can also execute this with Postman client or similar tool.
 
 The new proxy is now ready for you or someone on your team to add policies, define security, traffic management, and more. For more information refer to Edge Migrogateway Documentation on Apigee Docs.
