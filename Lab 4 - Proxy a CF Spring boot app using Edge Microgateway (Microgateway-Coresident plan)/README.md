@@ -9,7 +9,7 @@
 ![Apigee Microgateway Coresident Plan](./images/Apigee_Microgateway_Coresident.png "Apigee Microgateway Coresident Plan")
 
 # How is ths lab different from Lab 3
-Lab 3 and Lab 4 are both working on the core principle of co-resident microgateway architecture. Only difference is that the application we deploy in lab 4 is a Spring Boot app and this comes with it own web server (Apache Tomcat) and hence adds a different diamention to the deployment within PCF.
+Lab 3 and Lab 4 are both working on the core principle of co-resident microgateway architecture. Only difference is that the application we deploy in lab 4 is a Spring Boot app and this comes with its own web server (Apache Tomcat) and hence adds a different diamention to the deployment within PCF.
 
 # How can Apigee Edge help?
 
@@ -104,20 +104,12 @@ OK
 ### 1.e Use the cf service command to display information about the service instance:
 
 ```bash
-$ cf service INITIALS-YOUR-SERVICE-INSTANCE
+$ cf services
+Getting services in org apigee / space sandeepmuru+pivotal+labuser9@google.com as sandeepmuru+pivotal+labuser9@google.com...
+OK
 
-name:            AS-Apigee-MGW-COR-Plan
-service:         apigee-edge
-bound apps:
-tags:
-plan:            microgateway-coresident
-description:     Apigee Edge API Platform
-documentation:
-dashboard:       https://enterprise.apigee.com/platform/#/
-
-Showing status of last operation from service dz-apigee-mg-coresident-service-instance...
-
-status:    create succeeded
+name                service       plan                      bound apps       last operation
+as-cor-mgw-apigee   apigee-edge   microgateway-coresident   as_springhello   create succeeded
 ```
 
 ## Step 2: Install the Plugin 
@@ -310,9 +302,9 @@ edgemicro:
 **edgemicro/port is effectively listening on 8080. IMPORTANT: by default MG config file uses port 8000. So, make sure to make changes accordingly to PCF requirements.**
 
 ### 6.b. Disable oauth plugin
-We will be disabling the oauth plugin on the MG config file, this is done so that the Microgatway does not manadate oauth tokens for the healthcheck calls. Oauth has alreadybeen enabled on our manifest.yaml file (see above) and the sequesce defined there will ensure that all actual API traffic is subjected to Oauth policy enforcement.
+We will be disabling the oauth plugin on the MG config file, this is done so that the Microgatway does not manadate oauth tokens for the healthcheck calls. Oauth has already been enabled on our manifest.yaml file (see above) and the sequence defined there will ensure that all actual API traffic is subjected to Oauth policy enforcement.
 
-To diable oauth, we need to comment out the oauth option from within the plugin sequence (see below) within the MG config file:
+To disable oauth, we need to comment out the oauth option from within the plugin sequence (see below) within the MG config file:
 
 ```bash
 $ vi config/amer-api-partner19-test-config.yaml
@@ -324,9 +316,9 @@ plugins:
 
 
 ### 6.c. Check Spring Boot App is on Port 8081
-Ensure that your Cloud Foundry app won't be running on port 8080, nor on the port specified by the PORT environment variable.
+Ensure that your Cloud Foundry app won't be running on port 8080 and instead on the port specified by the 'server.port' environment variable.
 
-To check this opem the manifest.yml file and ensure that the JAVA_OPTS emntry is present as below (under the env section:
+To check this open the manifest.yml file and ensure that the JAVA_OPTS emntry is present as below (under the env section):
 
 ```
 $ cat manifest.yml
