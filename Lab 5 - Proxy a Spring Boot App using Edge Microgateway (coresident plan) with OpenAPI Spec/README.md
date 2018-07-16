@@ -9,24 +9,24 @@
 ![Apigee Microgateway Coresident Plan](./images/Apigee_Microgateway_Coresident.png "Apigee Microgateway Coresident Plan")
 
 # How is ths lab different from Lab 4
-Lab 4 is both working on the core principle of co-resident microgateway architecture. The only difference is that the Spring Boot app classes have been annotated to generate OpenAPI (FKA as Swagger) Specification using SpringFox. These annotations enable developers to leverage additional tooling available from products like Apigee with a suite of utilities to design, document, and test. The framework used in this example
+Lab 5 works on the core principle of co-resident microgateway architecture. The main difference with Lab 4 is that classes in the Spring Boot app have been annotated with Spring http://springfox.io to identify resources, verbs, headers, query parameters, payload, etc. So, that when Spring Boot starts OpenAPI (FKA as Swagger) Specs are generated available for use through a API endpoint.
 
 # Step 1: Run Spring Boot App from your local machine
-This tutorial comes with a Spring Boot precompiled ready for deployment to a PCF foundation. Generated from [Documenting Spring Boot REST API with Swagger and SpringFox from Vojtech Ruzicka](https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/).
+This tutorial comes with a Spring Boot precompiled ready for deployment to a PCF foundation. Generated from the git repo `https://github.com/dzuluaga/springfox-example`.
 
+To run the Spring Boot app:
 ```bash
 java -jar target/springfox-example-1.0.0-SNAPSHOT.jar
 ```
 
-## Optional step:
+## Optional step to compile source code:
 
 The jar above can be generated and run by executing this command: 
 ```bash
 $ git clone https://github.com/dzuluaga/springfox-example.git
 ```
-```
-$ mvn package && java -jar target/springfox-example-1.0.0-SNAPSHOT.jar 
-
+```bash
+$ mvn package && java -jar target/springfox-example-1.0.0-SNAPSHOT.jar
 ```
 
 Note [PersonController](https://github.com/dzuluaga/springfox-example/blob/master/src/main/java/com/vojtechruzicka/springfoxexample/controllers/PersonController.java) class annotations. These annotations are parsed during runtime and OpenAPI Spec is generated without manual intervention.
@@ -126,7 +126,7 @@ In this step we'll use the spec above to generate an API Portal in Apigee. Pleas
 The integration is handled by SpringFox, a 3rd party library for enabling Swagger on Spring MVC projects.
 For more information on SpringFox, please visit http://springfox.io
 
-This tutorial is based on the article from Braeldung [Setting Up Swagger 2 with a Spring REST API](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api). 
+This tutorial is based on the article [Documenting Spring Boot REST API with Swagger and SpringFox from Vojtech Ruzicka](https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/). 
 
 # Support
 
