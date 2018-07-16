@@ -18,6 +18,60 @@ This tutorial comes with a Spring Boot precompiled ready for deployment to a PCF
 java -jar target/springfox-example-1.0.0-SNAPSHOT.jar
 ```
 
+## Optional step:
+
+The jar above can be generated and run by executing this command: 
+```bash
+$ git clone https://github.com/dzuluaga/springfox-example.git
+```
+```
+$ mvn package && java -jar target/springfox-example-1.0.0-SNAPSHOT.jar 
+
+```
+
+Note [PersonController](https://github.com/dzuluaga/springfox-example/blob/master/src/main/java/com/vojtechruzicka/springfoxexample/controllers/PersonController.java) class annotations. These annotations are parsed during runtime and OpenAPI Spec is generated without manual intervention.
+
+```java
+@RestController
+@RequestMapping("/v2/persons/")
+@Api(description = "Set of endpoints for Creating, Retrieving, Updating and Deleting of Persons.")
+public class PersonController {
+
+    private PersonService personService;
+
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation("${personcontroller.getallpersons}")
+    public List<Person> getAllPersons(@RequestHeader("x-api-key") String apiKey, @RequestHeader(value = "Cache-Control", defaultValue="no-cache") String cacheControl) {
+        return personService.getAllPersons();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}", produces = "application/json")
+    @ApiOperation("${personcontroller.getpersonbyid}")
+    public Person getPersonById(@ApiParam(value = "Id of the person to be obtained. Cannot be empty.", required = true)
+                                    @PathVariable int id,
+                                    @RequestHeader("x-api-key") String apiKey, @RequestHeader(value = "Cache-Control", defaultValue="no-cache") String cacheControl) {
+        return personService.getPersonById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @ApiOperation("${personcontroller.deleteperson}")
+    public void deletePerson(@ApiParam(value = "Id of the person to be deleted. Cannot be empty.", required = true)
+                                 @PathVariable int id,
+                                 @RequestHeader("x-api-key") String apiKey, @RequestHeader(value = "Cache-Control", defaultValue="no-cache") String cacheControl) {
+        personService.deletePerson(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation("${personcontroller.createperson}")
+    public Person createPerson(@ApiParam("Person information for a new person to be created.")
+                                   @RequestBody Person person,
+                                   @RequestHeader("x-api-key") String apiKey, @RequestHeader(value = "Cache-Control", defaultValue="no-cache") String cacheControl) {
+        return personService.createPerson(person);
+    }
+
+
+```
+
 # Step 2: Test your OpenAPI docs
 
 **Paths**
@@ -64,7 +118,7 @@ Congrats if you made it to this point!
 
 In this step we'll use the spec above to generate an API Portal in Apigee. Please copy and paste the spec in raw format and create a new spec directly from Apigee.
 
-![alt text][./images/copy-openapi-spec-to-edge.png]
+![alt text](./images/copy-openapi-spec-to-edge.png "Logo Title Text 1")
 
 
 # References
