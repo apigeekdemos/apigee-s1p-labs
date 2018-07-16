@@ -1,0 +1,26 @@
+---
+applications:
+  - name: dz_spring_fox_example
+    memory: 1GB
+    #buildpack: java_buildpack
+    health-check-type: http
+    health-check-http-endpoint: /healthcheck
+    path: target/springfox-example-1.0.0-SNAPSHOT.jar
+env:
+    JAVA_OPTS: '-Dserver.port=8081'
+    #APIGEE_MICROGATEWAY_PROXY: edgemicro_cf-test.local.pcfdev.io
+    #APIGEE_MICROGATEWAY_CUST_PLUGINS: plugins
+    #APIGEE_MICROGATEWAY_PROCESSES: 2
+    APIGEE_MICROGATEWAY_CONFIG_DIR: config
+    APIGEE_MICROGATEWAY_CUSTOM: |
+                                 {"policies":
+                                      {
+                                      "oauth":
+                                          {
+                                          "allowNoAuthorization": false,
+                                          "allowInvalidAuthorization": false,
+                                          "verify_api_key_url": "https://amer-api-partner19-test.apigee.net/edgemicro-auth/verifyApiKey"
+                                          }
+                                      },
+                                      "sequence": ["healthcheck", "oauth"]
+                                      }
