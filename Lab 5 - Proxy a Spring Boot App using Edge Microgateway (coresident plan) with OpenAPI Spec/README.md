@@ -120,6 +120,19 @@ In this step we'll use the spec above to generate an API Portal in Apigee. Pleas
 
 ![alt text](./images/copy-openapi-spec-to-edge.png "Logo Title Text 1")
 
+# Step 7: Publish OpenAPI Spec to Apigee Developer Portal
+
+In this step the instructor will walk you through the process of publishing OpenAPI specs.
+
+These process requires:
+
+1. Create an API Product and associate the API Proxy to it
+2. Create a Developer
+3. Create a Developer App
+4. Create a Developer Portal
+5. Publish your OpenAPI to the portal
+6. Consume APIs
+
 
 # References
 
