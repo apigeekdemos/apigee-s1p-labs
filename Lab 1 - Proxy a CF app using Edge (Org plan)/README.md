@@ -6,7 +6,7 @@
 
 # Use case
 
-You have an API Created in Pivotal Cloud Founday. You want to proxy it through Apigee Edge.
+You have an API Created in Pivotal Cloud Foundry. You want to proxy it through Apigee Edge.
 
 ![Org Plan](resources/OrgPlan.png)
 
