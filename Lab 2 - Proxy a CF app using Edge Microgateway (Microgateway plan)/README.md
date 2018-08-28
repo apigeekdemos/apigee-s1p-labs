@@ -50,7 +50,7 @@ PCF_DOMAIN: PCF Domain for your apps.
 
    a. Clone the Apigee Edge GitHub repo:
     
-    $ git clone https://github.com/apigee/cloud-foundry-apigee.git
+    $ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
 
    b. Change to the *org-and-microgateway-sample* directory of the cloned repo:
     
@@ -71,7 +71,7 @@ PCF_DOMAIN: PCF Domain for your apps.
 ```
    d. Set your API endpoint to the Cloud Controller of your deployment
     
-    $ cf api --skip-ssl-validation https://api.system.apigee-demo.net
+    $ cf api --skip-ssl-validation https://api.run.pcfone.io
 ```
 Setting api endpoint to https://api.system.apigee-demo.net...
 OK

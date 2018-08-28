@@ -63,7 +63,7 @@ Note - This step is optional if you have completed lab 3 as you can re-use the s
 ### 1.a Set your API endpoint to the Cloud Controller of your deployment.
 
 ```bash
-cf api $PCF_API --skip-ssl-validation
+cf api --skip-ssl-validation https://api.run.pcfone.io
 Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
 OK
 API endpoint:  https://api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
@@ -145,7 +145,7 @@ Commands offered by installed plugins:
 
 ### 3.a Clone the Following GitHub repo:
 ```bash
-$ git clone https://github.com/ankurshukla80/gs-spring-boot.git
+$ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
 ```
 
 ### 3.b Change directory to the gs-spring-boot/initial directory of the cloned repo:
