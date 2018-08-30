@@ -78,7 +78,7 @@ OK
 api endpoint:    https://api.run.pcfone.io
 api version:    2.112.0
 ```
-   e. Log in to your deployment and select an org and a space
+e. Log in to your deployment and select an org and a space
 
     $ cf login
     -or-
@@ -105,7 +105,16 @@ Org:            group-apigee
 Space:          apijam
 ```
 
-f. Push the sample app to PCF:
+f. Select the org and space through the following command
+```
+$cf target -o $PCF_ORG -s $PCF_SPACE
+```
+
+g. Push the sample app to PCF:
+    
+From within the *org-and-microgateway-sample* folder run:
+
+h. Push the sample app to PCF:
     
 From within the *org-and-microgateway-sample* folder run:
 ```bash
@@ -140,9 +149,9 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 64M   56.1M of 128M
 ```
 
-   g. Get a list of apps to determine the URL of the app just pushed:
+i. Get a list of apps to determine the URL of the app just pushed:
     
-    $ cf apps
+$ cf apps
 ```
 ➜  org-and-microgateway-sample git:(master) ✗ cf apps
 Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
@@ -153,7 +162,7 @@ as-sample             started           1/1         64M      128M   as-sample.ap
 
 ```
 
-   h. Use curl to send a test request to the url of the running app. Verify the response from the app. 
+j. Use curl to send a test request to the url of the running app. Verify the response from the app. 
     
     $ curl as-sample.apps.pcfone.io
 ```
