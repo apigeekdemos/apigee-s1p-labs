@@ -295,7 +295,7 @@ buildpack: nodejs_buildpack
 
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 ```
-   $ curl http://{your_sample_app_name}.apps.apigee-demo.net
+   $ curl http://{your_sample_app_name}.apps.pcfone.io
 
 {"error":"missing_authorization","error_description":"Missing Authorization header"}
 ```
