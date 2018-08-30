@@ -105,19 +105,14 @@ Org:            group-apigee
 Space:          apijam
 ```
 
-You can also select the org and space through the following command
-
-    ```
-    $cf target -o $PCF_ORG -s $PCF_SPACE
-    ```
-
-   f. Push the sample app to PCF:
+f. Push the sample app to PCF:
     
-    From within the *org-and-microgateway-sample* folder run:
+From within the *org-and-microgateway-sample* folder run:
+```bash
+$ cf push
+```
     
-    $ cf push
-    
-    If successful, you should see some output from this command and finally:
+If successful, you should see some output from this command and finally:
 ```
 .
 .
