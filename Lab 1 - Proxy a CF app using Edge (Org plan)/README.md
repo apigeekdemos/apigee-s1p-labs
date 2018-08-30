@@ -106,8 +106,10 @@ Space:          apijam
 f. Push the sample app to PCF:
     
 From within the *org-and-microgateway-sample* folder run:
-    
+
+```
 $ cf push
+```
     
 If successful, you should see some output from this command and finally:
 ```
