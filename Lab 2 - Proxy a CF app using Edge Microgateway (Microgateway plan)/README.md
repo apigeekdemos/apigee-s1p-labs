@@ -71,7 +71,7 @@ PCF_DOMAIN: PCF Domain for your apps.  // e.g. - apps.pcfone.io
 ```
 d. Set your API endpoint to the Cloud Controller of your deployment
 ```
-    $ cf api https://api.run.pcfone.io
+$ cf api https://api.run.pcfone.io
 Setting api endpoint to ...
 OK
 
