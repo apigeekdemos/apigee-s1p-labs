@@ -113,10 +113,6 @@ $cf target -o $PCF_ORG -s $PCF_SPACE
 g. Push the sample app to PCF:
     
 From within the *org-and-microgateway-sample* folder run:
-
-h. Push the sample app to PCF:
-    
-From within the *org-and-microgateway-sample* folder run:
 ```bash
 $ cf push
 ```
@@ -149,7 +145,7 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 64M   56.1M of 128M
 ```
 
-i. Get a list of apps to determine the URL of the app just pushed:
+h. Get a list of apps to determine the URL of the app just pushed:
     
 $ cf apps
 ```
@@ -162,7 +158,7 @@ as-sample             started           1/1         64M      128M   as-sample.ap
 
 ```
 
-j. Use curl to send a test request to the url of the running app. Verify the response from the app. 
+i. Use curl to send a test request to the url of the running app. Verify the response from the app. 
     
     $ curl as-sample.apps.pcfone.io
 ```
