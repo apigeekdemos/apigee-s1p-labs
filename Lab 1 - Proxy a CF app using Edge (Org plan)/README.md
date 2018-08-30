@@ -55,10 +55,11 @@ PCF_DOMAIN: PCF Domain for your apps.  // e.g. - apps.pcfone.io
     
     $ cd cloud-foundry-apigee/samples/org-and-microgateway-sample
 
-   c. In the *org-and-microgateway-sample* directory, edit *manifest.yml* and change the 'name' parameters:
+   c. In the *org-and-microgateway-sample* directory, edit *manifest.yml* and change the **'name' parameters**:
    
    * **name**: {your_initials}-sampleapi
-```
+
+```yml
   applications: 
   - name: {your_initials}-sampleapi
     memory: 64M
@@ -67,21 +68,26 @@ PCF_DOMAIN: PCF Domain for your apps.  // e.g. - apps.pcfone.io
     path: . 
     buildpack: nodejs_buildpack
 ```
+
    d. Set your API endpoint to the Cloud Controller of your deployment
-```
-    $ cf api https://api.run.pcfone.io
+
+```bash
+$ cf api https://api.run.pcfone.io
 Setting api endpoint to ...
 OK
 
 api endpoint:    https://api.run.pcfone.io
 api version:    2.112.0
 ```
-   e. Log in to your deployment and select an org and a space
 
-    $ cf login
-    -or-
-    $ cf login -u {PCF_USERNAME} -p {PCF_PASSWORD}
-```
+e. Log in to your deployment and select an org and a space
+
+```bash
+$ cf login
+  -or-
+$ cf login -u {PCF_USERNAME} -p {PCF_PASSWORD}
+
+
 ➜  apigee-s1p-labs git:(master) cf login
 API endpoint: https://api.run.pcfone.io
 
@@ -103,16 +109,22 @@ Org:            group-apigee
 Space:          apijam
 ```
 
-f. Push the sample app to PCF:
+f. Select the org and space through the following command:
+
+```bash
+$ cf target -o $PCF_ORG -s $PCF_SPACE
+```
+
+g. Push the sample app to PCF:
     
 From within the *org-and-microgateway-sample* folder run:
 
-```
+```bash
 $ cf push
 ```
     
 If successful, you should see some output from this command and finally:
-```
+```bash
 .
 .
 1 of 1 instances running
@@ -139,40 +151,45 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 64M   56.1M of 128M
 ```
 
-   g. Get a list of apps to determine the URL of the app just pushed:
+h. Get a list of apps to determine the URL of the app just pushed:
     
-    $ cf apps
-```
+```bash
+$ cf apps
+
 ➜  org-and-microgateway-sample git:(master) ✗ cf apps
 Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
 as-sample             started           1/1         64M      128M   as-sample.apps.pcfone.io
-
 ```
 
-   h. Use curl to send a test request to the url of the running app. Verify the response from the app. 
-    
-    $ curl as-sample.apps.pcfone.io
-```
+i. Use curl to send a test request to the url of the running app. Verify the response from the app. 
+
+
+```bash
+$ curl https://as-sample.apps.pcfone.io
+
 {"hello":"hello from cf app"}
 ```
 
 **2. Install the Apigee Broker Plugin**
 
-   a. Run the CF install-plugin command
-   
-   $ cf install-plugin -r CF-Community "apigee-broker-plugin"
-```
+a. Run the CF install-plugin command
+
+```   
+$ cf install-plugin -r CF-Community "apigee-broker-plugin"
+
 Installing plugin Apigee-Broker-Plugin...
 OK
 Plugin Apigee-Broker-Plugin 0.1.1 successfully installed.
 ```
-   b. Make sure the plugin is available by running:
 
-    $ cf -h
+b. Make sure the plugin is available by running:
+
 ```
+$ cf -h
+
 ...
 Commands offered by installed plugins:
   apigee-bind-mg,abm     apigee-push,ap           apigee-unbind-org,auo
@@ -183,9 +200,13 @@ Commands offered by installed plugins:
 **3. List your Service Instance**
 
 Note - If you are executing this lab in your own PCF foundation, you will need to create your own Service instance, for the purpose of this lab , we have pre-created Service instance for you.
-   a. List the Marketplace services and locate the Apigee Edge service:
-    
-    $ cf marketplace
+
+a. List the Marketplace services and locate the Apigee Edge service:
+
+```bash
+$ cf marketplace
+```
+
 ```
 Getting services from marketplace in org group-apigee / space apijam as shuklaankur@google.com...
 OK
@@ -196,9 +217,11 @@ apigee-edge                   org, microgateway, microgateway-coresident   Apige
 .
 .
 ```
-   b. List instances of the Apigee Edge service. You will be Select the *org* service plan.
+   
+b. List instances of the Apigee Edge service. You will be Select the *org* service plan.
+
 ```
-   $ cf services
+$ cf services
 
 Getting services in org group-apigee / space apijam as shuklaankur@google.com...
 OK
@@ -209,6 +232,9 @@ apigee-microgateway-service   apigee-edge   microgateway                        
 apigee-org-service            apigee-edge   org                                    create succeeded
 ...
 ```
+
+c. Show more details of `apigee-org-service` service instance
+
 ```
 ➜  org-and-microgateway-sample git:(master) ✗ cf service apigee-org-service
 Showing info of service apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
@@ -223,21 +249,23 @@ documentation:
 dashboard:       https://enterprise.apigee.com/platform/#/
 
 ```
+
 **4. Bind the Sample CF App created in Step 1 to route its requests to the Apigee Egde ORG Service Instance listed in Step 3.**
 
-   The apigee-bind-org command creates a proxy for you and binds the app to the service.
+The apigee-bind-org command creates a proxy for you and binds the app to the service.
 
     $ cf apigee-bind-org --app {your_sample_app_name} --service {your_service_instance} --apigee_org amer-api-partner19 --apigee_env test --domain apps.pcfone.io  --protocol https --user {apiogee_username} --pass {apigee_password}
 
-   The above command will promt for these entries. Enter the values as listed below:
+The above command will promt for these entries. Enter the values as listed below:
 
-   Action to take ("bind", "proxy bind", or "proxy") [required]: proxy bind
-   The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: {press enter}
+Action to take ("bind", "proxy bind", or "proxy") [required]: proxy bind
+The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: {press enter}
 
 **5. Verify the binding**
     The above 'bind org' completes route binding by instructing the PCF go-router to route all traffic, headed for your application, via an Apigee ORG. You can verify that the binding was successful by using the 'cf routes' command and seeing that the 'ORG Plan' service is now associated with your application route. See below example:
-```
-cf routes
+
+```bash
+$ cf routes
 Getting routes for org group-apigee / space apijam as shuklaankur@google.com ...
 
 space    host                  domain           port   path   type   apps                  service
@@ -257,7 +285,8 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
    * Click the Trace tab, then click the Start Trace Session button.
 
    * From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
-```
+
+```bash
    $ curl http://{your_sample_app_name}.sample.apps.pcfone.io
 
    You should see the following response as before:
@@ -274,11 +303,13 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
     - If you have swagger spec for this API, you can enable your developers to access these APIs through smartdocs
 
 # Unbinding the Application from 'ORG' Service Plan
+
 Since we will be using the same application for our next set of labs, we will now be unbinding this application from the ORG plan.
 
 To unbind the the application we will be using the 'apigee-unbind-org' comand as follows:
-```
-cf apigee-unbind-org --app {your_initials}-sample --domain apps.pcfone.io --service apigee-org-service
+
+```bash
+$ cf apigee-unbind-org --app {your_initials}-sample --domain apps.pcfone.io --service apigee-org-service
 
 Unbinding may leave apps mapped to route as-sample.apps.pcfone.io vulnerable; e.g. if service instance apigee-org-service provides authentication. Do you want to proceed?> y
 Unbinding route as-sample.apps.pcfone.io from service instance apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
@@ -287,8 +318,9 @@ OK
 ``` 
 
 You can verify that the 'unbind-org' was successful by using 'cf routes' command and ensuring that you do not see the service listed against your app route:
+
 ```
-cf routes
+$ cf routes
 Getting routes for org group-apigee / space apijam as shuklaankur@google.com ...
 
 space    host                  domain           port   path   type   apps                  service
