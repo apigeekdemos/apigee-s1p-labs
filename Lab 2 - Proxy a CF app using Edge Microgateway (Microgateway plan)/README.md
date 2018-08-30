@@ -1,6 +1,6 @@
 # Apigee Edge Service Broker Microgateway Plan: Secure a CF App
 
-*Duration : 45 mins*
+*Duration : 20 mins*
 
 *Persona : API Team*
 
@@ -32,22 +32,23 @@ Before you begin, you will need to get the following from your PCF instance or r
 
 YOUR-SYSTEM-DOMAIN: This the the domian/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
 
-PCF_USERNAME: PCF username
+PCF_USERNAME: PCF Username   // e.g. - apigee-pcf-user-XXX -  where XXX is your unique identifier
 
 PCF_PASSWORD: PCF Password
 
-PCF_ORG: The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab
+PCF_ORG: The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
 
-PCF_SPACE: An org can contain multiple spaces. This is the space you will pick for this lab
+PCF_SPACE: An org can contain multiple spaces. The space you will pick for this lab is called - "apijam"
 
-PCF_API: PCF API Endpoint
+PCF_API: PCF API Endpoint   // e.g. - https://api.run.pcfone.io
 
-PCF_DOMAIN: PCF Domain for your apps. 
+PCF_DOMAIN: PCF Domain for your apps.  // e.g. - apps.pcfone.io
 
 # Steps
 
-**1. Push the sample target application as a CF app to PCF**
+**1. (Optional) Push the sample target application as a CF app to PCF**
 
+<b>Note</b> - This step is optional if you have completed Lab 1, as we will be using the same sample application as Lab 1 and this application is already present in our CF Environment<br>
    a. Clone the Apigee Edge GitHub repo:
     
     $ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
@@ -56,148 +57,160 @@ PCF_DOMAIN: PCF Domain for your apps.
     
     $ cd cloud-foundry-apigee/samples/org-and-microgateway-sample
 
-   c. In the *org-and-microgateway-sample* directory, edit *manifest.yml* and change the following parameters:
+   c. In the *org-and-microgateway-sample* directory, edit *manifest.yml* and change the 'name' parameter:
    
-   * **name**: {your_initials-target}-sampleapi-mg
-   * **host**: {your_initials-target}-sampleapi-mg
+    name: {your_initials}-sampleapi
 ```
   applications: 
-  - name: {your_initials-target}-sampleapi-mg
-    memory: 128M 
+  - name: {your_initials}-sampleapi
+    memory: 64M
+    disk_quota: 128M 
     instances: 1 
-    host: {your_initials-target}-sampleapi-mg
     path: . 
     buildpack: nodejs_buildpack
 ```
-   d. Set your API endpoint to the Cloud Controller of your deployment
-    
-    $ cf api --skip-ssl-validation https://api.run.pcfone.io
+d. Set your API endpoint to the Cloud Controller of your deployment
 ```
-Setting api endpoint to https://api.system.apigee-demo.net...
+    $ cf api https://api.run.pcfone.io
+Setting api endpoint to ...
 OK
 
-api endpoint:   https://api.system.apigee-demo.net
-api version:    2.82.0
+api endpoint:    https://api.run.pcfone.io
+api version:    2.112.0
 ```
    e. Log in to your deployment and select an org and a space
-    
+
     $ cf login
     -or-
     $ cf login -u {PCF_USERNAME} -p {PCF_PASSWORD}
 ```
-API endpoint: https://api.system.apigee-demo.net
+➜  apigee-s1p-labs git:(master) cf login
+API endpoint: https://api.run.pcfone.io
 
-Email> sandeepmuru+pivotal+labuser3@google.com
+Email> shuklaankur@google.com
 
-Password> 
+Password>
 Authenticating...
 OK
 
-Targeted org apigee
+Targeted org group-apigee
 
-Targeted space sandeepmuru+pivotal+labuser3@google.com
+Targeted space apijam
 
-API endpoint:   https://api.system.apigee-demo.net (API version: 2.82.0)
-User:           sandeepmuru+pivotal+labuser3@google.com
-Org:            apigee
-Space:          sandeepmuru+pivotal+labuser3@google.com
+
+
+API endpoint:   https://api.run.pcfone.io (API version: 2.112.0)
+User:           shuklaankur@google.com
+Org:            group-apigee
+Space:          apijam
 ```
-   You can also select the org and space through the following command
+
+You can also select the org and space through the following command
+
     ```
-    $cf target -o {PCF_ORG} -s {PCF_SPACE}
+    $cf target -o $PCF_ORG -s $PCF_SPACE
     ```
 
-   f. Push the sample app to PCF
-
+   f. Push the sample app to PCF:
+    
     From within the *org-and-microgateway-sample* folder run:
     
     $ cf push
     
     If successful, you should see some output from this command and finally:
 ```
-     state     since                    cpu    memory          disk          details
-#0   running   2018-04-25 02:50:40 PM   0.0%   56.3M of 600M   46.5M of 1G
+.
+.
+1 of 1 instances running
+
+App started
+
+
+OK
+
+App as-sample was started using this command `npm start`
+
+Showing health and status for app as-sample in org group-apigee / space apijam as shuklaankur@google.com...
+OK
+
+requested state: started
+instances: 1/1
+usage: 64M x 1 instances
+urls: as-sample.apps.pcfone.io
+last uploaded: Wed Aug 29 20:29:32 UTC 2018
+stack: cflinuxfs2
+buildpack: nodejs_buildpack
+
+     state     since                    cpu    memory         disk            details
+#0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 64M   56.1M of 128M
 ```
 
    g. Get a list of apps to determine the URL of the app just pushed:
     
     $ cf apps
 ```
-Getting apps in org apigee / space sandeepmuru+pivotal+labuser3@google.com as sandeepmuru+pivotal+labuser3@google.com...
+➜  org-and-microgateway-sample git:(master) ✗ cf apps
+Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
-name                        requested state   instances   memory   disk   urls
-hm-target-sampleapi-mg             started           1/1         600M     1G   hm-target-sampleapi-mg.apps.apigee-demo.net
+name                  requested state   instances   memory   disk   urls
+as-sample             started           1/1         64M      128M   as-sample.apps.pcfone.io
+
 ```
 
    h. Use curl to send a test request to the url of the running app. Verify the response from the app. 
     
-    $ curl hm-target-sampleapi-mg.apps.apigee-demo.net
+    $ curl as-sample.apps.pcfone.io
 ```
 {"hello":"hello from cf app"}
 ```
 
-**2. Install the Apigee Broker Plugin**
+**2. List your Service Instance**
 
-   a. Run the CF install-plugin command
-   
-   $ cf install-plugin -r CF-Community "apigee-broker-plugin"
-```
-Installing plugin Apigee-Broker-Plugin...
-OK
-Plugin Apigee-Broker-Plugin 0.1.1 successfully installed.
-```
-   b. Make sure the plugin is available by running:
-
-    $ cf -h
-```
-...
-Commands offered by installed plugins:
-  apigee-bind-mg,abm     apigee-push,ap           apigee-unbind-org,auo
-  apigee-bind-mgc,abc    apigee-unbind-mg,aum     
-  apigee-bind-org,abo    apigee-unbind-mgc,auc  
-```
-
-**3. Create a Service Instance**
-
+Note - If you are executing this lab in your own PCF foundation you will need to create your own Service instance, for the purpose of this lab we have pre-created Service instance for you.
    a. List the Marketplace services and locate the Apigee Edge service:
     
     $ cf marketplace
 ```
-Getting services from marketplace in org apigee / space sandeepmuru+pivotal+labuser3@google.com as sandeepmuru+pivotal+labuser3@google.com...
+Getting services from marketplace in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
-service       plans                                        description
-apigee-edge   org, microgateway, microgateway-coresident   Apigee Edge API Platform
+service                       plans                                        description
+apigee-edge                   org, microgateway, microgateway-coresident   Apigee Edge API Platform
+.
+.
+.
 ```
-   b. Create an instance of the Apigee Edge service. 
-   
-   Select the microgateway service plan to have Apigee Edge Microgateway run in a separate container from your Cloud Foundry app.
+   b. List instances of the Apigee Edge service. You will be Selecting the *microgateway* service plan for the purpose of this lab.
 ```
-   $ cf create-service apigee-edge microgateway {your_initials}_apigee_mg_service -c '{"org":"amer-api-partner19","env":"test"}'
+   $ cf services
 
-Creating service instance hm_apigee_mg_service in org apigee / space sandeepmuru+pivotal+labuser3@google.com as sandeepmuru+pivotal+labuser3@google.com...
+Getting services in org group-apigee / space apijam as shuklaankur@google.com...
 OK
-```
 
-   c. Use the cf service command to display information about the service instance:
-```
-   $ cf service {your_initials}_apigee_mg_service
-
-Showing info of service hm_apigee_mg_service in org apigee / space sandeepmuru+pivotal+labuser3@google.com as sandeepmuru+pivotal+labuser3@google.com...
-
-name:            hm_apigee_mg_service
-service:         apigee-edge
-bound apps:      
-tags:            
-plan:            microgateway
-description:     Apigee Edge API Platform
-documentation:   
-dashboard:       https://enterprise.apigee.com/platform/#/
+name                          service       plan                      bound apps   last operation
+apigee-coresident-service     apigee-edge   microgateway-coresident                create succeeded
+apigee-microgateway-service   apigee-edge   microgateway                           create succeeded
+apigee-org-service            apigee-edge   org                                    create succeeded
 ...
 ```
+List out details of the 'microgateway' plan service instance using below command:
+```
+org-and-microgateway-sample git:(master) ✗ cf service apigee-microgateway-service
+Showing info of service apigee-microgateway-service in org group-apigee / space apijam as shuklaankur@google.com...
 
-**4. Deploy Edge Microgateway onto Pivotal Cloud Foundry**
+name:            apigee-microgateway-service
+service:         apigee-edge
+bound apps:
+tags:
+plan:            microgateway
+description:     Apigee Edge API Platform
+documentation:
+dashboard:       https://enterprise.apigee.com/platform/#/
+....
+```
+
+**3. Deploy Edge Microgateway onto Pivotal Cloud Foundry**
 
    a. Clone the Apigee Microgateway repository.
     
@@ -211,42 +224,70 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 ```
    $ cp resources/amer-api-partner19-test-config.yaml microgateway/config
 ```
-   c. Edit the application manifest file *microgateway/manifest.yml* in the cloned Edge Microgateway repository to update the following env values: (Replace {your-initials} with your own). Leave the other values as-is.
+   c. Edit the application manifest file *microgateway/manifest.yml* in the cloned Edge Microgateway repository to update the following env values: 
+
+      i) Replace {your-initials} with your own for name parameter. 
+      ii) Add the EDGEMICRO_KEY & EDGEMICRO_SECRET - see below 
+      iii) Change the EDGEMICRO_ENV and EDGEMICRO_ORG - see below
+      
+      Leave the other values as-is.
 ```
 applications:
 - name: {your-initials}-edgemicro-app
-  memory: 512M
+  memory: 128M
+  disk_quota: 512M
   instances: 1
-  host: {your-initials}-edgemicro-app
   path: .
   buildpack: nodejs_buildpack
   env: 
     EDGEMICRO_KEY: '6f10ad9a16f85a14fa8c8595cf7cf39b7c3432bb8135a95af56ffe0776454eaf'
     EDGEMICRO_SECRET: '94102b540cc60aed1a6737f476c3cbcef5bf2d8a1a2a3273dc32e24cda990d05'
-    EDGEMICRO_CONFIG_DIR: '/app/config'
+    EDGEMICRO_CONFIG_DIR: './config'
     EDGEMICRO_ENV: 'test'
     EDGEMICRO_ORG: 'amer-api-partner19'
     NODE_TLS_REJECT_UNAUTHORIZED: '0'
 ```
-   d. Finally push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.
+   d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.
     
     $ cf push
 ```
 ...
-     state     since                    cpu    memory         disk         details
-#0   running   2018-04-26 10:41:17 AM   0.0%   952K of 512M   1.3M of 1G
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+
+App started
+
+
+OK
+
+App as-edgemicro-app was started using this command `npm start`
+
+Showing health and status for app as-edgemicro-app in org group-apigee / space apijam as shuklaankur@google.com...
+OK
+
+requested state: started
+instances: 1/1
+usage: 256M x 1 instances
+urls: as-edgemicro-app.apps.pcfone.io
+last uploaded: Wed Aug 29 23:29:10 UTC 2018
+stack: cflinuxfs2
+buildpack: nodejs_buildpack
+
+     state     since                    cpu    memory          disk             details
+#0   running   2018-08-29 04:30:26 PM   0.0%   52.9M of 256M   331.3M of 512M
 ```
 
-**5. Bind the Sample CF App created in Step 1 to route its requests to the Apigee Egde Service Instance created in Step 3.**
+**4. Bind the Sample CF App created in Step 1 / Lab 1 (ORG Plan - remember we are using the same target application) to route its requests to the Apigee Egde Service Instance listed in Step 2.**
 
    The apigee-bind-mg command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service {your_mg_service_instance} --apigee_org amer-api-partner19 --apigee_env test --micro {your_edgemicro_app_name}.apps.apigee-demo.net --domain apps.apigee-demo.net --user {username} --pass {password}
+    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service apigee-microgateway-service --apigee_org amer-api-partner19 --apigee_env test --micro {your_edgemicro_app_name}.apps.pcfone.io --domain apps.pcfone.io --protocol https --user {username} --pass {password}
 
    The above command will promt for these entries. Enter the values as listed below:
 
    Action to take ("bind", "proxy bind", or "proxy") [required]: proxy bind
    Target application protocol [optional]: https
+
 
 **6. Test the binding**
    
