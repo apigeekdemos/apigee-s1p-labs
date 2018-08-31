@@ -29,7 +29,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
 **1. Register to obtain PCF Credentials:** Open this [Google Sheet](https://TODO/GOOGLE_SHEET_PROVIDED_BY_INSTRUCTOR) and pick any record to grab your credentials.
 
-**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. Please ask your instructor to provision them.
+**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. Please ask your instructor to provision them. Replace values of **`PCF_USERNAME`** and **`PCF_PASSWORD`** variables.
 
    **a. Save apigee-pcf-environment.sh** 
    
