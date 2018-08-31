@@ -27,17 +27,17 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
 # Instructions
 
-1. **Register to obtain PCF Credentials:** Open this [Google Sheet](https://TODO/GOOGLE_SHEET_PROVIDED_BY_INSTRUCTOR) and pick any record to grab your credentials.
+**1. Register to obtain PCF Credentials:** Open this [Google Sheet](https://TODO/GOOGLE_SHEET_PROVIDED_BY_INSTRUCTOR) and pick any record to grab your credentials.
 
 **2. Set environment variables:** Before you begin, you will need to get the following from your PCF instance or receive them from your instructor.
 
 ```bash
-# This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
-export YOUR-SYSTEM-DOMAIN=apps.pcfone.io
-
 # e.g. apigee-pcf-user-XXX -  where XXX is your unique identifier
 export PCF_USERNAME=apigee-pcf-user-XXX
 export PCF_PASSWORD=SomePass$word
+
+# This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
+export YOUR_SYSTEM_DOMAIN=apps.pcfone.io
 
 # The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
 export PCF_ORG=group-apigee
