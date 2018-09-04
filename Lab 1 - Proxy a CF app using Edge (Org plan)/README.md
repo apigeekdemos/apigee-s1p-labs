@@ -280,9 +280,9 @@ The apigee-bind-org command creates a proxy for you and binds the app to the ser
 
 The above command will promt for these entries. Enter the values as listed below:
 
-Action to take ("bind", "proxy bind", or "proxy") [required]: Use `proxy bind`
+Action to take ("bind", "proxy bind", or "proxy") [required]: **Use `proxy bind`**
 
-The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: {press enter}
+The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: **{press enter}**
 
 **5. Verify the binding**
     The above 'bind org' completes route binding by instructing the PCF go-router to route all traffic, headed for your application, via an Apigee ORG. You can verify that the binding was successful by using the 'cf routes' command and seeing that the 'ORG Plan' service is now associated with your application route. See below example:
@@ -310,7 +310,7 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
    * From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-   $ curl http://{your_sample_app_name}.sample.apps.pcfone.io
+   $ curl https://{your_sample_app_name}.sample.apps.pcfone.io
 
    You should see the following response as before:
 
