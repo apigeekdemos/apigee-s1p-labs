@@ -69,9 +69,9 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
    b. Change to the *org-and-microgateway-sample* directory of the cloned repo:
     
-    $ cd cloud-foundry-apigee/samples/org-and-microgateway-sample
+    $ cd cloud-foundry-apigee/lab1-org-plan/
 
-   c. In the *org-and-microgateway-sample* directory, edit *manifest.yml* and change the **'name' parameters**:
+   c. In the *lab1-org-plan* directory, edit *manifest.yml* and change the **'name' parameters**:
    
    * **name**: {your_initials}-sampleapi
 
@@ -88,7 +88,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    d. Set your API endpoint to the Cloud Controller of your deployment
 
 ```bash
-$ cf api https://api.run.pcfone.io
+$ cf api $PCF_API
 Setting api endpoint to ...
 OK
 
