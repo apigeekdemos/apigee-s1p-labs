@@ -47,9 +47,6 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
    export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
 
-   # This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
-   export YOUR_SYSTEM_DOMAIN=apps.pcfone.io
-
    # The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
    export PCF_ORG=group-apigee
 
@@ -57,6 +54,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    export PCF_SPACE=apijam
 
    # PCF API Endpoint - e.g. - https://api.run.pcfone.io
+   # This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
    export PCF_API=https://api.run.pcfone.io
 
    # PCF Domain for your apps.  // e.g. - apps.pcfone.io
@@ -280,14 +278,12 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 The apigee-bind-org command creates a proxy for you and binds the app to the service.
 
     $ cf apigee-bind-org --app {your_sample_app_name} --service $PCF_ORG_SERVICE_INSTANCE \
-    --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --domain apps.pcfone.io  \
-    --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD
+    --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --domain $PCF_DOMAIN  \
+    --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD --action "proxy bind"
 
 The above command will promt for these entries. Enter the values as listed below:
 
-Action to take ("bind", "proxy bind", or "proxy") [required]: **Use `proxy bind`**
-
-The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: **{press enter}**
+The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: **Press enter**
 
 **5. Verify the binding**
     The above 'bind org' completes route binding by instructing the PCF go-router to route all traffic, headed for your application, via an Apigee ORG. You can verify that the binding was successful by using the 'cf routes' command and seeing that the 'ORG Plan' service is now associated with your application route. See below example:
