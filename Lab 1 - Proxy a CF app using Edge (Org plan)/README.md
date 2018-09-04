@@ -40,6 +40,10 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    # e.g. apigee-pcf-user-XXX -  where XXX is your unique identifier
    export PCF_USERNAME=apigee-pcf-user-XXX
    export PCF_PASSWORD=SomePass$word
+   
+   # user APIGEE_USERNAME from registration sheet above
+   export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
+   export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
 
    # This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
    export YOUR_SYSTEM_DOMAIN=apps.pcfone.io
@@ -270,7 +274,9 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 The apigee-bind-org command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-org --app {your_sample_app_name} --service {your_service_instance} --apigee_org amer-api-partner19 --apigee_env test --domain apps.pcfone.io  --protocol https --user {apiogee_username} --pass {apigee_password}
+    $ cf apigee-bind-org --app {your_sample_app_name} --service apigee-org-service \
+    --apigee_org amer-api-partner19 --apigee_env test --domain apps.pcfone.io  \
+    --protocol https --user {apiogee_username} --pass {apigee_password}
 
 The above command will promt for these entries. Enter the values as listed below:
 
