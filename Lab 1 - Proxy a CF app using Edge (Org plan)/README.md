@@ -30,7 +30,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 **1. Register to obtain PCF Credentials:** Open [registration sheet](https://apigeespringone.page.link/registration
 ), pick a user and complete additional fields: name, role, email, and company.
 
-**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. Please ask your instructor to provision them. Replace values of **`PCF_USERNAME`** and **`PCF_PASSWORD`** variables.
+**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. Please ask your instructor to provision them. Replace values of **`PCF_USERNAME, PCF_PASSWORD, APIGEE_ORG, APIGEE_ENV, APIGEE_USERNAME, APIGEE_PASSWORD, `**,  variables.
 
    **a. Save apigee-pcf-environment.sh** 
    
@@ -41,7 +41,9 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    export PCF_USERNAME=apigee-pcf-user-XXX
    export PCF_PASSWORD=SomePass$word
    
-   # user APIGEE_USERNAME from registration sheet above
+   # Apigee Credetials from registration sheet above
+   export APIGEE_ORG=LOOKUP_IN_SPREADSHEET_ABOVE
+   export APIGEE_ENV=LOOKUP_IN_SPREADSHEET_ABOVE
    export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
    export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
 
@@ -59,6 +61,9 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
    # PCF Domain for your apps.  // e.g. - apps.pcfone.io
    export PCF_DOMAIN=apps.pcfone.io
+   
+   #
+   export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
    ```
    
    **b. run `source apigee-pcf-environment.sh` to see these environment variables.** 
@@ -274,9 +279,9 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 The apigee-bind-org command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-org --app {your_sample_app_name} --service apigee-org-service \
-    --apigee_org amer-api-partner19 --apigee_env test --domain apps.pcfone.io  \
-    --protocol https --user {apiogee_username} --pass {apigee_password}
+    $ cf apigee-bind-org --app {your_sample_app_name} --service $PCF_ORG_SERVICE_INSTANCE \
+    --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --domain apps.pcfone.io  \
+    --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD
 
 The above command will promt for these entries. Enter the values as listed below:
 
