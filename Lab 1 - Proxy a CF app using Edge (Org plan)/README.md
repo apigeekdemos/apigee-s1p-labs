@@ -280,7 +280,8 @@ The apigee-bind-org command creates a proxy for you and binds the app to the ser
 
 The above command will promt for these entries. Enter the values as listed below:
 
-Action to take ("bind", "proxy bind", or "proxy") [required]: proxy bind
+Action to take ("bind", "proxy bind", or "proxy") [required]: Use `proxy bind`
+
 The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: {press enter}
 
 **5. Verify the binding**
