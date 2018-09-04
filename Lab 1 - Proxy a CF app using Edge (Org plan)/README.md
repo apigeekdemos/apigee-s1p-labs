@@ -21,9 +21,9 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
 * You have [installed and configured](http://docs.pivotal.io/partners/apigee/installing.html) the *Apigee Edge Service Broker for PCF tile*. Or you got a set of credentials from your instructor that has access to a PCF environment with *Apigee Edge Service Broker for PCF* tile. 
 
-* You have installed [cf CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
+* You have installed [cf CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) in your laptop. Alternatively, you can use Google Cloud Shell to [install cf cli following these steps](https://gist.github.com/dzuluaga/a5f42e343dad0198d052df8b2c35a45e).
 
-* You have an Apigee account and have access to an Apigee Org.
+* You have an Apigee account and have access to an Apigee Org. For PCF One Environment, pick up credentials [APIGEE_LOGIN, APIGEE_USERNAME, and APIGEE_PASSWORD here](https://apigeespringone.page.link/registration).
 
 # Instructions
 
