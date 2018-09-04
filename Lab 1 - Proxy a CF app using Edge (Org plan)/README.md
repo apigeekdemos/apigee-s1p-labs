@@ -337,12 +337,12 @@ Since we will be using the same application for our next set of labs, we will no
 To unbind the the application we will be using the 'apigee-unbind-org' comand as follows:
 
 ```bash
-$ cf apigee-unbind-org --app {your_initials}-sample --domain apps.pcfone.io --service apigee-org-service
+    $ cf apigee-unbind-org --app {your_sample_app_name} --domain $PCF_DOMAIN --service $PCF_ORG_SERVICE_INSTANCE
 
-Unbinding may leave apps mapped to route as-sample.apps.pcfone.io vulnerable; e.g. if service instance apigee-org-service provides authentication. Do you want to proceed?> y
-Unbinding route as-sample.apps.pcfone.io from service instance apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
-OK
-➜  org-and-microgateway-sample git:(master) ✗
+    Unbinding may leave apps mapped to route as-sample.apps.pcfone.io vulnerable; e.g. if service instance apigee-org-service provides authentication. Do you want to proceed?> y
+    Unbinding route as-sample.apps.pcfone.io from service instance apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
+    OK
+    ➜  org-and-microgateway-sample git:(master) ✗
 ``` 
 
 You can verify that the 'unbind-org' was successful by using 'cf routes' command and ensuring that you do not see the service listed against your app route:
