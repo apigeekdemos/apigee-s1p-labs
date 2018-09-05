@@ -29,8 +29,6 @@ TODO
 
    **a. Save apigee-pcf-environment.sh** 
 
-<script src="https://gist.github.com/nisrulz/11c0d63428b108f10c83.js"></script>
-
    ```bash
    # apigee-pcf-environment.sh file
    #
@@ -173,7 +171,6 @@ plugins:
       #- oauth
 ```
 
-
 ### 6.c. Check Cloud Foundry App Port running on port 8081
 Ensure that your Cloud Foundry app isn’t running on port 8080, nor on the port specified by the PORT environment variable.
 
@@ -192,12 +189,12 @@ This looks good. Cloud Foundry app listens on port 8081.
 
 In this step Node.js target application will be pushed to PCF. We will use the apigee-push command instead of regular piush command as apigee-push option automatically injects the microgateway within the cf container for the co-resident plan to work.
 
-Note - Please enter 'y' for the "microgateway-coresident" question, other questions are optional (can be left blank) if you are not pushing a java application.
+**Note - Please enter 'y' for the "microgateway-coresident" question, other questions are optional (can be left blank) if you are not pushing a java application.**
 
 ```bash
 $ cf apigee-push
 
-Do you plan on using this application with the "microgateway-coresident" plan? [y/n] y
+Do you plan on using this application with the "microgateway-coresident" plan? [y/n] **y**
 If you are pushing a java application, enter the path to the archive. Otherwise press [Enter]:
 Specific name of application to push [optional]:
 Using manifest file /Users/shuklaankur/pcf/cloud-foundry-apigee/samples/coresident-sample/manifest.yml
@@ -257,10 +254,10 @@ Use the command without arguments to be prompted for argument values. To use the
 
 
 ```bash
-    $ cf apigee-bind-mgc --app CF_APP_NAME --service $PCF_COR_SERVICE_INSTANCE \
-    --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ORG --edgemicro_key $EDGEMICRO_KEY \
-    --edgemicro_secret $EDGEMICRO_SECRET --target_app_route TARGET_APP_ROUTE \
-    --target_app_port 8081 --action 'proxy bind' --user APIGEE_USER_NAME --pass APIGEE_PASSWORD
+$ cf apigee-bind-mgc --app CF_APP_NAME --service $PCF_COR_SERVICE_INSTANCE \
+--apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --edgemicro_key $EDGEMICRO_KEY \
+--edgemicro_secret $EDGEMICRO_SECRET --target_app_route TARGET_APP_ROUTE \
+--target_app_port 8081 --action 'proxy bind' --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD
 ```
 
 This command should return `OK`. If it returns and error, try again until you get it. This will also give you an option to re-start your application, select 'y' to start the target application and Microgatway.
@@ -285,13 +282,13 @@ You’ll be prompted for the following:
 
 Example:
 ```bash
-shuklaankur-macbookpro:lab3 shuklaankur$ cf apigee-bind-mgc --app as1-target-nodejs-app --service AS-Apigee-MGW-COR-Plan --apigee_org amer-api-partner19 --apigee_env test --edgemicro_key {EdgeMicroKey} --edgemicro_secret {EdgeMicroSecret} --target_app_route as1-target-nodejs-app.apps.apigee-demo.net --target_app_port 8081 --action 'proxy bind' --user {Apigee-username} --pass {Apigee-password}
+$ cf apigee-bind-mgc --app as1-target-nodejs-app --service AS-Apigee-MGW-COR-Plan --apigee_org amer-api-partner19 --apigee_env test --edgemicro_key {EdgeMicroKey} --edgemicro_secret {EdgeMicroSecret} --target_app_route as1-target-nodejs-app.apps.apigee-demo.net --target_app_port 8081 --action 'proxy bind' --user {Apigee-username} --pass {Apigee-password}
 Binding service AS-Apigee-MGW-COR-Plan to app as1-target-nodejs-app in org apigee / space sandeepmuru+pivotal+labuser4@google.com as sandeepmuru+pivotal+labuser4@google.com...
 OK
 TIP: Use 'cf restage as1-target-nodejs-app' to ensure your env variable changes take effect
 Would you like to start your application now? [y/n] y
 ```
-Note :  You will be promted to restart your application, select the options 'y'. To ensure duccesfull deployment, look out for message below at the end of the deployment sequence.
+Note :  You will be prompted to restart your application, select the options 'y'. To ensure succesfull deployment, look out for message below at the end of the deployment sequence.
 
 ```bash
 Successfully destroyed container
