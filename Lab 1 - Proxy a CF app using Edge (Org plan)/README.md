@@ -69,20 +69,21 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    ```
    
    **b. run `source apigee-pcf-environment.sh` to see these environment variables.** 
+   
+   **c. Clone the Apigee Edge GitHub repo:**
+    
+       `$ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git`
+
 
 # Steps
 
 **1. Push the sample application as a CF app to PCF**
 
-   a. Clone the Apigee Edge GitHub repo:
-    
-    $ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
-
-   b. Change to the *lab1-org-plan* directory of the cloned repo:
+   a. Change to the *lab1-org-plan* directory of the cloned repo:
     
     $ cd cloud-foundry-apigee/lab1-org-plan/
 
-   c. In the *lab1-org-plan* directory, edit *manifest.yml* and change the **'name' parameters**:
+   b. In the *lab1-org-plan* directory, edit *manifest.yml* and change the **'name' parameters**:
    
    * **name**: {your_initials}-sampleapi
 
@@ -96,7 +97,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
     buildpack: nodejs_buildpack
 ```
 
-   d. Set your API endpoint to the Cloud Controller of your deployment
+   c. Set your API endpoint to the Cloud Controller of your deployment
 
 ```bash
 $ cf api $PCF_API
