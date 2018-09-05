@@ -62,6 +62,9 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    
    #
    export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
+   export PCF_MGW_SERVICE_INSTANCE=apigee-microgateway-service
+   export PCF_COR_SERVICE_INSTANCE=apigee-coresident-service
+  
    ```
    
    **b. run `source apigee-pcf-environment.sh` to see these environment variables.** 
@@ -74,7 +77,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
     
     $ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
 
-   b. Change to the *org-and-microgateway-sample* directory of the cloned repo:
+   b. Change to the *lab1-org-plan* directory of the cloned repo:
     
     $ cd cloud-foundry-apigee/lab1-org-plan/
 
