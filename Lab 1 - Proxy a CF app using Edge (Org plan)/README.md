@@ -46,6 +46,8 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    export APIGEE_ENV=LOOKUP_IN_SPREADSHEET_ABOVE
    export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
    export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
+   export EDGEMICRO_KEY=LOOKUP_IN_SPREADSHEET_ABOVE
+   export EDGEMICRO_SECRET=LOOKUP_IN_SPREADSHEET_ABOVE
 
    # The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
    export PCF_ORG=group-apigee
@@ -64,7 +66,6 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
    export PCF_MGW_SERVICE_INSTANCE=apigee-microgateway-service
    export PCF_COR_SERVICE_INSTANCE=apigee-coresident-service
-  
    ```
    
    **b. run `source apigee-pcf-environment.sh` to see these environment variables.** 
