@@ -99,13 +99,13 @@ Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-sample-mg          started           1/1         64M      128M   as-sample-mg.apps.pcfone.io
+as-sampleapi-mg       started           1/1         64M      128M   as-sampleapi-mg.apps.pcfone.io
 
 ```
 
    **f. Use curl to send a test request to the url of the running app. Verify the response from the app. 
     
-    $ curl https://as-sample-mg.apps.pcfone.io
+    $ curl https://as-sampleapi-mg.apps.pcfone.io
 ```
 {"hello":"hello from cf app"}
 ```
@@ -165,8 +165,7 @@ dashboard:       https://enterprise.apigee.com/platform/#/
     
     $ git checkout tags/v.2.5.4
     
-   b. Copy the Microgateway configuration YAML file *amer-api-partner19-test-config.yaml* from this Lab 2 */resources* folder to the *microgateway/config* directory in the Microgateway repository cloned in step c. above.
-```
+   b. 
    $ cp resources/amer-api-partner19-test-config.yaml microgateway/config
 ```
    c. Edit the application manifest file *microgateway/manifest.yml* in the cloned Edge Microgateway repository to update the following env values: 
