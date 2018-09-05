@@ -26,52 +26,77 @@ In the process described here, the PCF app and Edge Microgateway app are in sepa
 
 * You have an Apigee account and have access to an Apigee Org.
 
-# Instructions
+# Instructions (Optional, if you have done Lab - 1 Org Plan)
 
-Before you begin, you will need to get the following from your PCF instance or receive them from your instructor.
+**1. Register to obtain PCF Credentials:** Open [registration sheet](https://apigeespringone.page.link/registration
+), pick a user and complete additional fields: name, role, email, and company.
 
-YOUR-SYSTEM-DOMAIN: This the the domian/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
+**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. Please ask your instructor to provision them. Replace values of **`PCF_USERNAME, PCF_PASSWORD, APIGEE_ORG, APIGEE_ENV, APIGEE_USERNAME, APIGEE_PASSWORD, `**,  variables.
 
-PCF_USERNAME: PCF Username   // e.g. - apigee-pcf-user-XXX -  where XXX is your unique identifier
+   **a. Save apigee-pcf-environment.sh** 
+   
+   ```bash
+   # apigee-pcf-environment.sh file
+   #
+   # e.g. apigee-pcf-user-XXX -  where XXX is your unique identifier
+   export PCF_USERNAME=apigee-pcf-user-XXX
+   export PCF_PASSWORD=SomePass$word
+   
+   # Apigee Credetials from registration sheet above
+   export APIGEE_ORG=LOOKUP_IN_SPREADSHEET_ABOVE
+   export APIGEE_ENV=LOOKUP_IN_SPREADSHEET_ABOVE
+   export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
+   export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
 
-PCF_PASSWORD: PCF Password
+   # The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
+   export PCF_ORG=group-apigee
 
-PCF_ORG: The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
+   # An org can contain multiple spaces. The space you will pick for this lab is called - "apijam"
+   export PCF_SPACE=apijam
 
-PCF_SPACE: An org can contain multiple spaces. The space you will pick for this lab is called - "apijam"
+   # PCF API Endpoint - e.g. - https://api.run.pcfone.io
+   # This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
+   export PCF_API=https://api.run.pcfone.io
 
-PCF_API: PCF API Endpoint   // e.g. - https://api.run.pcfone.io
-
-PCF_DOMAIN: PCF Domain for your apps.  // e.g. - apps.pcfone.io
+   # PCF Domain for your apps.  // e.g. - apps.pcfone.io
+   export PCF_DOMAIN=apps.pcfone.io
+   
+   #
+   export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
+   export PCF_MGW_SERVICE_INSTANCE=apigee-microgateway-service
+   export PCF_COR_SERVICE_INSTANCE=apigee-coresident-service
+   ```
+   
+   **b. run `source apigee-pcf-environment.sh` to see these environment variables.** 
 
 # Steps
 
-**1. (Optional) Push the sample target application as a CF app to PCF**
+**1. Push the sample target application as a CF app to PCF**
 
-<b>Note</b> - This step is optional if you have completed Lab 1, as we will be using the same sample application as Lab 1 and this application is already present in our CF Environment<br>
+<b>Note</b> - This step (a - Clone Github) is optional if you have completed Lab 1, as we will be using the same code Repo we cloned in Lab 1. <br>
    a. Clone the Apigee Edge GitHub repo:
     
     $ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
 
-   b. Change to the *org-and-microgateway-sample* directory of the cloned repo:
+   b. Change to the *lab2-microgateway-plan* directory of the cloned repo:
     
-    $ cd cloud-foundry-apigee/samples/org-and-microgateway-sample
+    $ cd cloud-foundry-apigee/samples/lab2-microgateway-plan
 
-   c. In the *org-and-microgateway-sample* directory, edit *manifest.yml* and change the 'name' parameter:
+   c. In the *lab2-microgateway-plan* directory, edit *manifest.yml* and change the 'name' parameter:
    
-    name: {your_initials}-sampleapi
+    name: {your_initials}-sampleapi-mg
 ```
-  applications: 
-  - name: {your_initials}-sampleapi
-    memory: 64M
-    disk_quota: 128M 
-    instances: 1 
-    path: . 
-    buildpack: nodejs_buildpack
+applications:
+- name: {your_initials}-sampleapi-mg
+  memory: 64M
+  disk_quota: 128M
+  instances: 1
+  path: .
+  buildpack: nodejs_buildpack
 ```
 d. Set your API endpoint to the Cloud Controller of your deployment
 ```
-$ cf api https://api.run.pcfone.io
+$ cf api $PCF_API
 Setting api endpoint to ...
 OK
 
@@ -112,7 +137,7 @@ $cf target -o $PCF_ORG -s $PCF_SPACE
 
 g. Push the sample app to PCF:
     
-From within the *org-and-microgateway-sample* folder run:
+From within the *lab2-microgateway-plan* folder run:
 ```bash
 $ cf push
 ```
@@ -136,7 +161,7 @@ OK
 requested state: started
 instances: 1/1
 usage: 64M x 1 instances
-urls: as-sample.apps.pcfone.io
+urls: as-sample-mg.apps.pcfone.io
 last uploaded: Wed Aug 29 20:29:32 UTC 2018
 stack: cflinuxfs2
 buildpack: nodejs_buildpack
@@ -154,13 +179,13 @@ Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-sample             started           1/1         64M      128M   as-sample.apps.pcfone.io
+as-sample-mg          started           1/1         64M      128M   as-sample-mg.apps.pcfone.io
 
 ```
 
 i. Use curl to send a test request to the url of the running app. Verify the response from the app. 
     
-    $ curl as-sample.apps.pcfone.io
+    $ curl https://as-sample-mg.apps.pcfone.io
 ```
 {"hello":"hello from cf app"}
 ```
@@ -281,12 +306,10 @@ buildpack: nodejs_buildpack
 
    The apigee-bind-mg command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service apigee-microgateway-service --apigee_org amer-api-partner19 --apigee_env test --micro {your_edgemicro_app_name}.apps.pcfone.io --domain apps.pcfone.io --protocol https --user {username} --pass {password}
+    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service $PCF_MGW_SERVICE_INSTANCE \
+    --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --micro {your_edgemicro_app_name}.apps.pcfone.io \
+    --domain PCF_DOMAIN --protocol https --user $APIGEE_USERNAME --pass APIGEE_PASSWORD --action "proxy bind"
 
-   The above command will promt for these entries. Enter the values as listed below:
-
-   Action to take ("bind", "proxy bind", or "proxy") [required]: proxy bind
-   Target application protocol [optional]: https
 
 
 **6. Test the binding**
@@ -295,7 +318,7 @@ buildpack: nodejs_buildpack
 
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 ```
-   $ curl http://{your_sample_app_name}.apps.pcfone.io
+   $ curl https://{your_sample_app_name}.apps.pcfone.io
 
 {"error":"missing_authorization","error_description":"Missing Authorization header"}
 ```
@@ -315,7 +338,7 @@ buildpack: nodejs_buildpack
 
    c. Resend the request to your app this time passing the apikey as a request header.
     
-    $ curl http://{URL OF YOUR APP} -H "x-api-key: {api-key}"
+    $ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
     
     NOTE: If curl hangs on this command, use the Postman client to make the request.
 ```
