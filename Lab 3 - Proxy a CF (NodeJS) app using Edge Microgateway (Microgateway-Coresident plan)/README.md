@@ -28,7 +28,9 @@ TODO
 **2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. Please ask your instructor to provision them. Replace values of **`PCF_USERNAME, PCF_PASSWORD, APIGEE_ORG, APIGEE_ENV, APIGEE_USERNAME, APIGEE_PASSWORD, `**,  variables.
 
    **a. Save apigee-pcf-environment.sh** 
-   
+
+<script src="https://gist.github.com/nisrulz/11c0d63428b108f10c83.js"></script>
+
    ```bash
    # apigee-pcf-environment.sh file
    #
