@@ -59,6 +59,7 @@ TODO
    
    #
    export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
+   export PCF_MGW_SERVICE_INSTANCE=apigee-microgateway-service
    export PCF_COR_SERVICE_INSTANCE=apigee-coresident-service
 ```
    
