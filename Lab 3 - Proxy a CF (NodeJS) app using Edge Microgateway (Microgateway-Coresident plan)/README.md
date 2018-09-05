@@ -41,8 +41,8 @@ TODO
    export APIGEE_ENV=LOOKUP_IN_SPREADSHEET_ABOVE
    export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
    export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
-   export EDGEMICRO_KEY=2d99ace69294c8f791404a7dd735a83b4ce08545f9f2da2cb736a7b9019989c5
-   export EDGEMICRO_SECRET=b4eb6dea5cb19ca6c784d3345c1630d3698ab2ef8041cf7843d191f3a5d5de66
+   export EDGEMICRO_KEY=LOOKUP_IN_SPREADSHEET_ABOVE
+   export EDGEMICRO_SECRET=LOOKUP_IN_SPREADSHEET_ABOVE
 
    # The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
    export PCF_ORG=group-apigee
