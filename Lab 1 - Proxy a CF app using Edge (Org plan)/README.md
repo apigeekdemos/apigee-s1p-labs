@@ -73,31 +73,8 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    **c. Clone the Apigee Edge GitHub repo:**
     
        `$ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git`
-
-
-# Steps
-
-**1. Push the sample application as a CF app to PCF**
-
-   a. Change to the *lab1-org-plan* directory of the cloned repo:
-    
-    $ cd cloud-foundry-apigee/lab1-org-plan/
-
-   b. In the *lab1-org-plan* directory, edit *manifest.yml* and change the **'name' parameters**:
-   
-   * **name**: {your_initials}-sampleapi
-
-```yml
-  applications: 
-  - name: {your_initials}-sampleapi
-    memory: 64M
-    disk_quota: 128M 
-    instances: 1 
-    path: . 
-    buildpack: nodejs_buildpack
-```
-
-   c. Set your API endpoint to the Cloud Controller of your deployment
+ 
+   **d. Set your API endpoint to the Cloud Controller of your deployment
 
 ```bash
 $ cf api $PCF_API
@@ -108,7 +85,7 @@ api endpoint:    https://api.run.pcfone.io
 api version:    2.112.0
 ```
 
-e. Log in to your deployment and select an org and a space
+  **e. Log in to your deployment and select an org and a space
 
 ```bash
 $ cf login
@@ -137,21 +114,68 @@ Org:            group-apigee
 Space:          apijam
 ```
 
-f. Select the org and space through the following command:
+  **f. Select the org and space through the following command:
 
 ```bash
 $ cf target -o $PCF_ORG -s $PCF_SPACE
 ```
+**3. Install the Apigee Broker Plugin**
 
-g. Push the sample app to PCF:
+  **a. Run the CF install-plugin command
+
+```   
+$ cf install-plugin -r CF-Community "apigee-broker-plugin"
+
+Installing plugin Apigee-Broker-Plugin...
+OK
+Plugin Apigee-Broker-Plugin 0.1.1 successfully installed.
+```
+
+  **b. Make sure the plugin is available by running:
+
+```
+$ cf -h
+
+...
+Commands offered by installed plugins:
+  apigee-bind-mg,abm     apigee-push,ap           apigee-unbind-org,auo
+  apigee-bind-mgc,abc    apigee-unbind-mg,aum     
+  apigee-bind-org,abo    apigee-unbind-mgc,auc  
+```
+
+# Steps
+
+**1. Push the sample application as a CF app to PCF**
+
+   a. Change to the *lab1-org-plan* directory of the cloned repo:
     
-From within the *org-and-microgateway-sample* folder run:
+    $ cd cloud-foundry-apigee/lab1-org-plan/
+
+   b. In the *lab1-org-plan* directory, edit *manifest.yml* and change the **'name' parameters**:
+   
+   * **name**: {your_initials}-sampleapi
+
+```yml
+  applications: 
+  - name: {your_initials}-sampleapi
+    memory: 64M
+    disk_quota: 128M 
+    instances: 1 
+    path: . 
+    buildpack: nodejs_buildpack
+```
+
+
+
+  c. Push the sample app to PCF:
+    
+  From within the *lab1-org-plan* folder run:
 
 ```bash
-$ cf push
+    $ cf push 
 ```
     
-If successful, you should see some output from this command and finally:
+  If successful, you should see some output from this command and finally:
 ```bash
 .
 .
@@ -201,31 +225,7 @@ $ curl https://as-sample.apps.pcfone.io
 {"hello":"hello from cf app"}
 ```
 
-**2. Install the Apigee Broker Plugin**
-
-a. Run the CF install-plugin command
-
-```   
-$ cf install-plugin -r CF-Community "apigee-broker-plugin"
-
-Installing plugin Apigee-Broker-Plugin...
-OK
-Plugin Apigee-Broker-Plugin 0.1.1 successfully installed.
-```
-
-b. Make sure the plugin is available by running:
-
-```
-$ cf -h
-
-...
-Commands offered by installed plugins:
-  apigee-bind-mg,abm     apigee-push,ap           apigee-unbind-org,auo
-  apigee-bind-mgc,abc    apigee-unbind-mg,aum     
-  apigee-bind-org,abo    apigee-unbind-mgc,auc  
-```
-
-**3. List your Service Instance**
+**2. List your Service Instance**
 
 Note - If you are executing this lab in your own PCF foundation, you will need to create your own Service instance, for the purpose of this lab , we have pre-created Service instance for you.
 
@@ -278,7 +278,7 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 ```
 
-**4. Bind the Sample CF App created in Step 1 to route its requests to the Apigee Egde ORG Service Instance listed in Step 3.**
+**3. Bind the Sample CF App created in Step 1 to route its requests to the Apigee Egde ORG Service Instance listed in Step 2.**
 
 The apigee-bind-org command creates a proxy for you and binds the app to the service.
 
@@ -290,7 +290,7 @@ The above command will promt for these entries. Enter the values as listed below
 
 The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: **Press enter**
 
-**5. Verify the binding**
+**4. Verify the binding**
     The above 'bind org' completes route binding by instructing the PCF go-router to route all traffic, headed for your application, via an Apigee ORG. You can verify that the binding was successful by using the 'cf routes' command and seeing that the 'ORG Plan' service is now associated with your application route. See below example:
 
 ```bash
@@ -301,7 +301,7 @@ space    host                  domain           port   path   type   apps       
 apijam   as-sample             apps.pcfone.io                        as-sample             apigee-org-service
 ```
 
-**6. Test the binding**
+**5. Test the binding**
    
    Once you’ve bound your app’s path to the Apigee service (creating an Apigee proxy in the process), you can try it out with a simple curl command.
 
@@ -331,9 +331,9 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
     - When you do that the business teams can create API Products, and scale the consumption
     - If you have swagger spec for this API, you can enable your developers to access these APIs through smartdocs
 
-# Unbinding the Application from 'ORG' Service Plan
+# Unbinding the Application from 'ORG' Service Plan (Optional)
 
-Since we will be using the same application for our next set of labs, we will now be unbinding this application from the ORG plan.
+These set of instrcutions are optional for this Lab, but good to know for an application lifescyle management perspective. We will now be unbinding this application from the ORG plan.
 
 To unbind the the application we will be using the 'apigee-unbind-org' comand as follows:
 
