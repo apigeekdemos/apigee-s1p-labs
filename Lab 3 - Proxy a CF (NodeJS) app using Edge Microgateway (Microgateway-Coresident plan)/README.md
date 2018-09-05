@@ -20,50 +20,9 @@ TODO
 
 * You have an Apigee account and have access to an Apigee Org. For PCF One Environment, pick up credentials [APIGEE_LOGIN, APIGEE_USERNAME, and APIGEE_PASSWORD here](https://apigeespringone.page.link/registration).
 
-# Instructions
+# Instructions (Optional, if you have done Lab - 1 Org Plan)
 
-**1. Register to obtain PCF Credentials:** Open [registration sheet](https://apigeespringone.page.link/registration
-), pick a user and complete additional fields: name, role, email, and company.
-
-**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. Please ask your instructor to provision them. Replace values of **`PCF_USERNAME, PCF_PASSWORD, APIGEE_ORG, APIGEE_ENV, APIGEE_USERNAME, APIGEE_PASSWORD, `**,  variables.
-
-   **a. Save apigee-pcf-environment.sh** 
-
-   ```bash
-   # apigee-pcf-environment.sh file
-   #
-   # e.g. apigee-pcf-user-XXX -  where XXX is your unique identifier
-   export PCF_USERNAME=apigee-pcf-user-XXX
-   export PCF_PASSWORD=SomePass$word
-   
-   # Apigee Credetials from registration sheet above
-   export APIGEE_ORG=LOOKUP_IN_SPREADSHEET_ABOVE
-   export APIGEE_ENV=LOOKUP_IN_SPREADSHEET_ABOVE
-   export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
-   export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
-   export EDGEMICRO_KEY=LOOKUP_IN_SPREADSHEET_ABOVE
-   export EDGEMICRO_SECRET=LOOKUP_IN_SPREADSHEET_ABOVE
-
-   # The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
-   export PCF_ORG=group-apigee
-
-   # An org can contain multiple spaces. The space you will pick for this lab is called - "apijam"
-   export PCF_SPACE=apijam
-
-   # PCF API Endpoint - e.g. - https://api.run.pcfone.io
-   # This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
-   export PCF_API=https://api.run.pcfone.io
-
-   # PCF Domain for your apps.  // e.g. - apps.pcfone.io
-   export PCF_DOMAIN=apps.pcfone.io
-   
-   #
-   export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
-   export PCF_MGW_SERVICE_INSTANCE=apigee-microgateway-service
-   export PCF_COR_SERVICE_INSTANCE=apigee-coresident-service
-```
-   
-   **b. run `source apigee-pcf-environment.sh` to see these environment variables.** 
+[Lab 1 Instructions](https://github.com/apigeekdemos/apigee-s1p-labs/tree/master/Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
 
 # Steps
 
