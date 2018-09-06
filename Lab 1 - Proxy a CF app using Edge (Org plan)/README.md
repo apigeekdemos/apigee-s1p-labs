@@ -363,6 +363,10 @@ apijam   as-sample             apps.pcfone.io                        as-sample
 
 In this lab you have added API Management to an API created in PCF using Apigee Edge.
 
+# Let us know your feedback
+
+Please use [this form](https://apigeespringone.page.link/partner-request-form) to provide feedback.
+
 # References
 
 * [Installing Apigee Edge Service Broker for PCF tile]
