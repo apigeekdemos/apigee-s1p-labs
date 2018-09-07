@@ -93,20 +93,20 @@ buildpack: nodejs_buildpack
    **e. Get a list of apps to determine the URL of the app just pushed:
     
    $ cf apps
-```
+```bash
 ➜  org-and-microgateway-sample git:(master) ✗ cf apps
 Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-sample-mg          started           1/1         64M      128M   as-sample-mg.apps.pcfone.io
+as-sampleapi-mg       started           1/1         64M      128M   as-sampleapi-mg.apps.pcfone.io
 
 ```
 
    **f. Use curl to send a test request to the url of the running app. Verify the response from the app. 
     
-    $ curl https://as-sample-mg.apps.pcfone.io
-```
+    $ curl https://as-sampleapi-mg.apps.pcfone.io
+```bash
 {"hello":"hello from cf app"}
 ```
 
@@ -116,7 +116,7 @@ Note - If you are executing this lab in your own PCF foundation you will need to
    a. List the Marketplace services and locate the Apigee Edge service:
     
     $ cf marketplace
-```
+```bash
 Getting services from marketplace in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
@@ -127,7 +127,7 @@ apigee-edge                   org, microgateway, microgateway-coresident   Apige
 .
 ```
    b. List instances of the Apigee Edge service. You will be Selecting the *microgateway* service plan for the purpose of this lab.
-```
+```bash
    $ cf services
 
 Getting services in org group-apigee / space apijam as shuklaankur@google.com...
@@ -140,7 +140,7 @@ apigee-org-service            apigee-edge   org                                 
 ...
 ```
 List out details of the 'microgateway' plan service instance using below command:
-```
+```bash
 org-and-microgateway-sample git:(master) ✗ cf service apigee-microgateway-service
 Showing info of service apigee-microgateway-service in org group-apigee / space apijam as shuklaankur@google.com...
 
@@ -158,30 +158,35 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 **3. Deploy Edge Microgateway onto Pivotal Cloud Foundry**
 
    a. Clone the Apigee Microgateway repository.
-    
+```bash    
     $ git clone https://github.com/apigee-internal/microgateway.git
     
     $ cd microgateway
     
     $ git checkout tags/v.2.5.4
-    
-   b. Copy the Microgateway configuration YAML file *amer-api-partner19-test-config.yaml* from this Lab 2 */resources* folder to the *microgateway/config* directory in the Microgateway repository cloned in step c. above.
-```
-   $ cp resources/amer-api-partner19-test-config.yaml microgateway/config
+```    
+   b. Create a config subfolder and copy the file amer-api-partner19-test-config.yaml within folder lab2-microgateway-plan/config to lab2-microgateway-plan/microgateway/config
+```bash
+$ mkdir config
+$ cp ../config/amer-api-partner19-test-config.yaml ./config
+
 ```
    c. Edit the application manifest file *microgateway/manifest.yml* in the cloned Edge Microgateway repository to update the following env values: 
 
-      i) Replace {your-initials} with your own for name parameter. 
+      i) Replace {your-initials} with your own for name and host parameter. 
       ii) Add the EDGEMICRO_KEY & EDGEMICRO_SECRET - see below 
       iii) Change the EDGEMICRO_ENV and EDGEMICRO_ORG - see below
+      iv) Change the EDGEMICRO_CONFIG_DIR to './config'
+      v) Add 'disk_quota: 512M'
       
       Leave the other values as-is.
-```
+```yaml
 applications:
 - name: {your-initials}-edgemicro-app
   memory: 128M
   disk_quota: 512M
   instances: 1
+  host: as-edgemicro-app
   path: .
   buildpack: nodejs_buildpack
   env: 
@@ -190,7 +195,6 @@ applications:
     EDGEMICRO_CONFIG_DIR: './config'
     EDGEMICRO_ENV: 'test'
     EDGEMICRO_ORG: 'amer-api-partner19'
-    NODE_TLS_REJECT_UNAUTHORIZED: '0'
 ```
    d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.
     
@@ -222,17 +226,17 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 04:30:26 PM   0.0%   52.9M of 256M   331.3M of 512M
 ```
 
-**4. Bind the Sample CF App created in Step 1 / Lab 1 (ORG Plan - remember we are using the same target application) to route its requests to the Apigee Egde Service Instance listed in Step 2.**
+**4. Bind the Sample CF App created in Step 1 / Lab 1 (ORG Plan - remember we are using the same target application) to route its requests to the Apigee Egde Service Instance listed in Step 2.b**
 
    The apigee-bind-mg command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service $PCF_MGW_SERVICE_INSTANCE \
+    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service $PCF_MGW_SERVICE_INSTANCE 
     --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --micro {your_edgemicro_app_name}.apps.pcfone.io \
-    --domain PCF_DOMAIN --protocol https --user $APIGEE_USERNAME --pass APIGEE_PASSWORD --action "proxy bind"
+    --domain $PCF_DOMAIN --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD --action "proxy bind"
 
 
 
-**6. Test the binding**
+**5. Test the binding**
    
    Once you’ve bound your app’s path to the Apigee service (creating an Apigee proxy in the process), you can try it out with the sample app.
 
@@ -244,7 +248,7 @@ buildpack: nodejs_buildpack
 ```
     You should see an validation error as edge micro is checking for security! 
 	
-**7. Test the binding again**
+**6. Create API Product, Developer and Developer App**
    
    In order to fix the error from the previous step, you need an API key.
 	
