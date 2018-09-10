@@ -187,11 +187,11 @@ $ cp ../config/amer-api-partner19-test-config.yaml ./config
 ```
 **c. Edit the application manifest file `microgateway/manifest.yml` in the cloned Edge Microgateway repository to update the following env values:**
 
-- i) Replace `edgemicro-app` with your own. e.g. `{your-username}-edgemicro-app`.
-- ii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
-- iii) Replace `EDGEMICRO_ENV` and `EDGEMICRO_ORG` with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
-- iv) Add `EDGEMICRO_CONFIG_DIR: './config'`
-- v) Add `'disk_quota: 512M'`
+- i) Replace name variable with your own name. e.g. `{your-username}-edgemicro-app`.
+- ii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` variables with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
+- iii) Replace `EDGEMICRO_ENV` and `EDGEMICRO_ORG` variables with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
+- iv) Add under env `EDGEMICRO_CONFIG_DIR: './config'`
+- v) Add under env `'disk_quota: 512M'`
 
 Leave the other values as-is.
       
