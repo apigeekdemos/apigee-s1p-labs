@@ -41,7 +41,7 @@ In the process described here, the PCF app and Edge Microgateway app are in sepa
 
    **b. Change to the *lab2-microgateway-plan* directory of the cloned repo:
     
-    $ cd cloud-foundry-apigee/samples/lab2-microgateway-plan
+    $ cd cloud-foundry-apigee/lab2-microgateway-plan/
 
    **c. In the *lab2-microgateway-plan* directory, edit *manifest.yml* and change the 'name' parameter:
    
