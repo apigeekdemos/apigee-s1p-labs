@@ -44,11 +44,14 @@ In the process described here, the PCF app and Edge Microgateway app are in sepa
     $ cd cloud-foundry-apigee/lab2-microgateway-plan/
 
    **c. In the *lab2-microgateway-plan* directory, edit `manifest.yml` and change the 'name' parameter:**
-   
-    name: {your_initials}-sampleapi-mg
+
+```
+name: {your-username}-sampleapi-mg
+```
+
 ```bash
 applications:
-- name: {your_initials}-sampleapi-mg
+- name: {your-username}-sampleapi-mg
   memory: 64M
   disk_quota: 128M
   instances: 1
@@ -184,7 +187,7 @@ $ cp ../config/amer-api-partner19-test-config.yaml ./config
 ```
 **c. Edit the application manifest file `microgateway/manifest.yml` in the cloned Edge Microgateway repository to update the following env values:**
 
-- i) Replace `edgemicro-app` with your own for name e.g. `{your-initials}-edgemicro-app`.
+- i) Replace `edgemicro-app` with your own. e.g. `{your-username}-edgemicro-app`.
 - ii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
 - iii) Replace `EDGEMICRO_ENV` and `EDGEMICRO_ORG` with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
 - iv) Add `EDGEMICRO_CONFIG_DIR: './config'`
@@ -194,7 +197,7 @@ Leave the other values as-is.
       
 ```yaml
 applications:
-- name: {your-initials}-edgemicro-app
+- name: {your-username}-edgemicro-app
   memory: 128M
   disk_quota: 512M
   instances: 1
@@ -266,14 +269,14 @@ You should see an validation error as edge micro is checking for security!
    
    In order to fix the error from the previous step, you need an API key.
 	
-**a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-initials}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
+**a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-username}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
 	
 **b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.**
 
 ```bash
 $ cf apps
 
-$ cf restart {your_initials}-edgemicro-app
+$ cf restart {your-username}-edgemicro-app
 ```
 
 **c. Resend the request to your app this time passing the apikey as a request header.**
@@ -292,7 +295,7 @@ NOTE: If curl hangs on this command, use the Postman client to make the request.
     
 Login to [https://apigee.com/edge](https://apigee.com/edge)
     
-Go to API Proxies. You should see an API Proxy created by the PCF Service Broker- with the following name `edgemicro_cf-{your_initials}_helloapi.YOUR-SYSTEM-DOMAIN`
+Go to API Proxies. You should see an API Proxy created by the PCF Service Broker- with the following name `edgemicro_cf-{your-username}_helloapi.YOUR-SYSTEM-DOMAIN`
 	
 You will also see `edgemicro-auth` API Proxy. Where requests are sent to for authentication. As edge microgateway does validation, you can see the validation calls coming to this API Proxy
     
