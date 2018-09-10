@@ -190,7 +190,7 @@ $ cp ../config/amer-api-partner19-test-config.yaml ./config
 - i) Replace name variable with your own name. e.g. `{your-username}-edgemicro-app-lab2`.
 - ii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` variables with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
 - iii) Replace `EDGEMICRO_ORG` and `EDGEMICRO_ENV` variables with `APIGEE_ORG` and `APIGEE_ENV` values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
-- iv) Add under env `EDGEMICRO_CONFIG_DIR: './config'`
+- iv) Replace variable `EDGEMICRO_CONFIG_DIR: './config'`
 - v) Add under env `'disk_quota: 512M'`
 
 Leave the other values as-is.
