@@ -282,13 +282,9 @@ $ cf restart {your-username}-edgemicro-app-lab2
 **c. Resend the request to your app this time passing the apikey as a request header.**
 
 ```bash
-$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
-```
+$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}" -H 'Cache-Control: no-cache'
 
-NOTE: If curl hangs on this command, use the Postman client to make the request.
-
-```json
-{"hello":"hello from cf app"}
+{"hello":"hello from cf app"} 
 ```
 
 **8. Extra credit**
