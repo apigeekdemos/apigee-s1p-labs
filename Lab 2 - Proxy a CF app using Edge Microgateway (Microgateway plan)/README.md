@@ -57,12 +57,14 @@ applications:
 ```
    **d. Push the sample app to PCF:**
     
-    From within the *lab2-microgateway-plan* folder run:
+From within the *lab2-microgateway-plan* folder run:
+
 ```bash
 $ cf push
 ```
     
-    If successful, you should see some output from this command and finally:
+If successful, you should see some output from this command and finally:
+
 ```bash
 .
 .
@@ -90,7 +92,7 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 64M   56.1M of 128M
 ```
 
-   **e. Get a list of apps to determine the URL of the app just pushed:**
+**e. Get a list of apps to determine the URL of the app just pushed:**
 
 ```bash
 $ cf apps
@@ -103,10 +105,11 @@ as-sampleapi-mg       started           1/1         64M      128M   as-sampleapi
 
 ```
 
-   **f. Use curl to send a test request to the url of the running app. Verify the response from the app.**
-    
-    $ curl https://as-sampleapi-mg.apps.pcfone.io
+**f. Use curl to send a test request to the url of the running app. Verify the response from the app.**
+
 ```bash
+$ curl https://as-sampleapi-mg.apps.pcfone.io
+
 {"hello":"hello from cf app"}
 ```
 
