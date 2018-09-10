@@ -46,12 +46,12 @@ In the process described here, the PCF app and Edge Microgateway app are in sepa
    **c. In the *lab2-microgateway-plan* directory, edit `manifest.yml` and change the 'name' parameter:**
 
 ```
-name: {your-username}-sampleapi-mg
+name: {your-username}-samplebackend-lab2
 ```
 
 ```bash
 applications:
-- name: {your-username}-sampleapi-mg
+- name: {your-username}-samplebackend-lab2
   memory: 64M
   disk_quota: 128M
   instances: 1
@@ -104,14 +104,14 @@ Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-sampleapi-mg       started           1/1         64M      128M   as-sampleapi-mg.apps.pcfone.io
+as-samplebackend-lab2       started           1/1         64M      128M   as-samplebackend-lab2.apps.pcfone.io
 
 ```
 
 **f. Use curl to send a test request to the url of the running app. Verify the response from the app.**
 
 ```bash
-$ curl https://as-sampleapi-mg.apps.pcfone.io
+$ curl https://as-samplebackend-lab2.apps.pcfone.io
 
 {"hello":"hello from cf app"}
 ```
@@ -273,7 +273,7 @@ You should see an validation error as edge micro is checking for security!
    
    In order to fix the error from the previous step, you need an API key.
 	
-**a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-username}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
+**a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-username}-samplebackend-lab2.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
 	
 **b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.**
 
