@@ -320,7 +320,6 @@ In this lab you have added API Management to an API created in PCF using Apigee 
 
 # References
 
-* [Installing Apigee Edge Service Broker for PCF tile]
-    (http://docs.pivotal.io/partners/apigee/installing.html)
+* [Installing Apigee Edge Service Broker for PCF tile](http://docs.pivotal.io/partners/apigee/installing.html)
 
 
