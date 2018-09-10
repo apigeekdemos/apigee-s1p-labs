@@ -182,15 +182,15 @@ $ git checkout tags/v.2.5.4
 $ cp ../config/amer-api-partner19-test-config.yaml ./config
 
 ```
-**c. Edit the application manifest file *microgateway/manifest.yml* in the cloned Edge Microgateway repository to update the following env values:**
+**c. Edit the application manifest file `*microgateway/manifest.yml*` in the cloned Edge Microgateway repository to update the following env values:**
 
-      i) Replace {your-initials} with your own for name and host parameter. 
-      ii) Add the EDGEMICRO_KEY & EDGEMICRO_SECRET - see below 
-      iii) Change the EDGEMICRO_ENV and EDGEMICRO_ORG - see below
-      iv) Change the EDGEMICRO_CONFIG_DIR to './config'
-      v) Add 'disk_quota: 512M'
-      
-      Leave the other values as-is.
+- i) Replace `edgemicro-app` with your own for name e.g. `{your-initials}-edgemicro-app`.
+- ii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
+- iii) Replace `EDGEMICRO_ENV` and `EDGEMICRO_ORG` with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
+- iv) Add `EDGEMICRO_CONFIG_DIR: './config'`
+- v) Add `'disk_quota: 512M'`
+
+Leave the other values as-is.
       
 ```yaml
 applications:
@@ -198,12 +198,11 @@ applications:
   memory: 128M
   disk_quota: 512M
   instances: 1
-  host: as-edgemicro-app
   path: .
   buildpack: nodejs_buildpack
   env: 
-    EDGEMICRO_KEY: '6f10ad9a16f85a14fa8c8595cf7cf39b7c3432bb8135a95af56ffe0776454eaf'
-    EDGEMICRO_SECRET: '94102b540cc60aed1a6737f476c3cbcef5bf2d8a1a2a3273dc32e24cda990d05'
+    EDGEMICRO_KEY: values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
+    EDGEMICRO_SECRET: values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
     EDGEMICRO_CONFIG_DIR: './config'
     EDGEMICRO_ENV: 'test'
     EDGEMICRO_ORG: 'amer-api-partner19'
@@ -259,8 +258,9 @@ $ cf apigee-bind-mg --app {your_sample_target_app_name} --service $PCF_MGW_SERVI
 $ curl https://{your_sample_app_name}.apps.pcfone.io
 
 {"error":"missing_authorization","error_description":"Missing Authorization header"}
+
+You should see an validation error as edge micro is checking for security! 
 ```
-    You should see an validation error as edge micro is checking for security! 
 	
 **6. Create API Product, Developer and Developer App**
    
