@@ -185,16 +185,11 @@ $ git checkout tags/v.2.5.4
 $ cp ../config/amer-api-partner19-test-config.yaml ./config
 
 ```
-**c. Edit the application manifest file `microgateway/manifest.yml` in the cloned Edge Microgateway repository to update the following env values:**
+**c. Download manifest.yaml from [this location](https://drive.google.com/file/d/142EEj2dPbBEkHYxrbHGWorUgyRp7Ov45/view?usp=sharing) under `microgateway` folder. So, replace the file in the cloned Edge Microgateway repository.**
 
-- i) Replace `name` variable with your own name. e.g. `{your-username}-edgemicro-app-lab2`.
-- ii) Remove `host` variable
-- iii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` variables with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
-- iv) Replace `EDGEMICRO_ORG` and `EDGEMICRO_ENV` variables with `APIGEE_ORG` and `APIGEE_ENV` values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
-- v) Replace variable `EDGEMICRO_CONFIG_DIR: './config'`
-- vi) Add under env `'disk_quota: 512M'`
+i) Replace `name: {your-username}-edgemicro-app-lab2` variable with your own username. e.g. `johndoe-edgemicro-app-lab2`.
 
-Leave the other values as-is.
+The file should look like this:
       
 ```yaml
 applications:
