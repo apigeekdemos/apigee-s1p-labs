@@ -282,7 +282,7 @@ $ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
 NOTE: If curl hangs on this command, use the Postman client to make the request.
 
 ```json
-    {"hello":"hello from cf app"}
+{"hello":"hello from cf app"}
 ```
 
 **8. Extra credit**
@@ -303,10 +303,10 @@ $ curl https://{URL OF YOUR APP}"
 If you forgot the URL OF YOUR APP, you can get if through the following command (the output will have a urls section corresponding to your app)
 
 ```bash
-    $ cf apps
+$ cf apps
 ```
     
-**Congratulations!**...
+## **Congratulations!**...
     
 What does this mean
 - You have analytics across all your APIs, created through PCF
