@@ -141,7 +141,7 @@ apigee-org-service            apigee-edge   org                                 
 ```
 List out details of the 'microgateway' plan service instance using below command:
 ```bash
-org-and-microgateway-sample git:(master) ✗ cf service apigee-microgateway-service
+$ cf service apigee-microgateway-service
 Showing info of service apigee-microgateway-service in org group-apigee / space apijam as shuklaankur@google.com...
 
 name:            apigee-microgateway-service
