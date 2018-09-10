@@ -35,15 +35,15 @@ In the process described here, the PCF app and Edge Microgateway app are in sepa
 **1. Push the sample target application as a CF app to PCF**
 
 <b>Note</b> - This step (a - Clone Github) is optional if you have completed Lab 1, as we will be using the same code Repo we cloned in Lab 1. <br>
-   **a. Clone the Apigee Edge GitHub repo:
+   **a. Clone the Apigee Edge GitHub repo:**
     
     $ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
 
-   **b. Change to the *lab2-microgateway-plan* directory of the cloned repo:
+   **b. Change to the *lab2-microgateway-plan* directory of the cloned repo:**
     
     $ cd cloud-foundry-apigee/lab2-microgateway-plan/
 
-   **c. In the *lab2-microgateway-plan* directory, edit *manifest.yml* and change the 'name' parameter:
+   **c. In the *lab2-microgateway-plan* directory, edit *manifest.yml* and change the 'name' parameter:**
    
     name: {your_initials}-sampleapi-mg
 ```bash
@@ -55,7 +55,7 @@ applications:
   path: .
   buildpack: nodejs_buildpack
 ```
-   **d. Push the sample app to PCF:
+   **d. Push the sample app to PCF:**
     
     From within the *lab2-microgateway-plan* folder run:
 ```bash
@@ -90,11 +90,11 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 64M   56.1M of 128M
 ```
 
-   **e. Get a list of apps to determine the URL of the app just pushed:
-    
-   $ cf apps
+   **e. Get a list of apps to determine the URL of the app just pushed:**
+
 ```bash
-➜  org-and-microgateway-sample git:(master) ✗ cf apps
+$ cf apps
+
 Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
@@ -103,7 +103,7 @@ as-sampleapi-mg       started           1/1         64M      128M   as-sampleapi
 
 ```
 
-   **f. Use curl to send a test request to the url of the running app. Verify the response from the app. 
+   **f. Use curl to send a test request to the url of the running app. Verify the response from the app.**
     
     $ curl https://as-sampleapi-mg.apps.pcfone.io
 ```bash
@@ -113,10 +113,12 @@ as-sampleapi-mg       started           1/1         64M      128M   as-sampleapi
 **2. List your Service Instance**
 
 Note - If you are executing this lab in your own PCF foundation you will need to create your own Service instance, for the purpose of this lab we have pre-created Service instance for you.
-   a. List the Marketplace services and locate the Apigee Edge service:
-    
-    $ cf marketplace
+   
+**a. List the Marketplace services and locate the Apigee Edge service:**
+
 ```bash
+$ cf marketplace
+
 Getting services from marketplace in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
@@ -126,9 +128,11 @@ apigee-edge                   org, microgateway, microgateway-coresident   Apige
 .
 .
 ```
-   b. List instances of the Apigee Edge service. You will be Selecting the *microgateway* service plan for the purpose of this lab.
+
+**b. List instances of the Apigee Edge service. You will be Selecting the *microgateway* service plan for the purpose of this lab.**
+
 ```bash
-   $ cf services
+$ cf services
 
 Getting services in org group-apigee / space apijam as shuklaankur@google.com...
 OK
@@ -139,9 +143,12 @@ apigee-microgateway-service   apigee-edge   microgateway                        
 apigee-org-service            apigee-edge   org                                    create succeeded
 ...
 ```
+
 List out details of the 'microgateway' plan service instance using below command:
+
 ```bash
 $ cf service apigee-microgateway-service
+
 Showing info of service apigee-microgateway-service in org group-apigee / space apijam as shuklaankur@google.com...
 
 name:            apigee-microgateway-service
@@ -157,7 +164,7 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 **3. Deploy Edge Microgateway onto Pivotal Cloud Foundry**
 
-   a. Clone the Apigee Microgateway repository.
+**a. Clone the Apigee Microgateway repository.**
 ```bash    
     $ git clone https://github.com/apigee-internal/microgateway.git
     
@@ -165,13 +172,15 @@ dashboard:       https://enterprise.apigee.com/platform/#/
     
     $ git checkout tags/v.2.5.4
 ```    
-   b. Create a config subfolder and copy the file amer-api-partner19-test-config.yaml within folder lab2-microgateway-plan/config to lab2-microgateway-plan/microgateway/config
+
+**b. Create a config subfolder and copy the file amer-api-partner19-test-config.yaml within folder lab2-microgateway-plan/config to lab2-microgateway-plan/microgateway/config**
+
 ```bash
 $ mkdir config
 $ cp ../config/amer-api-partner19-test-config.yaml ./config
 
 ```
-   c. Edit the application manifest file *microgateway/manifest.yml* in the cloned Edge Microgateway repository to update the following env values: 
+**c. Edit the application manifest file *microgateway/manifest.yml* in the cloned Edge Microgateway repository to update the following env values:**
 
       i) Replace {your-initials} with your own for name and host parameter. 
       ii) Add the EDGEMICRO_KEY & EDGEMICRO_SECRET - see below 
@@ -196,7 +205,7 @@ applications:
     EDGEMICRO_ENV: 'test'
     EDGEMICRO_ORG: 'amer-api-partner19'
 ```
-   d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.
+   **d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.**
     
     $ cf push
 ```
@@ -252,15 +261,15 @@ buildpack: nodejs_buildpack
    
    In order to fix the error from the previous step, you need an API key.
 	
-   a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-initials}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key. 
+   **a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-initials}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
 	
-   b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.
+   **b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.**
 
 	$ cf apps
 	
     $ cf restart {your_initials}-edgemicro-app
 
-   c. Resend the request to your app this time passing the apikey as a request header.
+   **c. Resend the request to your app this time passing the apikey as a request header.**
     
     $ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
     
