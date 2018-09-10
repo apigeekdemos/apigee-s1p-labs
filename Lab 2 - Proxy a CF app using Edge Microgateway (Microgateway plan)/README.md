@@ -185,7 +185,7 @@ $ git checkout tags/v.2.5.4
 $ cp ../config/amer-api-partner19-test-config.yaml ./config
 
 ```
-**c. Download manifest.yaml from [this location](https://drive.google.com/file/d/142EEj2dPbBEkHYxrbHGWorUgyRp7Ov45/view?usp=sharing) under `microgateway` folder. So, replace the file in the cloned Edge Microgateway repository.**
+**c. Download manifest.yml from [this location](https://drive.google.com/file/d/142EEj2dPbBEkHYxrbHGWorUgyRp7Ov45/view?usp=sharing) under `microgateway` folder. So, replace the file in the cloned Edge Microgateway repository.**
 
 i) Replace `name: {your-username}-edgemicro-app-lab2` variable with your own username. e.g. `johndoe-edgemicro-app-lab2`.
 
