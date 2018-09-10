@@ -282,7 +282,7 @@ $ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
 NOTE: If curl hangs on this command, use the Postman client to make the request.
 
 ```json
-    {“hello”:“hello from cf app”}
+    {"hello":"hello from cf app"}
 ```
 
 **8. Extra credit**
