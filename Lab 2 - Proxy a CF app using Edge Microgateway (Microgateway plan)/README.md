@@ -287,29 +287,32 @@ NOTE: If curl hangs on this command, use the Postman client to make the request.
 
 **8. Extra credit**
     
-    Login to [https://apigee.com/edge](https://apigee.com/edge)
+Login to [https://apigee.com/edge](https://apigee.com/edge)
     
-    Go to API Proxies. You should see an API Proxy created by the PCF Service Broker- with the following name `edgemicro_cf-{your_initials}_helloapi.YOUR-SYSTEM-DOMAIN`
+Go to API Proxies. You should see an API Proxy created by the PCF Service Broker- with the following name `edgemicro_cf-{your_initials}_helloapi.YOUR-SYSTEM-DOMAIN`
 	
-	You will also see `edgemicro-auth` API Proxy. Where requests are sent to for authentication. As edge microgateway does validation, you can see the validation calls coming to this API Proxy
+You will also see `edgemicro-auth` API Proxy. Where requests are sent to for authentication. As edge microgateway does validation, you can see the validation calls coming to this API Proxy
     
-    Select the API and select `TRACE` tab on the top right
-    Click on the `Start Trace Session`, the green button on the top left
-	Send a request to the same endpoint, as you did in step 2 
+Select the API and select `TRACE` tab on the top right
+Click on the `Start Trace Session`, the green button on the top left
+Send a request to the same endpoint, as you did in step 2 
 	
-	$ curl https://{URL OF YOUR APP}"
-      
-    If you forgot the URL OF YOUR APP, you can get if through the following command (the output will have a urls section corresponding to your app)
+```bash
+$ curl https://{URL OF YOUR APP}"
+```   
+If you forgot the URL OF YOUR APP, you can get if through the following command (the output will have a urls section corresponding to your app)
 
+```bash
     $ cf apps
+```
     
 **Congratulations!**...
     
-    What does this mean
-    - You have analytics across all your APIs, created through PCF
-    - You can add authentication, traffic management and few more directly from your cf CLI, without logging into Apigee
-    - When you do that the business teams can create API Products, and scale the consumption
-    - If you have swagger spec for this API, you can enable your developers to access these APIs through smartdocs
+What does this mean
+- You have analytics across all your APIs, created through PCF
+- You can add authentication, traffic management and few more directly from your cf CLI, without logging into Apigee
+- When you do that the business teams can create API Products, and scale the consumption
+- If you have swagger spec for this API, you can enable your developers to access these APIs through smartdocs
 
 # Summary
 
