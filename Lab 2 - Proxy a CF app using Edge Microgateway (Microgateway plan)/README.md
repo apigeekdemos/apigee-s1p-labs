@@ -209,6 +209,7 @@ applications:
     EDGEMICRO_ORG: 'amer-api-partner19'
     # Replace EDGEMICRO_ENV with APIGEE_ENV variable from Instructions above
     EDGEMICRO_ENV: 'test'
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
 ```
    **d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.**
 ```   
