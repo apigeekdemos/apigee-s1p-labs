@@ -194,7 +194,7 @@ The file should look like this:
 ```yaml
 applications:
 - name: {your-username}-edgemicro-app-lab2
-  memory: 128M
+  memory: 512M
   disk_quota: 512M
   instances: 1
   path: .
