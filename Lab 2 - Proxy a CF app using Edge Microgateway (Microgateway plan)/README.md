@@ -166,11 +166,11 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 **a. Clone the Apigee Microgateway repository.**
 ```bash    
-    $ git clone https://github.com/apigee-internal/microgateway.git
-    
-    $ cd microgateway
-    
-    $ git checkout tags/v.2.5.4
+$ git clone https://github.com/apigee-internal/microgateway.git
+
+$ cd microgateway
+
+$ git checkout tags/v.2.5.4
 ```    
 
 **b. Create a config subfolder and copy the file amer-api-partner19-test-config.yaml within folder lab2-microgateway-plan/config to lab2-microgateway-plan/microgateway/config**
@@ -188,6 +188,7 @@ $ cp ../config/amer-api-partner19-test-config.yaml ./config
       v) Add 'disk_quota: 512M'
       
       Leave the other values as-is.
+      
 ```yaml
 applications:
 - name: {your-initials}-edgemicro-app
@@ -205,9 +206,9 @@ applications:
     EDGEMICRO_ORG: 'amer-api-partner19'
 ```
    **d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.**
-    
-    $ cf push
-```
+```   
+$ cf push
+
 ...
 0 of 1 instances running, 1 starting
 1 of 1 instances running
@@ -238,10 +239,11 @@ buildpack: nodejs_buildpack
 
    The apigee-bind-mg command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-mg --app {your_sample_target_app_name} --service $PCF_MGW_SERVICE_INSTANCE 
-    --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --micro {your_edgemicro_app_name}.apps.pcfone.io \
-    --domain $PCF_DOMAIN --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD --action "proxy bind"
-
+```bash
+$ cf apigee-bind-mg --app {your_sample_target_app_name} --service $PCF_MGW_SERVICE_INSTANCE 
+--apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --micro {your_edgemicro_app_name}.apps.pcfone.io \
+--domain $PCF_DOMAIN --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD --action "proxy bind"
+```
 
 
 **5. Test the binding**
@@ -249,8 +251,9 @@ buildpack: nodejs_buildpack
    Once you’ve bound your app’s path to the Apigee service (creating an Apigee proxy in the process), you can try it out with the sample app.
 
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
-```
-   $ curl https://{your_sample_app_name}.apps.pcfone.io
+
+```bash
+$ curl https://{your_sample_app_name}.apps.pcfone.io
 
 {"error":"missing_authorization","error_description":"Missing Authorization header"}
 ```
@@ -260,20 +263,25 @@ buildpack: nodejs_buildpack
    
    In order to fix the error from the previous step, you need an API key.
 	
-   **a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-initials}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
+**a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-initials}-sampleapi-mg.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
 	
-   **b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.**
+**b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.**
 
-	$ cf apps
-	
-    $ cf restart {your_initials}-edgemicro-app
+```bash
+$ cf apps
 
-   **c. Resend the request to your app this time passing the apikey as a request header.**
-    
-    $ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
-    
-    NOTE: If curl hangs on this command, use the Postman client to make the request.
+$ cf restart {your_initials}-edgemicro-app
 ```
+
+**c. Resend the request to your app this time passing the apikey as a request header.**
+
+```bash
+$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
+```
+
+NOTE: If curl hangs on this command, use the Postman client to make the request.
+
+```json
     {“hello”:“hello from cf app”}
 ```
 
