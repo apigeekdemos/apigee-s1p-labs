@@ -176,7 +176,6 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 **b. Create a config subfolder and copy the file amer-api-partner19-test-config.yaml within folder lab2-microgateway-plan/config to lab2-microgateway-plan/microgateway/config**
 
 ```bash
-$ mkdir config
 $ cp ../config/amer-api-partner19-test-config.yaml ./config
 
 ```
