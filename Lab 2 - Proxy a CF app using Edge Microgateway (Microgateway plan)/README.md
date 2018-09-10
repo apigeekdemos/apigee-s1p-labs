@@ -189,7 +189,7 @@ $ cp ../config/amer-api-partner19-test-config.yaml ./config
 
 - i) Replace name variable with your own name. e.g. `{your-username}-edgemicro-app`.
 - ii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` variables with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
-- iii) Replace `EDGEMICRO_ENV` and `EDGEMICRO_ORG` variables with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
+- iii) Replace `EDGEMICRO_ORG` and `EDGEMICRO_ENV` variables with `APIGEE_ORG` and `APIGEE_ENV` values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
 - iv) Add under env `EDGEMICRO_CONFIG_DIR: './config'`
 - v) Add under env `'disk_quota: 512M'`
 
@@ -204,11 +204,15 @@ applications:
   path: .
   buildpack: nodejs_buildpack
   env: 
-    EDGEMICRO_KEY: values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
-    EDGEMICRO_SECRET: values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
+    # Replace with EDGEMICRO_KEY from Instructions above
+    EDGEMICRO_KEY: 2d99ace69294c8f791404a7dd735a83b4ce08545f9f2da2cb736a7b9019989c5
+    # Replace with EDGEMICRO_SECRET from Instructions above
+    EDGEMICRO_SECRET: b4eb6dea5cb19ca6c784d3345c1630d3698ab2ef8041cf7843d191f3a5d5de66
     EDGEMICRO_CONFIG_DIR: './config'
-    EDGEMICRO_ENV: 'test'
+    # Replace EDGEMICRO_ORG with APIGEE_ORG variable from Instructions above
     EDGEMICRO_ORG: 'amer-api-partner19'
+    # Replace EDGEMICRO_ENV with APIGEE_ENV variable from Instructions above
+    EDGEMICRO_ENV: 'test'
 ```
    **d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.**
 ```   
