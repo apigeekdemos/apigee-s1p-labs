@@ -245,9 +245,15 @@ buildpack: nodejs_buildpack
    The apigee-bind-mg command creates a proxy for you and binds the app to the service.
 
 ```bash
-$ cf apigee-bind-mg --app {your_sample_target_app_name} --service $PCF_MGW_SERVICE_INSTANCE 
---apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --micro {your_edgemicro_app_name}.apps.pcfone.io \
---domain $PCF_DOMAIN --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD --action "proxy bind"
+cf bind-route-service $PCF_DOMAIN $PCF_MGW_SERVICE_INSTANCE --hostname {your-username}-samplebackend-lab2 \
+-c '{"org":"'$APIGEE_ORG'","env":"'$APIGEE_ENV'",
+  "user": "'$APIGEE_USERNAME'","pass":"'$APIGEE_PASSWORD'",
+  "micro": "{your-username}-edgemicro-app-lab2.apps.pcfone.io",
+  "action": "proxy bind",
+  "protocol":"https"}'
+  
+Binding route diegozuluaga-samplebackend-lab2.apps.pcfone.io to service instance apigee-microgateway-service in org group-apigee / space apijam as diegozuluaga@google.com...
+OK
 ```
 
 
