@@ -43,7 +43,7 @@ In the process described here, the PCF app and Edge Microgateway app are in sepa
     
     $ cd cloud-foundry-apigee/lab2-microgateway-plan/
 
-   **c. In the *lab2-microgateway-plan* directory, edit *manifest.yml* and change the 'name' parameter:**
+   **c. In the *lab2-microgateway-plan* directory, edit `manifest.yml` and change the 'name' parameter:**
    
     name: {your_initials}-sampleapi-mg
 ```bash
@@ -182,7 +182,7 @@ $ git checkout tags/v.2.5.4
 $ cp ../config/amer-api-partner19-test-config.yaml ./config
 
 ```
-**c. Edit the application manifest file `*microgateway/manifest.yml*` in the cloned Edge Microgateway repository to update the following env values:**
+**c. Edit the application manifest file `microgateway/manifest.yml` in the cloned Edge Microgateway repository to update the following env values:**
 
 - i) Replace `edgemicro-app` with your own for name e.g. `{your-initials}-edgemicro-app`.
 - ii) Replace `EDGEMICRO_KEY` and `EDGEMICRO_SECRET` with values from [Instructions step](../Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
