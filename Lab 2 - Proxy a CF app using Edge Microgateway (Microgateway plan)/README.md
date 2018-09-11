@@ -172,7 +172,7 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 **a. Clone the Apigee Microgateway repository.**
 ```bash    
-$ git clone https://github.com/apigee-internal/microgateway.git
+$ git clone https://github.com/apigeekdemos/microgateway.git
 
 $ cd microgateway
 
