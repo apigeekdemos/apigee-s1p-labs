@@ -121,29 +121,6 @@ Space:          apijam
 ```bash
 $ cf target -o $PCF_ORG -s $PCF_SPACE
 ```
-**3. Install the Apigee Broker Plugin**
-
-  **a. Run the CF install-plugin command
-
-```   
-$ cf install-plugin -r CF-Community "apigee-broker-plugin"
-
-Installing plugin Apigee-Broker-Plugin...
-OK
-Plugin Apigee-Broker-Plugin 0.1.1 successfully installed.
-```
-
-  **b. Make sure the plugin is available by running:
-
-```
-$ cf -h
-
-...
-Commands offered by installed plugins:
-  apigee-bind-mg,abm     apigee-push,ap           apigee-unbind-org,auo
-  apigee-bind-mgc,abc    apigee-unbind-mg,aum     
-  apigee-bind-org,abo    apigee-unbind-mgc,auc  
-```
 
 # Steps
 
