@@ -282,15 +282,11 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 **3. Bind the Sample CF App created in Step 1 to route its requests to the Apigee Egde ORG Service Instance listed in Step 2.**
 
-The apigee-bind-org command creates a proxy for you and binds the app to the service.
+The bind-route-service command creates a proxy for you and binds the app to the service.
 
-    $ cf apigee-bind-org --app {your_sample_app_name} --service $PCF_ORG_SERVICE_INSTANCE \
-    --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --domain $PCF_DOMAIN  \
-    --protocol https --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD --action "proxy bind"
+    $ cf bind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name> -c '{"org":"'$APIGEE_ORG'", "env":"'$APIGEE_ENV'", "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'", "action":"proxy bind", "protocol":"https"}'
 
-The above command will promt for these entries. Enter the values as listed below:
-
-The host domain to which API calls are made. Specify a value only if your Apigee proxy domain is not the same as that given by your virtual host [optional]: **Press enter**
+Note - Replace <Your_App_Name> with the name of the Application you pushed above.
 
 **4. Verify the binding**
     The above 'bind org' completes route binding by instructing the PCF go-router to route all traffic, headed for your application, via an Apigee ORG. You can verify that the binding was successful by using the 'cf routes' command and seeing that the 'ORG Plan' service is now associated with your application route. See below example:
@@ -337,17 +333,18 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
 
 These set of instrcutions are optional for this Lab, but good to know for an application lifescyle management perspective. We will now be unbinding this application from the ORG plan.
 
-To unbind the the application we will be using the 'apigee-unbind-org' comand as follows:
+To unbind the the application we will be using the 'unbind-route-service' command as follows:
 
 ```bash
-    $ cf apigee-unbind-org --app {your_sample_app_name} --domain $PCF_DOMAIN \
-    --service $PCF_ORG_SERVICE_INSTANCE
+    $ 
+    cf unbind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name>
 
     Unbinding may leave apps mapped to route as-sample.apps.pcfone.io vulnerable; e.g. if service instance apigee-org-service provides authentication. Do you want to proceed?> y
     Unbinding route as-sample.apps.pcfone.io from service instance apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
     OK
-    ➜  org-and-microgateway-sample git:(master) ✗
+
 ``` 
+Note - Replace <Your_App_Name> with the name of the Application you pushed above.
 
 You can verify that the 'unbind-org' was successful by using 'cf routes' command and ensuring that you do not see the service listed against your app route:
 
