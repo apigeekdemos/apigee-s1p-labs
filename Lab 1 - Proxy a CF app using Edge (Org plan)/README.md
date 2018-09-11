@@ -92,7 +92,7 @@ api version:    2.112.0
 ```bash
 $ cf login
   -or-
-$ cf login -u {PCF_USERNAME} -p {PCF_PASSWORD}
+$ cf login -u $PCF_USERNAME -p $PCF_PASSWORD
 
 
 ➜  apigee-s1p-labs git:(master) cf login
