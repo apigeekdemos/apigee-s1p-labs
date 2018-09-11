@@ -136,7 +136,7 @@ $ cf target -o $PCF_ORG -s $PCF_SPACE
 
 ```yml
   applications: 
-  - name: {your_initials}-sampleapi
+  - name: {your-username}-sampleapi
     memory: 64M
     disk_quota: 128M 
     instances: 1 
