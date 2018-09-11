@@ -176,16 +176,16 @@ $ git clone https://github.com/apigeekdemos/microgateway.git
 
 $ cd microgateway
 
-$ git checkout tags/v.2.5.4
 ```    
 
-**b. Create a config subfolder and copy the file amer-api-partner19-test-config.yaml within folder lab2-microgateway-plan/config to lab2-microgateway-plan/microgateway/config**
+**b. View to ensure that file amer-api-partner19-test-config.yaml exists within folder lab2-microgateway-plan/microgateway/config**
+This file is contains the config details required by edge Migrogateway to communicate with Edge Enterprise on Cloud.
 
 ```bash
-$ cp ../config/amer-api-partner19-test-config.yaml ./config
+$ view /config/amer-api-partner19-test-config.yaml
 
 ```
-**c. Download manifest.yml from [this location](https://drive.google.com/file/d/1stWLHRKpyoYrq6ideD3LilpfBaj8M_B4/view?usp=sharing) under `microgateway` folder. So, replace the file in the cloned Edge Microgateway repository.**
+**c. Edit the manifest.yml file and replace {your-username} with your PCF Username (see below):
 
 i) Replace `name: {your-username}-edgemicro-app-lab2` variable with your own username. e.g. `johndoe-edgemicro-app-lab2`.
 
@@ -241,9 +241,9 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 04:30:26 PM   0.0%   52.9M of 256M   331.3M of 512M
 ```
 
-**4. Bind the Sample CF App created in Step 1 / Lab 1 (ORG Plan - remember we are using the same target application) to route its requests to the Apigee Egde Service Instance listed in Step 2.b**
+**4. Bind the Sample CF App we pushed in Step 1(d), above, to route its requests to the Apigee Egde Microgateway Service Instance listed in Step 2.b**
 
-   The apigee-bind-mg command creates a proxy for you and binds the app to the service.
+   The bind-route-service CF command creates a proxy for you within Apigee Edge and also binds the CF app to the service.
 
 ```bash
 cf bind-route-service $PCF_DOMAIN $PCF_MGW_SERVICE_INSTANCE --hostname {your-username}-samplebackend-lab2 \
