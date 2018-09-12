@@ -289,7 +289,7 @@ $ cf restart {your-username}-edgemicro-app-lab2
 **c. Resend the request to your app this time passing the apikey as a request header.**
 
 ```bash
-$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}" -H 'Origin: {URL OF YOUR APP}.apps.pcfone.io'
+$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
 
 {"hello":"hello from cf app"} 
 ```
