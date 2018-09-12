@@ -1,5 +1,8 @@
 # Apigee + Pivotal Cloud Foundry API Jam
+[https://apigeespringone.page.link/labs](https://apigeespringone.page.link/labs)
+
 This is the supporting material for a hands-on workshop that introduces developers to Apigee integrations with Pivotal Cloud Foundry.
+
 
 All of the material here is released under the [Apache 2.0 license](./LICENSE.md)
 
@@ -16,11 +19,7 @@ The content for this apijam includes multiple labs that use Apigee api proxy ser
 
 - [2. Proxy a CF app using Edge Microgateway (Microgateway plan)](Lab%202%20-%20Proxy%20a%20CF%20app%20using%20Edge%20Microgateway%20(Microgateway%20plan))
 
-- [3. Proxy a CF app using Edge Microgateway (Microgateway-Coresident plan)](Lab%203%20-%20Proxy%20a%20CF%20(NodeJS)%20app%20using%20Edge%20Microgateway%20(Microgateway-Coresident%20plan))
-
-- [4. Proxy a CF Spring boot app using Edge Microgateway (Microgateway-Coresident plan)](Lab%204%20-%20Proxy%20a%20CF%20Spring%20boot%20app%20using%20Edge%20Microgateway%20(Microgateway-Coresident%20plan))
-
-- [5. Proxy a Spring Boot App using Edge Microgateway (coresident plan) with OpenAPI Spec](Lab%205%20-%20Proxy%20a%20Spring%20Boot%20App%20using%20Edge%20Microgateway%20(coresident%20plan)%20with%20OpenAPI%20Spec)
+- [Addendum](./addendum). This section contains experimental stuff or labs that are no longer supported.
 
 #### Apigee Community 
 If you have any questions/comments please visit [https://community.apigee.com](https://community.apigee.com/).

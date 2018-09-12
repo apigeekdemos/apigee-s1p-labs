@@ -42,6 +42,8 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    # e.g. apigee-pcf-user-XXX -  where XXX is your unique identifier
    export PCF_USERNAME=apigee-pcf-user-XXX
    export PCF_PASSWORD=SomePass$word
+   export PCF_SPACE=apijam
+   export PCF_ORG=group-apigee
    
    # Apigee Credetials from registration sheet above
    export APIGEE_ORG=LOOKUP_IN_SPREADSHEET_ABOVE
@@ -76,7 +78,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
     
        `$ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git`
  
-   **d. Set your API endpoint to the Cloud Controller of your deployment
+   **d. Set your API endpoint to the Cloud Controller of your deployment**
 
 ```bash
 $ cf api $PCF_API
@@ -87,21 +89,11 @@ api endpoint:    https://api.run.pcfone.io
 api version:    2.112.0
 ```
 
-  **e. Log in to your deployment and select an org and a space
+  **e. Log in to your deployment and select an org and a space**
 
 ```bash
-$ cf login
-  -or-
-$ cf login -u $PCF_USERNAME -p $PCF_PASSWORD
+$ cf login -u $PCF_USERNAME -p $PCF_PASSWORD -s $PCF_SPACE -o $PCF_ORG 
 
-
-➜  apigee-s1p-labs git:(master) cf login
-API endpoint: https://api.run.pcfone.io
-
-Email> shuklaankur@google.com
-
-Password>
-Authenticating...
 OK
 
 Targeted org group-apigee
@@ -114,12 +106,6 @@ API endpoint:   https://api.run.pcfone.io (API version: 2.112.0)
 User:           shuklaankur@google.com
 Org:            group-apigee
 Space:          apijam
-```
-
-  **f. Select the org and space through the following command:
-
-```bash
-$ cf target -o $PCF_ORG -s $PCF_SPACE
 ```
 
 # Steps
@@ -151,7 +137,7 @@ $ cf target -o $PCF_ORG -s $PCF_SPACE
   From within the *lab1-org-plan* folder run:
 
 ```bash
-    $ cf push 
+$ cf push 
 ```
     
   If successful, you should see some output from this command and finally:
@@ -242,8 +228,8 @@ apigee-org-service            apigee-edge   org                                 
 
 c. Show more details of `apigee-org-service` service instance
 
-```
-➜  org-and-microgateway-sample git:(master) ✗ cf service apigee-org-service
+```shell
+$ cf service apigee-org-service
 Showing info of service apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
 
 name:            apigee-org-service
@@ -261,8 +247,10 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 
 The bind-route-service command creates a proxy for you and binds the app to the service.
 
-    $ cf bind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name> -c '{"org":"'$APIGEE_ORG'", "env":"'$APIGEE_ENV'", "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'", "action":"proxy bind", "protocol":"https"}'
-
+```shell
+$ cf bind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name> -c '{"org":"'$APIGEE_ORG'", "env":"'$APIGEE_ENV'", "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'", "action":"proxy bind", "protocol":"https"}'
+```
+    
 Note - Replace <Your_App_Name> with the name of the Application you pushed above.
 
 **4. Verify the binding**
@@ -291,11 +279,11 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
    * From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-   $ curl https://{your_sample_app_name}.sample.apps.pcfone.io
+$ curl https://{your_sample_app_name}.sample.apps.pcfone.io
 
-   You should see the following response as before:
+You should see the following response as before:
 
-    {“hello”:“hello from cf app”}
+{“hello”:“hello from cf app”}
 ```
     
 **Congratulations!**...
@@ -313,19 +301,18 @@ These set of instrcutions are optional for this Lab, but good to know for an app
 To unbind the the application we will be using the 'unbind-route-service' command as follows:
 
 ```bash
-    $ 
-    cf unbind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name>
+$ cf unbind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name>
 
-    Unbinding may leave apps mapped to route as-sample.apps.pcfone.io vulnerable; e.g. if service instance apigee-org-service provides authentication. Do you want to proceed?> y
-    Unbinding route as-sample.apps.pcfone.io from service instance apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
-    OK
+Unbinding may leave apps mapped to route as-sample.apps.pcfone.io vulnerable; e.g. if service instance apigee-org-service provides authentication. Do you want to proceed?> y
+Unbinding route as-sample.apps.pcfone.io from service instance apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
+OK
 
 ``` 
 Note - Replace <Your_App_Name> with the name of the Application you pushed above.
 
 You can verify that the 'unbind-org' was successful by using 'cf routes' command and ensuring that you do not see the service listed against your app route:
 
-```
+```shell
 $ cf routes
 Getting routes for org group-apigee / space apijam as shuklaankur@google.com ...
 
