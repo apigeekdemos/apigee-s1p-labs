@@ -265,7 +265,7 @@ OK
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_sample_app_name}.apps.pcfone.io
+$ curl https://{your_sample_app_name}.apps.pcfone.io -H 'Origin: ankur-samplebackend-lab2.apps.pcfone.io'
 
 {"error":"missing_authorization","error_description":"Missing Authorization header"}
 
@@ -289,7 +289,7 @@ $ cf restart {your-username}-edgemicro-app-lab2
 **c. Resend the request to your app this time passing the apikey as a request header.**
 
 ```bash
-$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}" -H 'Cache-Control: no-cache'
+$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}" -H 'Origin: {URL OF YOUR APP}.apps.pcfone.io'
 
 {"hello":"hello from cf app"} 
 ```
