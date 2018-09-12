@@ -265,7 +265,7 @@ OK
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_sample_app_name}.apps.pcfone.io -H 'Origin: ankur-samplebackend-lab2.apps.pcfone.io'
+$ curl https://{your_sample_app_name}.apps.pcfone.io'
 
 {"error":"missing_authorization","error_description":"Missing Authorization header"}
 
