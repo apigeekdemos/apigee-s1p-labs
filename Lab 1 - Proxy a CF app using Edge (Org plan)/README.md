@@ -118,13 +118,13 @@ Space:          apijam
 
    b. In the *lab1-org-plan* directory, edit *manifest.yml* and change the **'name' parameters**:
    
-   * **name**: {your_initials}-sampleapi
+   * **name**: {PCF_USERNAME}-sampleapi
 
 ```yml
   applications: 
-  - name: {your-username}-sampleapi
-    memory: 64M
-    disk_quota: 128M 
+  - name: {PCF_USERNAME}-sampleapi
+    memory: 256M
+    disk_quota: 512M 
     instances: 1 
     path: . 
     buildpack: nodejs_buildpack
@@ -158,14 +158,14 @@ OK
 
 requested state: started
 instances: 1/1
-usage: 64M x 1 instances
+usage: 256M x 1 instances
 urls: as-sample.apps.pcfone.io
 last uploaded: Wed Aug 29 20:29:32 UTC 2018
 stack: cflinuxfs2
 buildpack: nodejs_buildpack
 
      state     since                    cpu    memory         disk            details
-#0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 64M   56.1M of 128M
+#0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 256M   56.1M of 512M
 ```
 
 h. Get a list of apps to determine the URL of the app just pushed:
@@ -178,7 +178,7 @@ Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-sample             started           1/1         64M      128M   as-sample.apps.pcfone.io
+as-sample             started           1/1         256M      512M   as-sample.apps.pcfone.io
 ```
 
 i. Use curl to send a test request to the url of the running app. Verify the response from the app. 
