@@ -28,11 +28,11 @@ Apigee Edge API Proxy created in earlier lab exercise. If not, jump back to "Lab
 
 3. Click on cf-**{PCF_USERNAME}**--sampleapi.apps.pcfone.io. This API Proxy would have been created by Apigee's Service Broker for PCF in the previous lab
 
-![image alt text](./media/image_3.png)
+![image alt text](./media/image_3_as.png)
 
 4. Click on **Develop** tab to access API Proxy development dashboard.
 
-![image alt text](./media/image_4.png)
+![image alt text](./media/image_4_as.png)
 
 ![image alt text](./media/image_5.png)
 
