@@ -185,9 +185,8 @@ i. Use curl to send a test request to the url of the running app. Verify the res
 
 
 ```bash
-$ curl https://as-sample.apps.pcfone.io
+$ curl https://as-sample.apps.pcfone.io/v1/employees
 
-{"hello":"hello from cf app"}
 ```
 
 **2. List your Service Instance**
@@ -279,11 +278,10 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
    * From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_sample_app_name}.sample.apps.pcfone.io
+$ curl https://{your_sample_app_name}.sample.apps.pcfone.io/v1/employees
 
-You should see the following response as before:
+You should see the same response as before:
 
-{“hello”:“hello from cf app”}
 ```
     
 **Congratulations!**...
