@@ -182,7 +182,7 @@ $ cd microgateway
 This file is contains the config details required by edge Migrogateway to communicate with Edge Enterprise on Cloud.
 
 ```bash
-$ view /config/amer-api-partner19-test-config.yaml
+$ view config/amer-api-partner19-test-config.yaml
 
 ```
 **c. Edit the manifest.yml file and replace {your-username} with your PCF Username (see below):
