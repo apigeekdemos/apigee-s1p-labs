@@ -86,15 +86,22 @@ What actually happens, then? To prevent spike-like behavior, Spike Arrest smooth
 
 ![image alt text](./media/image_11.png)
 
-3. Click on **Send** button multiple times, You will see 500 response code when spike arrest policy kicks in to protect target servers from spike in traffic.
+3. Make Multiple curl commands from your terminal to the PCF End point, see below for example:
 
-![image alt text](./media/image_12.png)
+```bash
+curl https://apigee-pcf-user-149-sampleapi.apps.pcfone.io/v1/employees
+```
+After multiple attempts you will see an 'Spike arrest violation' Error message as your response:
 
-4. You might notice that number of requests with 200 response is more than spike arrest rate value configured, It’s due to multiple message processors where policies gets executed and each has individual counters.
+```bash
+curl https://apigee-pcf-user-149-sampleapi.apps.pcfone.io/v1/employees
 
-5. You can also use [Apigee Rest Client](https://apigee-rest-client.appspot.com/) to test Spike Arrest Policy.
+{"fault":{"faultstring":"Spike arrest violation. Allowed rate : MessageRate{messagesPerPeriod=12, periodInMicroseconds=60000000, maxBurstMessageCount=1.2}","detail":{"errorcode":"policies.ratelimit.SpikeArrestViolation"}}}%
 
-![image alt text](./media/image_13.png)
+```
+
+4. In your Trace session, you might notice that number of requests with 200 response is more than spike arrest rate value configured, It’s due to multiple message processors where policies gets executed and each has individual counters.
+
 
 # Lab Video
 

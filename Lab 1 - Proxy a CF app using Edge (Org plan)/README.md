@@ -268,13 +268,14 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
    Once you’ve bound your app’s path to the Apigee service (creating an Apigee proxy in the process), you can try it out with a simple curl command.
 
    This time Trace the API proxy from the Apigee Edge management console.
-   * Login using the Apigee Org credentials given to you. Ensure that you are viewing the org 'amer-api-partner19' (see screenshot)
+   * [Login](https://login.apigee.com/login) using the Apigee Org by using credentials (APIGEE_USERNAME, APIGEE_PASSWORD) given to you. Ensure that you are viewing the org 'amer-api-partner19' (see screenshot)
 
    ![Org Plan](resources/SelectOrg.png)
-   * In the management console, under APIs > API proxies, locate the name of the proxy you just created with bind-route-service. It will have a name of cf-{your-initials}-sample.apps.pcfone.io
+   * In the management console, under DEVELOP > API proxies, locate the name of the proxy you just created with bind-route-service. It will have a name of cf-{your-initials}-sample.apps.pcfone.io (see screenshot)
+   ![Select Proxy](resources/SelectProxy.png)
    * Click the new proxy’s name to view its Overview page.
    * Click the Trace tab, then click the Start Trace Session button.
-
+    ![Start Trace](resources/StartTrace.png)
    * From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
