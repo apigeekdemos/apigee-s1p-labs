@@ -155,16 +155,23 @@ An App Developer can create any number of Apps.  Each App can register for any n
 
 9. Click **Start Trace Session** to begin a trace session.
 
-10. Click **Send** to send a request.  If your API Proxy requires query parameters, add them  prior to sending (Do not add the API Key yet)
+10. Use terminal to **Send** a request using curl calls.  (Do not add the API Key yet)
 
-   You should see a 401 (unauthorized) response for your API Call because the API Proxy was expecting an API Key as a query      parameter.  See the trace session below
+   You should see a 401 (unauthorized) response for your API Call because the API Proxy was expecting an API Key as a query      parameter.  See below for example error: 
+   ```bash
 
-11. Now add the query parameter ```?apikey={your_api_key}``` to the URL in the trace tool and try again.  (Use the API Key you created [here](#bookmark=id.mueb50zfeta3)) and resend the request.
+   ```
+curl https://apigee-pcf-user-149-sampleapi.apps.pcfone.io/v1/employees
+{"fault":{"faultstring":"Failed to resolve API Key variable request.queryparam.apikey","detail":{"errorcode":"steps.oauth.v2.FailedToResolveAPIKey"}}}
+```
+11. Now add the query parameter ```?apikey={your_api_key}``` to the URL in the curl call and try again.  (Use the API Key you created [here](#bookmark=id.mueb50zfeta3)) and resend the request.
 
-   You should see a 2xx response code and the Trace for that request should show that the Verify API Key policy is now            passing.
 
-![image alt text](./media/image_11.png)
+   ```bash
+   curl https://apigee-pcf-user-149-sampleapi.apps.pcfone.io/v1/employees\?apikey=GgOJNEh9GKCwyLpw6tN41xTQNYLx9PUN
+   ```
 
+   You should see a 2xx response code and the Trace for that request should show that the Verify API Key policy is now passing.
 # Lab Video
 
 If you would rather watch a video that covers this topic, point your browser [here](https://youtu.be/3nUFCOgGlS8).
