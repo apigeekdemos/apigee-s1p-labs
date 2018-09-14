@@ -13,7 +13,7 @@ The content for this apijam includes multiple labs that use Apigee api proxy ser
 
 ### Labs
 - [1. Proxy a CF app using Edge (Org plan)](Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan))
-    - [1.1 Traffic Management - Throttle APIs](Lab%201.1%20Traffic%20Management%20-%20Throttle%20APIs)
+    - [1.1 Traffic Management - Throttle APIs](Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)/Lab%201.1%20Traffic%20Management%20-%20Throttle%20APIs)
     - [1.2 API Security - Securing APIs with API Key](Lab%201.2%20API%20Security%20-%20Securing%20APIs%20with%20API%20Keys)
     - [1.3 Publishing APIs : Publish documentation](Lab%201.3%20API%20Publishing%20-%20Documentation)
     - [1.4 Consume APIs - Dev Portal](Lab%201.4%20Consume%20APIs)
