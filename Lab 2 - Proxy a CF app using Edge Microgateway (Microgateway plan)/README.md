@@ -269,7 +269,7 @@ cf bind-route-service $PCF_DOMAIN $PCF_MGW_SERVICE_INSTANCE --hostname {your-use
   "action": "proxy bind",
   "protocol":"https"}'
   
-Binding route diegozuluaga-samplebackend-lab2.apps.pcfone.io to service instance apigee-microgateway-service in org group-apigee / space apijam as diegozuluaga@google.com...
+Binding route {your_app_name}-samplebackend-lab2.apps.pcfone.io to service instance apigee-microgateway-service in org group-apigee / space apijam as xxx...
 OK
 ```
 
@@ -282,7 +282,7 @@ OK
 
 ```bash
 $ curl https://{your_user_num}-samplebackend-lab2.apps.pcfone.io
-{"message":"no match found for /diegozuluaga-samplebackend-lab2.apps.pcfone.io","status":404}
+{"message":"no match found for /{your_app_name}-samplebackend-lab2.apps.pcfone.io","status":404}
 
 You should see this error as edge micro does not contain the latest proxy we created via the service binding! 
 ```
