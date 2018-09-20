@@ -104,14 +104,14 @@ Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-samplebackend-lab2       started           1/1         64M      128M   as-samplebackend-lab2.apps.pcfone.io
+{your_app_name}       started           1/1         64M      128M   {your_app_name}.apps.pcfone.io
 
 ```
 
 **f. Use curl to send a test request to the url of the running app. Verify the response from the app.**
 
 ```bash
-$ curl https://as-samplebackend-lab2.apps.pcfone.io
+$ curl https://{your_app_name}.apps.pcfone.io
 
 {"hello":"hello from cf app"}
 ```
@@ -265,7 +265,7 @@ OK
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_sample_app_name}.apps.pcfone.io'
+$ curl https://{your_app_name}.apps.pcfone.io'
 
 {"error":"missing_authorization","error_description":"Missing Authorization header"}
 
