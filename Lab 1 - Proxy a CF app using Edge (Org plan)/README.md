@@ -185,7 +185,7 @@ i. Use curl to send a test request to the url of the running app. Verify the res
 
 
 ```bash
-$ curl https://as-sample.apps.pcfone.io/v1/employees
+$ curl https://{app_name}.apps.pcfone.io/v1/employees
 
 ```
 
