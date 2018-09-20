@@ -280,7 +280,7 @@ apijam   {your_app_name}       apps.pcfone.io                        {your_app_n
    * From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_sample_app_name}.sample.apps.pcfone.io/v1/employees
+$ curl https://{your_sample_app_name}.apps.pcfone.io/v1/employees
 
 You should see the same response as before:
 ```
