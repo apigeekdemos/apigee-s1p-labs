@@ -281,20 +281,14 @@ OK
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_app_name}.apps.pcfone.io'
+$ curl https://{your_user_num}-samplebackend-lab2.apps.pcfone.io
+{"message":"no match found for /diegozuluaga-samplebackend-lab2.apps.pcfone.io","status":404}
 
-{"error":"missing_authorization","error_description":"Missing Authorization header"}
-
-You should see an validation error as edge micro is checking for security! 
+You should see this error as edge micro does not contain the latest proxy we created via the service binding! 
 ```
+In order to fix the error from the previous step, you need to restart your microgateway application.
 	
-**6. Create API Product, Developer and Developer App**
-   
-   In order to fix the error from the previous step, you need an API key.
-	
-**a. To get an API Key, go to Management UI, create an API Product add `edgemicro-auth` and `edgemicro_cf-{your-username}-samplebackend-lab2.YOUR-SYSTEM-DOMAIN` API Proxies to it. Create an APP and get a Key.**
-	
-**b. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Products.**
+**a. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Proxies.**
 
 ```bash
 $ cf apps
@@ -302,15 +296,15 @@ $ cf apps
 $ cf restart {your-username}-edgemicro-app-lab2
 ```
 
-**c. Resend the request to your app this time passing the apikey as a request header.**
+**b. Resend the request to your app this time passing the apikey as a request header.**
 
 ```bash
-$ curl https://{URL OF YOUR APP} -H "x-api-key: {api-key}"
+$ curl https://{your_user_num}-samplebackend-lab2.apps.pcfone.io
 
 {"hello":"hello from cf app"} 
 ```
 
-**8. Extra credit**
+**6. Extra credit**
     
 Login to [https://apigee.com/edge](https://apigee.com/edge)
     
