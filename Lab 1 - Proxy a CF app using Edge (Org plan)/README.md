@@ -76,7 +76,7 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    
    **c. Clone the Apigee Edge GitHub repo:**
     
-       `$ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git`
+       $ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
  
    **d. Set your API endpoint to the Cloud Controller of your deployment**
 
@@ -103,7 +103,6 @@ Targeted space apijam
 
 
 API endpoint:   https://api.run.pcfone.io (API version: 2.112.0)
-User:           shuklaankur@google.com
 Org:            group-apigee
 Space:          apijam
 ```
@@ -178,14 +177,14 @@ Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-sample             started           1/1         256M      512M   as-sample.apps.pcfone.io
+as-sample             started           1/1         256M      512M   {your_app_name}.apps.pcfone.io
 ```
 
 i. Use curl to send a test request to the url of the running app. Verify the response from the app. 
 
 
 ```bash
-$ curl https://{app_name}.apps.pcfone.io/v1/employees
+$ curl https://{your_app_name}.apps.pcfone.io/v1/employees
 
 ```
 
@@ -247,7 +246,9 @@ dashboard:       https://enterprise.apigee.com/platform/#/
 The bind-route-service command creates a proxy for you and binds the app to the service.
 
 ```shell
-$ cf bind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name> -c '{"org":"'$APIGEE_ORG'", "env":"'$APIGEE_ENV'", "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'", "action":"proxy bind", "protocol":"https"}'
+$ cf bind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE \
+--hostname <Your_App_Name> \
+-c '{"org":"'$APIGEE_ORG'", "env":"'$APIGEE_ENV'", "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'", "action":"proxy bind", "protocol":"https"}'
 ```
     
 Note - Replace <Your_App_Name> with the name of the Application you pushed above.
