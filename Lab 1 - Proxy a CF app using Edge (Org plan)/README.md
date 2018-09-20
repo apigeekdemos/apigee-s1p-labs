@@ -187,9 +187,15 @@ i. Use curl to send a test request to the url of the running app. Verify the res
 $ curl https://{your_app_name}.apps.pcfone.io/v1/employees
 ```
 
-**See OpenAPI Specification:**
+**Explore operations through the OpenAPI Specification :**
 
-Open your browser with `/post` [https://{your_app_name}.apps.pcfone.io/docs](https://{your_app_name}.apps.pcfone.io/docs)
+Open your browser with pathsuffix `/docs`:
+[https://{your_app_name}.apps.pcfone.io/docs](https://{your_app_name}.apps.pcfone.io/docs)
+
+**See OpenAPI Specication:**
+
+Open your with pathsuffix `/api-docs`:
+[https://{your_app_name}.apps.pcfone.io/api-docs](https://{your_app_name}.apps.pcfone.io/api-docs)
 
 **2. List your Service Instance**
 
