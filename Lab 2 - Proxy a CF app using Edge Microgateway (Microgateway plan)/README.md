@@ -178,11 +178,11 @@ $ cd microgateway
 
 ```    
 
-**b. View to ensure that file amer-api-partner19-test-config.yaml exists within folder lab2-microgateway-plan/microgateway/config**
+**b. View to ensure that file apigee-pec-test-config.yaml exists within folder lab2-microgateway-plan/microgateway/config**
 This file is contains the config details required by edge Migrogateway to communicate with Edge Enterprise on Cloud.
 
 ```bash
-$ view config/amer-api-partner19-test-config.yaml
+$ view config/apigee-pec-test-config.yaml
 ```
 **c. Notice Edge Microgateway configuration**
 
@@ -221,7 +221,7 @@ applications:
     EDGEMICRO_SECRET: b4eb6dea5cb19ca6c784d3345c1630d3698ab2ef8041cf7843d191f3a5d5de66
     EDGEMICRO_CONFIG_DIR: './config'
     # Replace EDGEMICRO_ORG with APIGEE_ORG variable from Instructions above
-    EDGEMICRO_ORG: 'amer-api-partner19'
+    EDGEMICRO_ORG: 'apigee-pec'
     # Replace EDGEMICRO_ENV with APIGEE_ENV variable from Instructions above
     EDGEMICRO_ENV: 'test'
     NODE_TLS_REJECT_UNAUTHORIZED: 0
