@@ -200,9 +200,9 @@ spikearrest:
    allow: 10
 ```
 
-**c. Edit the manifest.yml file and replace {your-username} with your PCF Username (see below):
+**d. Edit the manifest.yml file and replace {your-username} with your PCF Username (see below):**
 
-i) Replace `name: {your-username}-edgemicro-app-lab2` variable with your own username. e.g. `johndoe-edgemicro-app-lab2`.
+Replace `name: {your-username}-edgemicro-app-lab2` variable with your own username. e.g. `johndoe-edgemicro-app-lab2`.
 
 The file should look like this:
       
@@ -226,7 +226,8 @@ applications:
     EDGEMICRO_ENV: 'test'
     NODE_TLS_REJECT_UNAUTHORIZED: 0
 ```
-   **d. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.**
+
+**e. Now your are ready push the Edge Microgateway as its own cloud foundy app to PCF. Run cf push from within the microgateway folder of the cloned repository.**
 ```   
 $ cf push
 
@@ -241,7 +242,7 @@ OK
 
 App as-edgemicro-app-lab2 was started using this command `npm start`
 
-Showing health and status for app as-edgemicro-app-lab2 in org group-apigee / space apijam as shuklaankur@google.com...
+Showing health and status for app as-edgemicro-app-lab2 in org group-apigee / space apijam as xxx...
 OK
 
 requested state: started
