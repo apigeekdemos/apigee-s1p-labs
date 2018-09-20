@@ -177,7 +177,7 @@ Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 name                  requested state   instances   memory   disk   urls
-as-sample             started           1/1         256M      512M   {your_app_name}.apps.pcfone.io
+{your_app_name}       started           1/1         256M      512M   {your_app_name}.apps.pcfone.io
 ```
 
 i. Use curl to send a test request to the url of the running app. Verify the response from the app. 
@@ -185,8 +185,11 @@ i. Use curl to send a test request to the url of the running app. Verify the res
 
 ```bash
 $ curl https://{your_app_name}.apps.pcfone.io/v1/employees
-
 ```
+
+**See OpenAPI Specification:**
+
+Open your browser with `/post` [https://{your_app_name}.apps.pcfone.io/docs](https://{your_app_name}.apps.pcfone.io/docs)
 
 **2. List your Service Instance**
 
