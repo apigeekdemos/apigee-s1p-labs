@@ -183,8 +183,23 @@ This file is contains the config details required by edge Migrogateway to commun
 
 ```bash
 $ view config/amer-api-partner19-test-config.yaml
-
 ```
+**c. Notice Edge Microgateway configuration**
+
+```yaml
+  plugins:
+    sequence:
+      - cloud-foundry-route-service
+      - cors
+      - oauth
+      - spikearrest
+cors:
+   cors-origin: '*'
+spikearrest:
+   timeUnit: minute
+   allow: 10
+```
+
 **c. Edit the manifest.yml file and replace {your-username} with your PCF Username (see below):
 
 i) Replace `name: {your-username}-edgemicro-app-lab2` variable with your own username. e.g. `johndoe-edgemicro-app-lab2`.
