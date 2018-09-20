@@ -167,7 +167,7 @@ buildpack: nodejs_buildpack
 #0   running   2018-08-29 01:29:55 PM   0.0%   44.7M of 256M   56.1M of 512M
 ```
 
-h. Get a list of apps to determine the URL of the app just pushed:
+d. Get a list of apps to determine the URL of the app just pushed:
     
 ```bash
 $ cf apps
@@ -180,19 +180,19 @@ name                  requested state   instances   memory   disk   urls
 {your_app_name}       started           1/1         256M      512M   {your_app_name}.apps.pcfone.io
 ```
 
-i. Use curl to send a test request to the url of the running app. Verify the response from the app. 
+e. Use curl to send a test request to the url of the running app. Verify the response from the app. 
 
 
 ```bash
 $ curl https://{your_app_name}.apps.pcfone.io/v1/employees
 ```
 
-**Explore operations through the OpenAPI Specification :**
+f. Explore operations through the OpenAPI Specification
 
 Open your browser with pathsuffix `/docs`:
 [https://{your_app_name}.apps.pcfone.io/docs](https://{your_app_name}.apps.pcfone.io/docs)
 
-**See OpenAPI Specication:**
+g. See OpenAPI Specication
 
 Open your with pathsuffix `/api-docs`:
 [https://{your_app_name}.apps.pcfone.io/api-docs](https://{your_app_name}.apps.pcfone.io/api-docs)
