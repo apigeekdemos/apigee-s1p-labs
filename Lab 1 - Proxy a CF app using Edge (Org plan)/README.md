@@ -261,7 +261,7 @@ $ cf routes
 Getting routes for org group-apigee / space apijam as shuklaankur@google.com ...
 
 space    host                  domain           port   path   type   apps                  service
-apijam   as-sample             apps.pcfone.io                        as-sample             apigee-org-service
+apijam   {your_app_name}       apps.pcfone.io                        {your_app_name}       apigee-org-service
 ```
 
 **5. Test the binding**
@@ -283,16 +283,15 @@ apijam   as-sample             apps.pcfone.io                        as-sample  
 $ curl https://{your_sample_app_name}.sample.apps.pcfone.io/v1/employees
 
 You should see the same response as before:
-
 ```
     
 **Congratulations!**...
     
-    What does this mean
-    - You have analytics across all your APIs, created through PCF
-    - You can now add authentication, traffic management and other capablities to your API
-    - When you do that the business teams can create API Products, and scale the consumption
-    - If you have swagger spec for this API, you can enable your developers to access these APIs through smartdocs
+What does this mean
+- You have analytics across all your APIs, created through PCF
+- You can now add authentication, traffic management and other capablities to your API
+- When you do that the business teams can create API Products, and scale the consumption
+- If you have swagger spec for this API, you can enable your developers to access these APIs through smartdocs
 
 # Unbinding the Application from 'ORG' Service Plan (Optional)
 
@@ -317,7 +316,7 @@ $ cf routes
 Getting routes for org group-apigee / space apijam as shuklaankur@google.com ...
 
 space    host                  domain           port   path   type   apps                  service
-apijam   as-sample             apps.pcfone.io                        as-sample
+apijam   {your_app_name}       apps.pcfone.io                        {your_app_name}
 ```
 
 # Summary
