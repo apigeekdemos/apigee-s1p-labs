@@ -43,15 +43,15 @@ In the process described here, the PCF app and Edge Microgateway app are in sepa
     
     $ cd cloud-foundry-apigee/lab2-microgateway-plan/
 
-   **c. In the *lab2-microgateway-plan* directory, edit `manifest.yml` and change the 'name' parameter:**
+   **c. In the *lab2-microgateway-plan* directory, edit `manifest.yml` and change the 'PCF_USERNUM' parameter:**
 
 ```
-name: {your-username}-samplebackend-lab2
+name: PCF_USERNUM-samplebackend-lab2
 ```
 
 ```bash
 applications:
-- name: {your-username}-samplebackend-lab2
+- name: PCF_USERNUM-samplebackend-lab2
   memory: 64M
   disk_quota: 128M
   instances: 1
@@ -86,7 +86,7 @@ OK
 requested state: started
 instances: 1/1
 usage: 64M x 1 instances
-urls: as-sample-mg.apps.pcfone.io
+urls: PCF_USERNUM-samplebackend-lab2.apps.pcfone.io
 last uploaded: Wed Aug 29 20:29:32 UTC 2018
 stack: cflinuxfs2
 buildpack: nodejs_buildpack
@@ -98,20 +98,20 @@ buildpack: nodejs_buildpack
 **e. Get a list of apps to determine the URL of the app just pushed:**
 
 ```bash
-$ cf apps
+$ cf apps | grep $PCF_USERNUM
 
 Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
-name                  requested state   instances   memory   disk   urls
-{your_app_name}       started           1/1         64M      128M   {your_app_name}.apps.pcfone.io
+name                  	requested state   instances   memory     disk    urls
+XXX-samplebackend-lab2     started           1/1         64M      128M   XXX-samplebackend-lab2.apps.pcfone.io
 
 ```
 
 **f. Use curl to send a test request to the url of the running app. Verify the response from the app.**
 
 ```bash
-$ curl https://{your_app_name}.apps.pcfone.io
+$ curl https://$PCF_USERNUM-samplebackend-lab2.apps.pcfone.io
 
 {"hello":"hello from cf app"}
 ```
@@ -191,7 +191,7 @@ $ view config/apigee-pec-test-config.yaml
     sequence:
       - cloud-foundry-route-service
       - cors
-      - oauth
+      #- oauth
       - spikearrest
 cors:
    cors-origin: '*'
@@ -200,15 +200,15 @@ spikearrest:
    allow: 10
 ```
 
-**d. Edit the manifest.yml file and replace {your-username} with your PCF Username (see below):**
+**d. Edit the manifest.yml file and replace PCF_USERNUM with your 3 Digit user number (see below):**
 
-Replace `name: {your-username}-edgemicro-app-lab2` variable with your own username. e.g. `johndoe-edgemicro-app-lab2`.
+Replace `name: PCF_USERNUM-edgemicro-app-lab2` variable with your own username. e.g. `149-edgemicro-app-lab2`.
 
 The file should look like this:
       
 ```yaml
 applications:
-- name: {your-username}-edgemicro-app-lab2
+- name: PCF_USERNUM-edgemicro-app-lab2
   memory: 512M
   disk_quota: 512M
   instances: 1
@@ -238,15 +238,15 @@ App started
 
 OK
 
-App as-edgemicro-app-lab2 was started using this command `npm start`
+App 149-edgemicro-app-lab2 was started using this command `npm start`
 
-Showing health and status for app as-edgemicro-app-lab2 in org group-apigee / space apijam as xxx...
+Showing health and status for app 149-edgemicro-app-lab2 in org group-apigee / space apijam as xxx...
 OK
 
 requested state: started
 instances: 1/1
 usage: 256M x 1 instances
-urls: as-edgemicro-app-lab2.apps.pcfone.io
+urls: 149-edgemicro-app-lab2.apps.pcfone.io
 last uploaded: Wed Aug 29 23:29:10 UTC 2018
 stack: cflinuxfs2
 buildpack: nodejs_buildpack
@@ -260,10 +260,10 @@ buildpack: nodejs_buildpack
    The bind-route-service CF command creates a proxy for you within Apigee Edge and also binds the CF app to the service.
 
 ```bash
-cf bind-route-service $PCF_DOMAIN $PCF_MGW_SERVICE_INSTANCE --hostname {your-username}-samplebackend-lab2 \
+cf bind-route-service $PCF_DOMAIN $PCF_MGW_SERVICE_INSTANCE --hostname $PCF_USERNUM-samplebackend-lab2 \
 -c '{"org":"'$APIGEE_ORG'","env":"'$APIGEE_ENV'",
   "user": "'$APIGEE_USERNAME'","pass":"'$APIGEE_PASSWORD'",
-  "micro": "{your-username}-edgemicro-app-lab2.apps.pcfone.io",
+  "micro": "'$PCF_USERNUM'-edgemicro-app-lab2.apps.pcfone.io",
   "action": "proxy bind",
   "protocol":"https"}'
   
@@ -279,8 +279,8 @@ OK
    From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_user_num}-samplebackend-lab2.apps.pcfone.io
-{"message":"no match found for /{your_app_name}-samplebackend-lab2.apps.pcfone.io","status":404}
+$ curl https://$PCF_USERNUM-samplebackend-lab2.apps.pcfone.io
+{"message":"no match found for /{your-user-number}-samplebackend-lab2.apps.pcfone.io","status":404}
 
 You should see this error as edge micro does not contain the latest proxy we created via the service binding! 
 ```
@@ -291,37 +291,17 @@ In order to fix the error from the previous step, you need to restart your micro
 ```bash
 $ cf apps
 
-$ cf restart {your-username}-edgemicro-app-lab2
+$ cf restart $PCF_USERNUM-edgemicro-app-lab2
 ```
 
 **b. Resend the request to your app this time passing the apikey as a request header.**
 
 ```bash
-$ curl https://{your_user_num}-samplebackend-lab2.apps.pcfone.io
+$ curl https://$PCF_USERNUM-samplebackend-lab2.apps.pcfone.io
 
 {"hello":"hello from cf app"} 
 ```
 
-**6. Extra credit**
-    
-Login to [https://apigee.com/edge](https://apigee.com/edge)
-    
-Go to API Proxies. You should see an API Proxy created by the PCF Service Broker- with the following name `edgemicro_cf-{your-username}_helloapi.YOUR-SYSTEM-DOMAIN`
-	
-You will also see `edgemicro-auth` API Proxy. Where requests are sent to for authentication. As edge microgateway does validation, you can see the validation calls coming to this API Proxy
-    
-Select the API and select `TRACE` tab on the top right
-Click on the `Start Trace Session`, the green button on the top left
-Send a request to the same endpoint, as you did in step 2 
-	
-```bash
-$ curl https://{URL OF YOUR APP}"
-```   
-If you forgot the URL OF YOUR APP, you can get if through the following command (the output will have a urls section corresponding to your app)
-
-```bash
-$ cf apps
-```
     
 ## **Congratulations!**...
     
