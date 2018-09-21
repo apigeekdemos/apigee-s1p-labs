@@ -38,9 +38,11 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    ```bash
    # apigee-pcf-environment.sh file
    #
-   # e.g. apigee-pcf-user-XXX -  where XXX is your unique identifier
-   export PCF_USERNAME=apigee-pcf-user-XXX
-   export PCF_PASSWORD=SomePass$word
+   # e.g. Please edit values for PCF_USERNUM and PCF_PASSWORD -  where XXX is your unique identifier
+   export PCF_USERNUM=XXX
+   export PCF_PASSWORD=CHANGE_ME
+   # Leave values below as is 
+   export PCF_USERNAME=apigee-pcf-user-$PCF_USERNUM
    export PCF_SPACE=apijam
    export PCF_ORG=group-apigee
    
@@ -114,11 +116,11 @@ Space:          apijam
 
    b. In the *lab1-org-plan* directory, edit *manifest.yml* and change the **'name' parameters**:
    
-   * **name**: {PCF_USERNAME}-sampleapi
+   * **name**: {PCF_USERNUM}-sampleapi
 
 ```yml
   applications: 
-  - name: {PCF_USERNAME}-sampleapi
+  - name: {PCF_USERNUM}-sampleapi
     memory: 256M
     disk_quota: 512M 
     instances: 1 
@@ -169,30 +171,30 @@ d. Get a list of apps to determine the URL of the app just pushed:
 ```bash
 $ cf apps
 
-➜  org-and-microgateway-sample git:(master) ✗ cf apps
+➜  org-and-microgateway-sample git:(master) ✗ cf apps | grep $PCF_USERNUM
 Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
-name                  requested state   instances   memory   disk   urls
-{your_app_name}       started           1/1         256M      512M   {your_app_name}.apps.pcfone.io
+name                      requested state   instances     memory   disk   urls
+$PCF_USERNUM-sampleapi      started           1/1         256M      512M   $PCF_USERNUM-sampleapi.apps.pcfone.io
 ```
 
 e. Use curl to send a test request to the url of the running app. Verify the response from the app. 
 
 
 ```bash
-$ curl https://{your_app_name}.apps.pcfone.io/v1/employees
+$ curl https://$PCF_USERNUM-sampleapi.apps.pcfone.io/v1/employees
 ```
 
 f. Explore operations through the OpenAPI Specification
 
 Open your browser with pathsuffix `/docs`:
-[https://{your_app_name}.apps.pcfone.io/docs](https://{your_app_name}.apps.pcfone.io/docs)
+[https://$PCF_USERNUM-sampleapi.apps.pcfone.io/docs](https://$PCF_USERNUM-sampleapi.apps.pcfone.io/docs)
 
 g. See OpenAPI Specication
 
 Open your with pathsuffix `/api-docs`:
-[https://{your_app_name}.apps.pcfone.io/api-docs](https://{your_app_name}.apps.pcfone.io/api-docs)
+[https://$PCF_USERNUM-sampleapi.apps.pcfone.io/api-docs](https://$PCF_USERNUM-sampleapi.apps.pcfone.io/api-docs)
 
 **2. List your Service Instance**
 
@@ -253,21 +255,19 @@ The bind-route-service command creates a proxy for you and binds the app to the 
 
 ```shell
 $ cf bind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE \
---hostname <Your_App_Name> \
+--hostname $PCF_USERNUM-sampleapi \
 -c '{"org":"'$APIGEE_ORG'", "env":"'$APIGEE_ENV'", "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'", "action":"proxy bind", "protocol":"https"}'
 ```
     
-Note - Replace <Your_App_Name> with the name of the Application you pushed above.
-
 **4. Verify the binding**
     The above 'bind org' completes route binding by instructing the PCF go-router to route all traffic, headed for your application, via an Apigee ORG. You can verify that the binding was successful by using the 'cf routes' command and seeing that the 'ORG Plan' service is now associated with your application route. See below example:
 
 ```bash
-$ cf routes
+$ cf routes | grep $PCF_USERNUM
 Getting routes for org group-apigee / space apijam as shuklaankur@google.com ...
 
-space    host                  domain           port   path   type   apps                  service
-apijam   {your_app_name}       apps.pcfone.io                        {your_app_name}       apigee-org-service
+space    host                   domain           port   path   type   apps                    service
+apijam   $PCF_USERNUM-sampleapi apps.pcfone.io                        $PCF_USERNUM-sampleapi  apigee-org-service
 ```
 
 **5. Test the binding**
@@ -286,7 +286,7 @@ apijam   {your_app_name}       apps.pcfone.io                        {your_app_n
    * From a command line run the curl command you ran earlier to make a request to your Cloud Foundry app you pushed, such as:
 
 ```bash
-$ curl https://{your_sample_app_name}.apps.pcfone.io/v1/employees
+$ curl https://$PCF_USERNUM-sampleapi.apps.pcfone.io/v1/employees
 
 You should see the same response as before:
 ```
@@ -306,14 +306,13 @@ These set of instrcutions are optional for this Lab, but good to know for an app
 To unbind the the application we will be using the 'unbind-route-service' command as follows:
 
 ```bash
-$ cf unbind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname <Your_App_Name>
+$ cf unbind-route-service $PCF_DOMAIN $PCF_ORG_SERVICE_INSTANCE --hostname $PCF_USERNUM-sampleapi
 
 Unbinding may leave apps mapped to route as-sample.apps.pcfone.io vulnerable; e.g. if service instance apigee-org-service provides authentication. Do you want to proceed?> y
 Unbinding route as-sample.apps.pcfone.io from service instance apigee-org-service in org group-apigee / space apijam as shuklaankur@google.com...
 OK
 
 ``` 
-Note - Replace <Your_App_Name> with the name of the Application you pushed above.
 
 You can verify that the 'unbind-org' was successful by using 'cf routes' command and ensuring that you do not see the service listed against your app route:
 
