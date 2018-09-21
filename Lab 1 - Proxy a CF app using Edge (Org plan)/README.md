@@ -342,4 +342,4 @@ Please use [this form](https://apigeespringone.page.link/partner-request-form) t
 
 # What's next
 
-Continue to [Lab 1.1 Traffic Management Throtle APIs](../Lab%201.1%20Traffic%20Management%20-%20Throttle%20APIs/README.md)
+Continue to [Lab 1.1 Traffic Management Throtle APIs](./Lab%201.1%20Traffic%20Management%20-%20Throttle%20APIs/README.md)
