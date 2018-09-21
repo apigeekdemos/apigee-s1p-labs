@@ -215,14 +215,10 @@ applications:
   path: .
   buildpack: nodejs_buildpack
   env: 
-    # Replace with EDGEMICRO_KEY from Instructions above
     EDGEMICRO_KEY: 6f70f4c24077058b45464606b788a854f3631a8c57ca3cc0ed144917a33f0e1a
-    # Replace with EDGEMICRO_SECRET from Instructions above
     EDGEMICRO_SECRET: 24173cbee9a078f5d2947dbcf5998724e2139e195e8f9efbcb3b3447869d4a0d
     EDGEMICRO_CONFIG_DIR: './config'
-    # Replace EDGEMICRO_ORG with APIGEE_ORG variable from Instructions above
     EDGEMICRO_ORG: 'apigee-pec'
-    # Replace EDGEMICRO_ENV with APIGEE_ENV variable from Instructions above
     EDGEMICRO_ENV: 'test'
     NODE_TLS_REJECT_UNAUTHORIZED: 0
 ```
