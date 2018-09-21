@@ -30,7 +30,7 @@ For this lab, you will need an API Proxy that is not currently secured.  If you 
 
 ## Choose (and invoke) an API Proxy to secure
 
-1. Go to [https://apigee.com/edge](https://apigee.com/edge) and log in. This is the Edge management UI
+1. Go to [https://apigee.com/edge](https://apigee.com/edge) and log in using `$APIGEE_USERNAME` and `$APIGE_PASSWORD`. This is the Edge management UI
 
 2. Select **Develop → API Proxies**
 
