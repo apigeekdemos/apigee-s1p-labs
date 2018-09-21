@@ -25,9 +25,11 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
 # Instructions
 
-**1. Use username/password from the sheet**
+**1. Use username/password from the handout**
 
-**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. [Download apigee-pcf-environment.sh](https://apigeespringone.page.link/apigee-pcf-environment). Ask your instructor to provision them. Replace values of **`PCF_USERNAME and PCF_PASSWORD`**,  variables.
+**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. [Download apigee-pcf-environment.sh](https://apigeespringone.page.link/apigee-pcf-environment).
+
+**3. Replace values for** `PCF_USERNUM and PCF_PASSWORD`**, variables from the handout.
 
    **a. Save apigee-pcf-environment.sh**
    
@@ -96,8 +98,6 @@ OK
 Targeted org group-apigee
 
 Targeted space apijam
-
-
 
 API endpoint:   https://api.run.pcfone.io (API version: 2.112.0)
 Org:            group-apigee
