@@ -169,7 +169,7 @@ buildpack: nodejs_buildpack
 d. Get a list of apps to determine the URL of the app just pushed:
     
 ```bash
-$ cf apps
+$ cf apps | grep $PCF_USERNUM
 
 ➜  org-and-microgateway-sample git:(master) ✗ cf apps | grep $PCF_USERNUM
 Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
