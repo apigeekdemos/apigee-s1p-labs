@@ -23,16 +23,13 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
 * You have installed [cf CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) in your laptop. Alternatively, you can use Google Cloud Shell to [install cf cli following these steps](https://gist.github.com/dzuluaga/a5f42e343dad0198d052df8b2c35a45e).
 
-* You have an Apigee account and have access to an Apigee Org. For PCF One Environment, pick up credentials [APIGEE_LOGIN, APIGEE_USERNAME, and APIGEE_PASSWORD here](https://apigeespringone.page.link/registration).
-
 # Instructions
 
-**1. Register to obtain PCF Credentials:** Open [registration sheet](https://apigeespringone.page.link/registration
-), pick a user and complete additional fields: name, role, email, and company.
+**1. Use username/password from the sheet**
 
 **2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. [Download apigee-pcf-environment.sh](https://apigeespringone.page.link/apigee-pcf-environment). Ask your instructor to provision them. Replace values of **`PCF_USERNAME and PCF_PASSWORD`**,  variables.
 
-   **a. Save apigee-pcf-environment.sh** 
+   **a. Save apigee-pcf-environment.sh**
    
    Example of environment variables. 
    
