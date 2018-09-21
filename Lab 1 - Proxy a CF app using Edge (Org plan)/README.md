@@ -338,5 +338,8 @@ Please use [this form](https://apigeespringone.page.link/partner-request-form) t
 
 # References
 
-* [Installing Apigee Edge Service Broker for PCF tile]
-    (http://docs.pivotal.io/partners/apigee/installing.html)
+[Installing Apigee Edge Service Broker for PCF tile](http://docs.pivotal.io/partners/apigee/installing.html)
+
+# What's next
+
+Continue to [Lab 1.1 Traffic Management Throtle APIs](../Lab%201.1%20Traffic%20Management%20-%20Throttle%20APIs/README.md)

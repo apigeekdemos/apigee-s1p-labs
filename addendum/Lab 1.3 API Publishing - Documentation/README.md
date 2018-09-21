@@ -126,8 +126,8 @@ You’ve learned how to do the following;
 
 * Use the Developer Portal UI to browse the OpenApi Specification Snapshot as a developer.
 
-# Rate this lab
+# Let us know your feedback
 
-How did you link this lab? Rate [here](https://goo.gl/forms/j33WG2U0NFf02QHi1).
+Please use [this form](https://apigeespringone.page.link/partner-request-form) to provide feedback.
 
 Now go to [Lab-7](https://github.com/apigee/devjam3/tree/master/Labs/Core/Lab%207%20API%20Publishing%20-%20Developer%20Portal%20Customization)

@@ -128,8 +128,8 @@ That completes this hands-on lesson. In this simple lab you learned how to self 
 
     * Apigee Developer Portal , [https://docs-new.apigee.com/portal](https://docs-new.apigee.com/portal)
 
-# Rate this lab
+# Let us know your feedback
 
-How did you like this lab? Rate [here](https://goo.gl/forms/H4qE5nLy36yWjj642).
+Please use [this form](https://apigeespringone.page.link/partner-request-form) to provide feedback.
 
 Now go to [Lab-9](https://github.com/apigee/devjam3/tree/master/Labs/Core/Lab%209%20API%20Analytics%20-%20Custom%20Reports)

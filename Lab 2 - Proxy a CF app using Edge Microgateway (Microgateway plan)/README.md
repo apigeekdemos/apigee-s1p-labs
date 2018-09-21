@@ -337,6 +337,10 @@ What does this mean
 
 In this lab you have added API Management to an API created in PCF using Apigee Edge Microgateway.
 
+# Let us know your feedback
+
+Please use [this form](https://apigeespringone.page.link/partner-request-form) to provide feedback.
+
 # References
 
 * [Installing Apigee Edge Service Broker for PCF tile](http://docs.pivotal.io/partners/apigee/installing.html)

@@ -205,8 +205,8 @@ In this lab you learned how to protect your API Proxy using the Verify API Key p
 
     * Verify Api Key Policy [http://docs.apigee.com/api-services/reference/verify-api-key-policy](http://docs.apigee.com/api-services/reference/verify-api-key-policy)
 
-# Rate this lab
+# Let us know your feedback
 
-How did you like this lab? Rate [here](https://goo.gl/forms/XxDqVtWHnyFdEChv1).
+Please use [this form](https://apigeespringone.page.link/partner-request-form) to provide feedback.
 
 Now go to [Lab-5](https://github.com/apigee/devjam3/tree/master/Labs/Core/Lab%205%20Traffic%20Management%20-%20Rate%20Limit%20APIs)
