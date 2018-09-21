@@ -289,7 +289,7 @@ In order to fix the error from the previous step, you need to restart your micro
 **a. Come back to the CF CLI to restart the edge micro app, for it to get the latest API Proxies.**
 
 ```bash
-$ cf apps
+$ cf apps | grep $PCF_USERNUM
 
 $ cf restart $PCF_USERNUM-edgemicro-app-lab2
 ```
