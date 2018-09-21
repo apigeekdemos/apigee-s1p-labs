@@ -22,7 +22,7 @@ Secure APIs with API Keys, Publishing API Documentation lab exercises. If not, j
 
 ## Open Your Portal
 
-1. Go to [https://apigee.com/edge](https://apigee.com/edge) and log in. This is the Edge management UI. 
+1. Go to [https://apigee.com/edge](https://apigee.com/edge) and log in from `$APIGEE_USERNAME` and `$APIGE_PASSWORD`. This is the Edge management UI. 
 
 2. Select **Publish → Portals** in the side navigation menu.
 
