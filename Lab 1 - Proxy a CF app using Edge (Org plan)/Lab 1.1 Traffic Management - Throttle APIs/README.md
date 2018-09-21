@@ -20,7 +20,7 @@ Apigee Edge API Proxy created in earlier lab exercise. If not, jump back to "Lab
 
 # Instructions
 
-1. Go to [https://apigee.com/edge](https://apigee.com/edge) and log in with credentials from `$APIGEE_USERNAME` and `$APIGE_PASSWORD`. This is the Edge management UI. 
+1. Go to [https://apigee.com/edge](https://apigee.com/edge) and log in with credentials using `$APIGEE_USERNAME` and `$APIGE_PASSWORD`. This is the Edge management UI. 
 
 2. Select **Develop → API Proxies** in the side navigation menu.
 
