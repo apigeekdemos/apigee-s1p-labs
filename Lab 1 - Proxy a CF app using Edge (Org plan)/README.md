@@ -275,7 +275,7 @@ apijam   $PCF_USERNUM-sampleapi apps.pcfone.io                        $PCF_USERN
    Once you’ve bound your app’s path to the Apigee service (creating an Apigee proxy in the process), you can try it out with a simple curl command.
 
    This time Trace the API proxy from the Apigee Edge management console.
-   * [Login](https://login.apigee.com/login) using the Apigee Org by using credentials (APIGEE_USERNAME, APIGEE_PASSWORD) given to you. Ensure that you are viewing the org 'amer-api-partner19' (see screenshot)
+   * [Login](https://login.apigee.com/login) using the Apigee Org by using credentials (APIGEE_USERNAME, APIGEE_PASSWORD) given to you. Ensure that you are viewing the org 'apigee-pec' (see screenshot)
 
    ![Org Plan](resources/SelectOrg.png)
    * In the management console, under DEVELOP > API proxies, locate the name of the proxy you just created with bind-route-service. It will have a name of cf-{your-initials}-sample.apps.pcfone.io (see screenshot)
