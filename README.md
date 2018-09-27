@@ -1,6 +1,8 @@
 # API and Microservices Management with Apigee + Pivotal API Jam
 [https://apigeespringone.page.link/labs](https://apigeespringone.page.link/labs)
 
+This [workshop](https://springoneplatform.io/2018/workshops/apigee) was presented by Apigee and Pivotal at SpringOne Platform Conference '18.
+
 
 [![View these slides](./images/api_microservices_management_pivotal_apigee.png)](https://docs.google.com/presentation/d/15OwvUaZ0TGzleRgqBemGQ85Kcwq5iOp0E-ugTKMOwJg/edit?usp=sharing)
 
@@ -32,5 +34,5 @@ The content for this apijam includes multiple labs that use Apigee api proxy ser
 #### Apigee Community 
 If you have any questions/comments please visit [https://community.apigee.com](https://community.apigee.com/).
 
-### For Apigee Partners
+#### For Apigee Partners
 For Apigee Partners who would like to present this API Jam, please reach out to us at [this link](https://apigeespringone.page.link/partner-request-form).
