@@ -1,4 +1,4 @@
-# API and Microservices Management with Apigee + Pivotal API Jam
+# API and Microservices Management with Apigee & Pivotal API Jam
 [https://apigeespringone.page.link/labs](https://apigeespringone.page.link/labs)
 
 This [workshop](https://springoneplatform.io/2018/workshops/apigee) was presented by Apigee and Pivotal at SpringOne Platform Conference '18.
