@@ -2,7 +2,7 @@
 [https://apigeespringone.page.link/labs](https://apigeespringone.page.link/labs)
 
 
-[![Download these slides](./images/api_microservices_management_pivotal_apigee.png)](https://docs.google.com/presentation/d/15OwvUaZ0TGzleRgqBemGQ85Kcwq5iOp0E-ugTKMOwJg/edit?usp=sharing)
+[![View these slides](./images/api_microservices_management_pivotal_apigee.png)](https://docs.google.com/presentation/d/15OwvUaZ0TGzleRgqBemGQ85Kcwq5iOp0E-ugTKMOwJg/edit?usp=sharing)
 
 [View slides](https://docs.google.com/presentation/d/15OwvUaZ0TGzleRgqBemGQ85Kcwq5iOp0E-ugTKMOwJg/edit?usp=sharing)
 
