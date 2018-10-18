@@ -21,15 +21,17 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
 
 * You have [installed and configured](http://docs.pivotal.io/partners/apigee/installing.html) the *Apigee Edge Service Broker for PCF tile*. Or you got a set of credentials from your instructor that has access to a PCF environment with *Apigee Edge Service Broker for PCF* tile. 
 
-* You have installed [cf CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) in your laptop. Alternatively, you can use Google Cloud Shell to [install cf cli following these steps](https://gist.github.com/dzuluaga/a5f42e343dad0198d052df8b2c35a45e).
+* You have installed [cf CLI on a Unix/Linux based machine](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) in your laptop.
+
+**Windows users:** Ensure you can execute Google Cloud Shell to [install cf cli following these steps](https://gist.github.com/dzuluaga/a5f42e343dad0198d052df8b2c35a45e).
 
 # Instructions
 
 **1. Use username/password from the handout**
 
-**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. [Download apigee-pcf-environment.sh](https://apigeespringone.page.link/apigee-pcf-environment).
+**2. Set environment variables:** Before you begin, you will need to set the environment variables of your PCF foundation. <a href="https://apigeespringone.page.link/apigee-pcf-environment" target="_blank">Download apigee-pcf-environment.sh</a>.
 
-**3. Replace values for** `PCF_USERNUM and PCF_PASSWORD`**, variables from the handout.
+**3. Replace values for** `PCF_USERNUM and PCF_PASSWORD`, variables from the handout.
 
    **a. Save apigee-pcf-environment.sh**
    
