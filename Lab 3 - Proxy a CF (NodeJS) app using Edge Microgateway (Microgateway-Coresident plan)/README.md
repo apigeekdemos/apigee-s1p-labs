@@ -6,11 +6,17 @@
 
 # Use case
 
+You have an API Created in Pivotal Cloud Foundry. You want to proxy it through Apigee Edge using Edge Microgateway and would like to introduction to the Apigee Co-resident plan.
+
 ![Apigee Microgateway Coresident Plan](./images/Apigee_Microgateway_Coresident.png "Apigee Microgateway Coresident Plan")
 
 # How can Apigee Edge help?
 
-TODO
+The [Apigee Edge Service Broker for PCF](https://docs.apigee.com/api-platform/integrations/cloud-foundry/install-and-configure-apigee-service-broker) enables developers to manage APIs for their PCF apps through the Apigee Edge management console.
+
+This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use an already created Apigee Edge service instance using Edge Microgateway co-resident plan, and bind the application to it. After binding the application to the Apigee Edge Co-resident service instance, requests to the app will be forwarded to an Apigee Edge API proxy running on Edge Microgateway for management. Its the same lab as listed in [PCF documentation](https://docs.apigee.com/api-platform/integrations/cloud-foundry/proxying-cloud-foundry-app-microgateway-coresident-plan)
+
+In the process described here, the PCF app and Edge Microgateway app are both running within the same Cloud Foundry container.
 
 # Pre-requisites
 
@@ -20,99 +26,12 @@ TODO
 
 * You have an Apigee account and have access to an Apigee Org.
 
-TODO * EdgeMicro
+# Instructions (Optional, if you have done Lab - 1 Org Plan)
 
-# Instructions
+[Lab 1 Instructions](https://github.com/apigeekdemos/apigee-s1p-labs/tree/master/Lab%201%20-%20Proxy%20a%20CF%20app%20using%20Edge%20(Org%20plan)#instructions)
 
-Before you begin, you will need to get the following from your PCF instance or receive them from your instructor.
 
-YOUR-SYSTEM-DOMAIN: This the the domian/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
-
-PCF-USER-NAME: PCF username
-
-PCF-PASSWORD: PCF Password
-
-PCF_ORG: The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab
-
-PCF_SPACE: An org can contain multiple spaces. This is the space you will pick for this lab
-
-PCF_API: PCF API Endpoint
-
-PCF_DOMAIN: PCF Domain for your apps. 
-
-APIGEE_ORG: Apigee Edge Org Name.
-
-APIGEE_ENV: Apigee Edge Environment.
-
-EDGEMICRO_KEY: Edge Micro Key.
-
-EDGEMICRO_SECRET: Edge Micro Secret.
-
-## Step 1: Create a Service Instance
-
-### 1.a Set your API endpoint to the Cloud Controller of your deployment.
-
-```bash
-cf api $PCF_API --skip-ssl-validation
-Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-OK
-API endpoint:  https://api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-Not logged in. Use 'cf login' to log in.
-```
-
-### 1.b Log in to your deployment and select an org and a space.
-
-```bash
-$ cf login
-API endpoint: https://api.YOUR-SYSTEM-DOMAIN
-Email> user@example.com
-Password>
-```
-
-### 1.c List the Marketplace services and locate the Apigee Edge service:
-
-```bash
-$ cf marketplace
-Getting services from marketplace in org example / space development as user@example.com...
-OK
-
-service          plans                     description
-apigee-edge      org, microgateway, microgateway-coresident         Apigee Edge API Platform
-```
-
-### 1.d Create an instance of the Apigee Edge service. Select the microgateway-coresident service plan to have Apigee Edge Microgateway run in the same container as your Cloud Foundry app.
-
-e.g. Replace INITIALS-YOUR-SERVICE-INSTANCE to something similar to dz-apigee-mg-coresident-service-instance.
-
-```bash
-$ cf create-service apigee-edge microgateway-coresident INITIALS-YOUR-SERVICE-INSTANCE -c \
-'{"org":"YOUR-APIGEE-ORG", "env":"YOUR-APIGEE-ENV"}'
-Creating service instance INITIALS-YOUR-SERVICE-INSTANCE in org apigee / space ...
-OK
-```
-
-### 1.e Use the cf service command to display information about the service instance:
-
-```bash
-$ cf service INITIALS-YOUR-SERVICE-INSTANCE
-
-name:            AS-Apigee-MGW-COR-Plan
-service:         apigee-edge
-bound apps:
-tags:
-plan:            microgateway-coresident
-description:     Apigee Edge API Platform
-documentation:
-dashboard:       https://enterprise.apigee.com/platform/#/
-
-Showing status of last operation from service dz-apigee-mg-coresident-service-instance...
-
-status:    create succeeded
-```
-
-## Step 2: Install the Plugin
-
-### 2.a Install the Apigee Broker Plugin as follows.
+## Install the Apigee Broker Plugin as follows.
 
 ```bash
 cf install-plugin -r CF-Community "apigee-broker-plugin"
@@ -127,7 +46,7 @@ OK
 Plugin Apigee-Broker-Plugin 0.1.1 successfully installed.
 ```
 
-### 2.b Make sure the plugin is available by running the following command:
+## Make sure the plugin is available by running the following command:
 
 ```bash
 $ cf -h
@@ -139,30 +58,26 @@ Commands offered by installed plugins:
   apigee-push,ap          diego-apps               dev,pcfdev
   apigee-unbind-mg,aum    disable-diego
 ```
-## Step 3: Clone Sample App with Microgateway Coresident
+## Step 1: Clone Sample App with Microgateway Coresident
 
-### 3.a Clone the Apigee Edge GitHub repo:
+### 1.a Clone the Apigee Edge GitHub repo:
 ```bash
 $ git clone https://github.com/apigee/cloud-foundry-apigee.git
 ```
 
-### 3.b Change to the org-and-microgateway-sample directory of the cloned repo:
+### 1.b Change to the *lab3-coresident-plan* directory of the cloned repo:
 
 ```bash
-$ cd cloud-foundry-apigee/samples/coresident-sample
+$ cd cloud-foundry-apigee/lab3-coresident-plan
 ```
 
-### 3.c In the coresident-sample directory, open manifest.yml.
-
-### 3.d Edit manifest.yml to change the name and host properties to values specific to your deployment. See the following example:
+### 1.c In the *lab3-coresident-plan* directory, edit `manifest.yml` and change the 'PCF_USERNUM' parameter:**.
 
 ```yaml
 ---
-applications:
-- name: as1-target-nodejs-app 
+- name: PCF_USERNUM-sample-coresident-app
   memory: 1G
   instances: 1
-  host: as1-target-nodejs-app 
   health-check-type: http
   health-check-http-endpoint: /healthcheck
   path: .
@@ -210,32 +125,26 @@ The following describes the manifest properties:
 |APIGEE_MICROGATEWAY_CUSTOM |	“sequence” corresponds to the sequence order in the microgateway yaml file (this will be added on to the end of any current sequence in the microgateway yaml file with duplicates removed). </br>“policies” correspond to any specific configuration needed by a plugin; for instance, “oauth” has the ‘"allowNoAuthorization": true configuration. These policies will overwrite any existing policies in the microgateway yaml file and add any that do not yet exist.|
 
 
-### 3.e. Save the edited file.
+### 1.d. Save the edited file.
 
-## Step 4 (Optional): Install Apigee Edge Microgateway and Cloud Foundry App
+## Step 2 (Optional): Install Apigee Edge Microgateway on local machine to generate the config file and keys
+
+Note - The steps below have been completed by your lab admin and the required files / keys have been provided to you already, so steps below are optional.
 
 Here, you install Apigee Edge Microgateway and your Cloud Foundry app to the same Cloud Foundry container.
 
-### 4.a. Step not required during API Jam as these files are provided under resources folder. Execute for generating key and secrets. [Install and configure Apigee Edge Microgateway.](https://docs.apigee.com/api-platform/microgateway/2.5.x/installing-edge-microgateway.html)
+### 2.a. Steps not required during API Jam as these files are already provided under config folder. Execute for generating key and secrets. [Install and configure Apigee Edge Microgateway.](https://docs.apigee.com/api-platform/microgateway/2.5.x/installing-edge-microgateway.html)
 
-## Step 5: Create config directory and copy Apigee Microgateway config file from resources
 
-In this step we will copy microgateway config file under under Microgateway-Coresident resources folder to config folder`amer-api-partner19-test-config.yaml`. Note APIGEE_MICROGATEWAY_CONFIG_DIR reference in Manifest.yaml file to config folder. 
+## Step 3: Check Edge Microgateway and Cloud Foundry App ports and disable oauth plugin
 
-```bash
-$ mkdir config
-$ cp ~/tools/git/apijam/Labs/PivotalJam/Lab\ 3\ -\ Proxy\ a\ CF\ app\ using\ Edge\ Microgateway\ \(Microgateway-Coresident\ plan\)/resources/amer-api-partner19-test-config.yaml ./config
-```
-
-## Step 6: Check Edge Microgateway and Cloud Foundry App ports and disable oauth plugin
-
-### 6.a Check Edge Microgateway listening on port 8080
+### 3.a Check Edge Microgateway listening on port 8080
 As per [PCF requirements Applications should listen on port `8080`](https://docs.run.pivotal.io/devguide/deploy-apps/routes-domains.html#http-vs.-tcp-routes). Therefore, Edge Microgateway will frontend our Cloud Foundry app, which listens on port `8081`.
 
 To confirm this is the case, run the following commands on the MG config file:
 
 ```bash
-$ cat config/amer-api-partner19-test-config.yaml
+$ cat config/apigee-pec-test-config.yaml
 
 edge_config:
 edgemicro:
@@ -244,13 +153,13 @@ edgemicro:
 
 **edgemicro/port is effectively listening on 8080. IMPORTANT: by default MG config file uses port 8000. So, make sure to make changes accordingly to PCF requirements.**
 
-### 6.b. Disable oauth plugin
+### 3.b. Disable oauth plugin
 We will be disabling the oauth plugin on the MG config file, this is done so that the Microgatway does not manadate oauth tokens for the healthcheck calls. Oauth has alreadybeen enabled on our manifest.yaml file (see above) and the sequesce defined there will ensure that all actual API traffic is subjected to Oauth policy enforcement.
 
 To diable oauth, we need to comment out the oauth option from within the plugin sequence (see below) within the MG config file:
 
 ```bash
-$ vi config/amer-api-partner19-test-config.yaml
+$ vi config/apigee-pec-test-config.yaml
 
 plugins:
     sequence: 
@@ -258,7 +167,7 @@ plugins:
 ```
 
 
-### 6.c. Check Cloud Foundry App Port running on port 8081
+### 3.c. Check Cloud Foundry App Port running on port 8081
 Ensure that your Cloud Foundry app isn’t running on port 8080, nor on the port specified by the PORT environment variable.
 
 ```
@@ -272,14 +181,14 @@ var webServer = app.listen(port, function () {
 
 This looks good. Cloud Foundry app listens on port 8081.
 
-## Step 7: Push the Cloud Foundry App to your Cloud Foundry Container
+## Step 4: Push the Cloud Foundry App to your Cloud Foundry Container
 
 In this step Node.js target application will be pushed to PCF. We will use the apigee-push command instead of regular piush command as apigee-push option automatically injects the microgateway within the cf container for the co-resident plan to work.
 
 Note - Please enter 'y' for the "microgateway-coresident" question, other questions are optional (can be left blank) if you are not pushing a java application.
 
 ```bash
-shuklaankur-macbookpro:coresident-sample shuklaankur$ cf apigee-push
+$ cf apigee-push
 Do you plan on using this application with the "microgateway-coresident" plan? [y/n] y
 If you are pushing a java application, enter the path to the archive. Otherwise press [Enter]:
 Specific name of application to push [optional]:
@@ -297,16 +206,14 @@ Uploading app files from: /Users/shuklaankur/pcf/cloud-foundry-apigee/samples/co
 Uploading 8.7K, 12 files
 Done uploading
 OK
-
-shuklaankur-macbookpro:coresident-sample shuklaankur$
 ```
-## Step 7: Bind the Cloud Foundry App to the Service Instance and Restart the Target App
+## Step 5: Bind the Cloud Foundry App to the Service Instance and Restart the Target App
 
 In this step, you bind a Cloud Foundry app to the Apigee service instance you created. The apigee-bind-mgc command creates the proxy for you and binds the app to the service. This command also gives you an option to restage your target application after binding is complete.
 
 Each bind attempt requires authorization with Apigee Edge, with credentials passed as additional parameters to the apigee-bind-mgc command. You can pass these credentials as arguments of the apigee-bind-mgc command or by using a bearer token.
 
-### 7.a. (Optional) If you’re using a bearer token to authenticate with Apigee Edge, get or update the token using the Apigee SSO CLI script. 
+### 5.a. (Optional) If you’re using a bearer token to authenticate with Apigee Edge, get or update the token using the Apigee SSO CLI script. 
 
 (If you’re instead using command-line arguments to authenticate with username and password, specify the credentials in the next step - 7.b.)
 
@@ -334,7 +241,7 @@ Use the get_token script to create a token. When prompted, enter the Apigee Edge
 $ ./get\_token
 The get_token script writes the token file into ~/.sso-cli. For more about get_token, see the Apigee documentation.
 
-### 7.b Bind the app to the Apigee service instance with the apigee-bind-mgc command
+### 5.b Bind the app to the Apigee service instance with the apigee-bind-mgc command
 
 Use the command without arguments to be prompted for argument values. To use the command with arguments, see the command reference at the end of this topic. For help on the command, type cf apigee-bind-mgc -h.
 
@@ -401,45 +308,45 @@ buildpack: node.js 1.6.3 (with decorator microgateway-coresident)
 
 ```
 
-### Step 8: Verify the API Proxy has been Deployed to the environment
+### Step 6: Verify the API Proxy has been Deployed to the environment
 
 Verify that proxy with proxy name edgemicro_{APP_NAME.PCF_DOMAIN} create in Edge has been deployed successfuly on the corresponding environment through [https://apigee.com/edge](https://apigee.com/edge). Remember to use Apigee username and password provided by instructor.
 
 ![alt text](./images/apigee_edge_test_deployment.png "Api Proxy deployment successful")
 
 
-### Step 9: Obtain API Keys by creating a Product, Developer and App
+### Step 7: Obtain API Keys by creating a Product, Developer and App
 
 Since the microgateway has oauth policy enforced we will need an API Key in order to pass our security validation and successfully make a call to our target application. To obtain a security key we need to create a product, developer and an developer app on Apigee Edge Portal.
 
-#### 9.a  Create a Product
+#### 8.a  Create a Product
 Login to Edge UI and create a API Product from the Publish - > API Product menu option.
 Ensure that you select the proxy created by the service binding and also include the out-of-box proxy for microgateway oauth verification - edgemicro-auth (see screenshot below):
 
 ![alt text](./images/create_a_product.png "Api Product Creation")
 
-#### 9.b  Create a Developer (Optional)
+#### 8.b  Create a Developer (Optional)
 Note:- This step is optional as you can use an existing developer for the purpose of this lab. 
 To create a developer select menu options - Publish - > Developers and '+ Developer' menu option on screen (see screenshot)
 
 ![alt text](./images/create_a_developer.png "Api Developer Creation")
 
-#### 9.c  Create a Developer App
+#### 8.c  Create a Developer App
 To create a developer select menu options - Publish - > Apps and '+ Apps' menu option on screen (see screenshot)
 Note - ensure to select the API Product created above in step 9.a
 
 ![alt text](./images/create_an_app.png "Api App Creation")
 
-#### 9.d  Obtain the Consumer Key
+#### 8.d  Obtain the Consumer Key
 
 Open the newly created App and click on the 'Show' Option next to the 'Cunsumer Key'. This key will be needed to make your call to PCF Target App via the Microgateway.
 
 ![alt text](./images/show_customer_key.png "Show Consumer Key")
 
 
-### Step 10: Restart the Target App and Test the App Binding
+### Step 9: Restart the Target App and Test the App Binding
 
-#### Step 10.a Restart App
+#### Step 9.a Restart App
 
 ```bash
  cf restart as1-target-nodejs-app
