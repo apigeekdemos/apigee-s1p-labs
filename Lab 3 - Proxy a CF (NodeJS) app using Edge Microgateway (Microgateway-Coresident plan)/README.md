@@ -246,7 +246,8 @@ The get_token script writes the token file into ~/.sso-cli. For more about get_t
 Use the command without arguments to be prompted for argument values. To use the command with arguments, see the command reference at the end of this topic. For help on the command, type cf apigee-bind-mgc -h.
 
 ```bash
-$ cf apigee-bind-mgc --app CF_APP_NAME --service CF_SERVICE_INSTANCE_NAME --apigee_org APIGEE_ORG --apigee_env APIGEE_ENV --edgemicro_key EDGEMICRO_KEY --edgemicro_secret EDGEMICRO_SECRET --target_app_route TARGET_APP_ROUTE --target_app_port 8081 --action 'proxy bind' --user APIGEE_USER_NAME --pass APIGEE_PASSWORD
+$ cf apigee-bind-mgc --app $PCF_USERNUM-sample-coresident-app --service $PCF_COR_SERVICE_INSTANCE  --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --edgemicro_key $EDGEMICRO_KEY --edgemicro_secret $EDGEMICRO_SECRET --target_app_route $PCF_DOMAIN --target_app_port 8081 --action 'proxy bind' --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD
+
 ```
 
 This command should return `OK`. If it returns and error, try again until you get it. This will also give you an option to re-start your application, select 'y' to start the target application and Microgatway.
