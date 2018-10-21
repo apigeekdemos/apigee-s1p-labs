@@ -39,40 +39,37 @@ This lab describes how to push a sample app to Pivotal Cloud Foundry (PCF), use 
    
    ```bash
    # apigee-pcf-environment.sh file
-   #
-   # e.g. Please edit values for PCF_USERNUM and PCF_PASSWORD -  where XXX is your unique identifier
-   export PCF_USERNUM=XXX
-   export PCF_PASSWORD=CHANGE_ME
-   # Leave values below as is 
-   export PCF_USERNAME=apigee-pcf-user-$PCF_USERNUM
-   export PCF_SPACE=apijam
-   export PCF_ORG=group-apigee
-   
-   # Apigee Credetials from registration sheet above
-   export APIGEE_ORG=LOOKUP_IN_SPREADSHEET_ABOVE
-   export APIGEE_ENV=LOOKUP_IN_SPREADSHEET_ABOVE
-   export APIGEE_USERNAME=LOOKUP_IN_SPREADSHEET_ABOVE
-   export APIGEE_PASSWORD=LOOKUP_IN_SPREADSHEET_ABOVE
-   export EDGEMICRO_KEY=LOOKUP_IN_SPREADSHEET_ABOVE
-   export EDGEMICRO_SECRET=LOOKUP_IN_SPREADSHEET_ABOVE
+#
+# Please edit values for PCF_USERNUM and PCF_PASSWORD -  where XXX is your unique identifier
+export PCF_USERNUM=CHANGE_ME
+export PCF_PASSWORD=CHANGE_ME
 
-   # The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
-   export PCF_ORG=group-apigee
+# Apigee Credentials from registration sheet above
+export PCF_USERNAME=apigee-pcf-user-$PCF_USERNUM
+export APIGEE_ORG=apigee-pec
+export APIGEE_ENV=test
+export APIGEE_USERNAME=springone18@gmail.com
+export APIGEE_PASSWORD=Springone18!
+export EDGEMICRO_KEY=6f70f4c24077058b45464606b788a854f3631a8c57ca3cc0ed144917a33f0e1a
+export EDGEMICRO_SECRET=24173cbee9a078f5d2947dbcf5998724e2139e195e8f9efbcb3b3447869d4a0d
 
-   # An org can contain multiple spaces. The space you will pick for this lab is called - "apijam"
-   export PCF_SPACE=apijam
+# The instance of your PCF deployment. If you are familiar with PCF, you may just refer to this as ORG. Since Apigee also as a concept of ORG, we will call this PCF_ORG for this lab and your ORG for this lab is called - "group-apigee"
+export PCF_ORG=group-apigee
 
-   # PCF API Endpoint - e.g. - https://api.run.pcfone.io
-   # This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
-   export PCF_API=https://api.run.pcfone.io
+# An org can contain multiple spaces. The space you will pick for this lab is called - "apijam"
+export PCF_SPACE=apijam
 
-   # PCF Domain for your apps.  // e.g. - apps.pcfone.io
-   export PCF_DOMAIN=apps.pcfone.io
-   
-   #
-   export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
-   export PCF_MGW_SERVICE_INSTANCE=apigee-microgateway-service
-   export PCF_COR_SERVICE_INSTANCE=apigee-coresident-service
+# PCF API Endpoint - e.g. - https://api.run.pcfone.io
+# This the the domain/hostname where the PCF is deployed. If you are using self signed certs for this endpoint, you will have to use `--skip-ssl-validation` for some of the commands
+export PCF_API=https://api.run.pcfone.io
+
+# PCF Domain for your apps.  // e.g. - apps.pcfone.io
+export PCF_DOMAIN=apps.pcfone.io
+
+#
+export PCF_ORG_SERVICE_INSTANCE=apigee-org-service
+export PCF_MGW_SERVICE_INSTANCE=apigee-microgateway-service
+export PCF_COR_SERVICE_INSTANCE=apigee-coresident-service
    ```
    
    **b. run `source apigee-pcf-environment.sh` to see these environment variables.** 
