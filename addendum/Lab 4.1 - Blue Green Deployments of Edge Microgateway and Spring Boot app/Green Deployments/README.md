@@ -30,7 +30,7 @@ $ cf apigee-bind-mgc --app Green --service apigee-edge-springboot-app --apigee_o
 cf bind-service Green apigee-edge-springboot-app \
     -c '{"org":"amer-api-partner19","env":"test",
       "user": "sandeepmuru+pivotal+labuser5@google.com",
-      "pass": "Apigee123",
+      "pass": "*****",
       "action":"proxy bind",
       "target_app_route":"dz-springhello.apps.hol.apigee-pcf-apijam.com",
       "edgemicro_key":"2d99ace69294c8f791404a7dd735a83b4ce08545f9f2da2cb736a7b9019989c5",
