@@ -62,7 +62,7 @@ Commands offered by installed plugins:
 
 ### 1.a Clone the Apigee Edge GitHub repo:
 ```bash
-$ git clone https://github.com/apigee/cloud-foundry-apigee.git
+$ git clone https://github.com/apigeekdemos/cloud-foundry-apigee.git
 ```
 
 ### 1.b Change to the *lab3-coresident-plan* directory of the cloned repo:
