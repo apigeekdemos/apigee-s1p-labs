@@ -170,8 +170,7 @@ d. Get a list of apps to determine the URL of the app just pushed:
 ```bash
 $ cf apps | grep $PCF_USERNUM
 
-➜  org-and-microgateway-sample git:(master) ✗ cf apps | grep $PCF_USERNUM
-Getting apps in org group-apigee / space apijam as shuklaankur@google.com...
+Getting apps in org group-apigee / space apijam as user@google.com...
 OK
 
 name                      requested state   instances     memory   disk   urls
