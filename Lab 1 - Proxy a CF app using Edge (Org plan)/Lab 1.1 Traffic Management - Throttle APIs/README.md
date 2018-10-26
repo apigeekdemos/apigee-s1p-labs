@@ -135,4 +135,4 @@ That completes this hands-on lesson. In this simple lab you learned how to prote
 
 Please use [this form](https://apigeespringone.page.link/partner-request-form) to provide feedback.
 
-Now go to [Lab-1.3](https://github.com/apigee/devjam3/tree/master/Labs/Core/Lab%203%20API%20Diagnostics%20-%20Trace%20tool)
+Now go to [Lab 1.2 API Security - Securing APIs with API Keys](../Lab%201.2%20API%20Security%20-%20Securing%20APIs%20with%20API%20Keys/README.md)
