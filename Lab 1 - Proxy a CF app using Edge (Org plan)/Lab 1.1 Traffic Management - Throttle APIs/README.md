@@ -89,12 +89,12 @@ What actually happens, then? To prevent spike-like behavior, Spike Arrest smooth
 3. Make Multiple curl commands from your terminal to the PCF End point, see below for example:
 
 ```bash
-curl https://apigee-pcf-user-149-sampleapi.apps.pcfone.io/v1/employees
+curl https://$PCF_USERNUM-sampleapi.apps.pcfone.io/v1/employees
 ```
 After multiple attempts you will see an 'Spike arrest violation' Error message as your response:
 
 ```bash
-curl https://apigee-pcf-user-149-sampleapi.apps.pcfone.io/v1/employees
+curl https://$PCF_USERNUM-sampleapi.apps.pcfone.io/v1/employees
 
 {"fault":{"faultstring":"Spike arrest violation. Allowed rate : MessageRate{messagesPerPeriod=12, periodInMicroseconds=60000000, maxBurstMessageCount=1.2}","detail":{"errorcode":"policies.ratelimit.SpikeArrestViolation"}}}%
 

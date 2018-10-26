@@ -140,6 +140,8 @@ An App Developer can create any number of Apps.  Each App can register for any n
 
 6. With the *Verify API Key* policy selected, you can see its configuration (the default policy configuration is below).  Note that the API Key is being retrieved from the context as the variable *request.queryparam.apikey*.  This is the default but the policy can be configured to retrieve the key from any parameter key you prefer.
 
+![image alt text](./media/verify-api-key-policy.png)
+
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
   <VerifyAPIKey async="false" continueOnError="false" enabled="true" name="Verify-API-Key-1">
@@ -149,13 +151,63 @@ An App Developer can create any number of Apps.  Each App can register for any n
 </VerifyAPIKey>
 ```
 
-7. **Save** the API Proxy.
+7. Let's also add [CORS functionality](https://docs.apigee.com/api-platform/develop/adding-cors-support-api-proxy) to the proxy. We didn't use the *Add CORS* checkbox when we created the proxy using the wizard. This is because you might run into problems if you use the default implementation when using the "Try it out" functionality of the portal API documentation.
 
-8. Click the **Trace** tab near the top of the window.
+First, select the Proxy PostFlow, and click **+Step** on the response flow. Select *Assign Message* policy from the *Mediation* section of the list. Name the policy *Add-CORS*.
 
-9. Click **Start Trace Session** to begin a trace session.
+Replace the *Assign Message* policy text with the following:
 
-10. Use terminal to **Send** a request using curl calls.  (Do not add the API Key yet)
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="Add-CORS">
+    <DisplayName>Add CORS</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Access-Control-Allow-Origin">{request.header.Origin}</Header>
+            <Header name="Access-Control-Allow-Headers">origin, x-requested-with, accept, content-type</Header>
+            <Header name="Access-Control-Max-Age">600</Header>
+            <Header name="Access-Control-Allow-Methods">GET, PATCH, PUT, POST, DELETE</Header>
+        </Headers>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>
+```
+
+This policy will set the required CORS headers. We only want to set the headers if the Origin header is set in the request, so add a condition to the policy:
+
+```
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>Add-CORS</Name>
+                <Condition>request.header.Origin != null</Condition>
+            </Step>
+        </Response>
+    </PostFlow>
+```
+
+We also want to make sure that the target is skipped if the request verb is "OPTIONS". We'll add a no target route rule for this case. Change the route rules to this:
+
+```
+    <RouteRule name="NoRoute">
+        <Condition>request.verb == "OPTIONS" AND request.header.Origin != null</Condition>
+    </RouteRule>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+```
+
+8. **Save** the API Proxy.
+
+9. Click the **Trace** tab near the top of the window.
+
+10. Click **Start Trace Session** to begin a trace session.
+
+11. Use terminal to **Send** a request using curl calls.  (Do not add the API Key yet)
 
    You should see a 401 (unauthorized) response for your API Call because the API Proxy was expecting an API Key as a query      parameter.  See below for example error: 
    ```bash
@@ -163,7 +215,7 @@ An App Developer can create any number of Apps.  Each App can register for any n
     {"fault":{"faultstring":"Failed to resolve API Key variable request.queryparam.apikey","detail":{"errorcode":"steps.oauth.v2.FailedToResolveAPIKey"}}}
 
    ```
-11. Now add the query parameter ```?apikey={your_api_key}``` to the URL in the curl call and try again.  (Use the API Key you created [here](#bookmark=id.mueb50zfeta3)) and resend the request.
+12. Now add the query parameter ```?apikey={your_api_key}``` to the URL in the curl call and try again.  (Use the API Key you created [here](#bookmark=id.mueb50zfeta3)) and resend the request.
 
 
    ```bash
