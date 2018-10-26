@@ -30,9 +30,61 @@ For this lab, you will need…
 
 2. Select **Develop → Specs**
 
-![image alt text](./media/image_0.png)
+![image alt text](./media/openapi-spec-import-url.png)
 
-3. Review the OpenAPI Specification in the Swagger Editor.
+3. Create a new OpenAPI Specification with the following paramaters:
+
+**Import Name:** (PCF_USERNUM}-sampleapi-spec
+
+**Import URL:** https://{PCF_USERNUM}-sampleapi.apps.pcfone.io/static/swagger.yaml?apikey={API_KEY}
+
+4. Edit the OpenAPI Spec just created with a valid host:
+
+```yaml
+basePath: "/v1/employees"
+host: {PCF_USERNUM}-sampleapi.apps.pcfone.io
+schemes:
+- https
+```
+
+5. We also need to add the API key as a security feature of our APIs. We'll do this by adding [a security requirement object and definition](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#securityRequirementObject) to the root of our OpenAPI spec. The securityDefinitions section specifies the types of security we use. The security section is used to apply the security. By providing an empty apikey security array, we are applying the API key security to all calls. Note the new **Authorize** button toward the top of the right pane.
+
+```yaml
+securityDefinitions:
+  apikey:
+    type: apiKey
+    in: query
+    name: apikey
+    description: All requests must include an API key in the apikey query parameter.
+
+# use apikey for every call
+security:
+  - apikey: []
+
+```
+
+![image alt text](./media/spec-security-definitions.png)
+
+6. Let's validate a call using this page. Find the same API key you used during the lab *API Design : Securing APIs with API Keys*. Click the **Authorize** button to open a dialog for entering your key. Paste in your API key and click **Authorize**.
+
+![image alt text](./media/image_17.png)
+
+7. Click the **Done** button.
+
+![image alt text](./media/image_18.png)
+
+8. Select the **Get all Employees** section by clicking it, and then click the **Try it out** button.
+
+![image alt text](./media/image_19.png)
+
+9. Click the **Execute** button.
+
+![image alt text](./media/image_20.png)
+
+10. If you successfully made the call, you should be able to see the curl command, and also see the response below. If you can't see these, try tracing your API using the trace tool to figure out what is happening. **Make sure you save your specification.**
+
+![image alt text](./media/image_21.png)
+
 
 ## Publish a new Portal on Apigee Edge
 
