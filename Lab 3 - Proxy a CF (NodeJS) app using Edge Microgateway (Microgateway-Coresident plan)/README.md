@@ -183,15 +183,10 @@ This looks good. Cloud Foundry app listens on port 8081.
 
 ## Step 4: Push the Cloud Foundry App to your Cloud Foundry Container
 
-In this step Node.js target application will be pushed to PCF. We will use the apigee-push command instead of regular piush command as apigee-push option automatically injects the microgateway within the cf container for the co-resident plan to work.
-
-Note - Please enter 'y' for the "microgateway-coresident" question, other questions are optional (can be left blank) if you are not pushing a java application.
+In this step Node.js target application will be pushed to PCF. We will use the push command with --no-start option instead of regular push command as we do not want to start our container without injecting the microgateway within the cf container for the co-resident plan to work.
 
 ```bash
-$ cf apigee-push
-Do you plan on using this application with the "microgateway-coresident" plan? [y/n] y
-If you are pushing a java application, enter the path to the archive. Otherwise press [Enter]:
-Specific name of application to push [optional]:
+$ cf push --no-start
 Using manifest file /Users/shuklaankur/pcf/cloud-foundry-apigee/samples/coresident-sample/manifest.yml
 
 Creating app as-sample-co-njs in org apigee-edge-for-pcf-service-broker-org / space apigee-edge-for-pcf-service-broker-space as admin...
@@ -241,12 +236,19 @@ Use the get_token script to create a token. When prompted, enter the Apigee Edge
 $ ./get\_token
 The get_token script writes the token file into ~/.sso-cli. For more about get_token, see the Apigee documentation.
 
-### 5.b Bind the app to the Apigee service instance with the apigee-bind-mgc command
+### 5.b Bind the app to the Apigee service instance with the bind-service command
 
-Use the command without arguments to be prompted for argument values. To use the command with arguments, see the command reference at the end of this topic. For help on the command, type cf apigee-bind-mgc -h.
+Use the command without arguments to be prompted for argument values. To use the command with arguments, see the command reference at the end of this topic. For help on the command, type cf bind-service -h.
 
 ```bash
-$ cf apigee-bind-mgc --app $PCF_USERNUM-sample-coresident-app --service $PCF_COR_SERVICE_INSTANCE  --apigee_org $APIGEE_ORG --apigee_env $APIGEE_ENV --edgemicro_key $EDGEMICRO_KEY --edgemicro_secret $EDGEMICRO_SECRET --target_app_route $PCF_DOMAIN --target_app_port 8081 --action 'proxy bind' --user $APIGEE_USERNAME --pass $APIGEE_PASSWORD
+cf bind-service ankur-sample-coresident-app2 $PCF_COR_SERVICE_INSTANCE \
+ -c '{"org":"'$APIGEE_ORG'","env":"'$APIGEE_ENV'",
+  "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'",
+  "action":"proxy bind",
+  "protocol":"https", "target_app_route":"'$PCF_DOMAIN'",
+  "edgemicro_key":"'$EDGEMICRO_KEY'", "edgemicro_secret":"'$EDGEMICRO_SECRET'",
+   "target_app_port":"8081"}'
+$ 
 
 ```
 
@@ -272,15 +274,22 @@ You’ll be prompted for the following:
 
 Example:
 ```bash
-shuklaankur-macbookpro:lab3 shuklaankur$ cf apigee-bind-mgc --app as1-target-nodejs-app --service AS-Apigee-MGW-COR-Plan --apigee_org amer-api-partner19 --apigee_env test --edgemicro_key {EdgeMicroKey} --edgemicro_secret {EdgeMicroSecret} --target_app_route as1-target-nodejs-app.apps.apigee-demo.net --target_app_port 8081 --action 'proxy bind' --user {Apigee-username} --pass {Apigee-password}
+shuklaankur-macbookpro:lab3 shuklaankur$ cf bind-service ankur-sample-coresident-app2 $PCF_COR_SERVICE_INSTANCE \
+ -c '{"org":"'$APIGEE_ORG'","env":"'$APIGEE_ENV'",
+  "user":"'$APIGEE_USERNAME'", "pass":"'$APIGEE_PASSWORD'",
+  "action":"proxy bind",
+  "protocol":"https", "target_app_route":"'$PCF_DOMAIN'",
+  "edgemicro_key":"'$EDGEMICRO_KEY'", "edgemicro_secret":"'$EDGEMICRO_SECRET'",
+   "target_app_port":"8081"}'
 Binding service AS-Apigee-MGW-COR-Plan to app as1-target-nodejs-app in org apigee / space sandeepmuru+pivotal+labuser4@google.com as sandeepmuru+pivotal+labuser4@google.com...
 OK
 TIP: Use 'cf restage as1-target-nodejs-app' to ensure your env variable changes take effect
-Would you like to start your application now? [y/n] y
+
 ```
-Note :  You will be promted to restart your application, select the options 'y'. To ensure duccesfull deployment, look out for message below at the end of the deployment sequence.
+Note :  You will now need to restart your application, using below commands. To ensure succesfull deployment, look out for message below at the end of the deployment sequence.
 
 ```bash
+cf v3-push ankur-sample-coresident-app2 -b microgateway_decorator -b nodejs_buildpack
 Successfully destroyed container
 
 0 of 1 instances running, 1 starting
