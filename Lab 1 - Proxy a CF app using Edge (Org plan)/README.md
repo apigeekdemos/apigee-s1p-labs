@@ -189,7 +189,7 @@ f. Explore operations through the OpenAPI Specification
 Open your browser with pathsuffix `/docs`:
 [https://$PCF_USERNUM-sampleapi.apps.pcfone.io/docs](https://$PCF_USERNUM-sampleapi.apps.pcfone.io/docs)
 
-g. See OpenAPI Specication
+g. See OpenAPI Specification
 
 Open your with pathsuffix `/api-docs`:
 [https://$PCF_USERNUM-sampleapi.apps.pcfone.io/api-docs](https://$PCF_USERNUM-sampleapi.apps.pcfone.io/api-docs)
